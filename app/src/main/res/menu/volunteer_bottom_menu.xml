@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:title="服務工作"
+        android:id="@+id/caseFragment"
+        android:icon="@drawable/ic_baseline_elderly_24"/>
+    <item
+        android:title="活動"
+        android:id="@+id/vtEventFragment"
+        android:icon="@drawable/ic_baseline_event_24"/>
+    <item
+        android:id="@+id/hourRecordFragment"
+        android:icon="@drawable/ic_baseline_more_time_24"
+        android:title="時數登記" />
+</menu>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/volunteer_nav"
+    app:startDestination="@id/vtEventFragment">
+
+    <fragment
+        android:id="@+id/vtEventFragment"
+        android:name="com.example.elderapp.volunteer.vtEventFragment"
+        android:label="志工 - 活動"
+        tools:layout="@layout/fragment_event_vt" />
+    <fragment
+        android:id="@+id/hourRecordFragment"
+        android:name="com.example.elderapp.volunteer.HourRecordFragment"
+        android:label="志工 - 時數登記"
+        tools:layout="@layout/fragment_hour_record" />
+    <fragment
+        android:id="@+id/caseFragment"
+        android:name="com.example.elderapp.volunteer.CaseFragment"
+        android:label="志工 - 服務工作"
+        tools:layout="@layout/fragment_case" />
+</navigation>
