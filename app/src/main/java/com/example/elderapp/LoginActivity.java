@@ -1,4 +1,4 @@
-package com.example.elderapp.signup;
+package com.example.elderapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,9 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-
-import com.example.elderapp.R;
-import com.example.elderapp.VolunteerActivity;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -26,12 +23,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.btn_login:
-                Intent it_volunteer = new Intent(LoginActivity.this, VolunteerActivity.class);
-                startActivity(it_volunteer);
+                Intent volunteer = new Intent(LoginActivity.this, VolunteerActivity.class);
+                startActivity(volunteer);
                 break;
             case R.id.btn_regist:
-                Intent it_signup = new Intent(LoginActivity.this, SignUpActivity.class);
-                startActivity(it_signup);
+                Intent signup = new Intent(LoginActivity.this, SignUpActivity.class);
+                startActivity(signup);
                 break;
         }
     }

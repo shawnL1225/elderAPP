@@ -12,10 +12,10 @@ import com.example.elderapp.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link fragment_sign_up3#newInstance} factory method to
+ * Use the {@link SignUp3Fragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class fragment_sign_up3 extends Fragment {
+public class SignUp3Fragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,7 +26,7 @@ public class fragment_sign_up3 extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public fragment_sign_up3() {
+    public SignUp3Fragment() {
         // Required empty public constructor
     }
 
@@ -39,8 +39,8 @@ public class fragment_sign_up3 extends Fragment {
      * @return A new instance of fragment fragment_sign_up3.
      */
     // TODO: Rename and change types and number of parameters
-    public static fragment_sign_up3 newInstance(String param1, String param2) {
-        fragment_sign_up3 fragment = new fragment_sign_up3();
+    public static SignUp3Fragment newInstance(String param1, String param2) {
+        SignUp3Fragment fragment = new SignUp3Fragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
