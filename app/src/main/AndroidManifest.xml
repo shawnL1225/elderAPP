@@ -2,10 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.elderapp">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-
-
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -14,35 +12,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ElderAPP">
-
-
-        <activity
-            android:name=".AddEventActivity"
-            android:label="@string/title_activity_add_event">
-
-        </activity>
-        <activity
-            android:name=".ElderActivity"
-            android:label="@string/title_activity_elder">
-
-        </activity>
-        <activity
-            android:name=".VolunteerActivity"
-            android:label="@string/title_activity_volunteer">
-
-        </activity>
-        <activity
-            android:name=".RegisterActivity"
-            android:label="@string/title_activity_signup">
-
-        </activity>
-        <activity android:name=".LoginActivity">
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".AddEventActivity"
+            android:label="@string/title_activity_add_event"></activity>
+        <activity
+            android:name=".ElderActivity"
+            android:label="@string/title_activity_elder"></activity>
+        <activity
+            android:name=".VolunteerActivity"
+            android:label="@string/title_activity_volunteer"></activity>
+        <activity
+            android:name=".RegisterActivity"
+            android:label="@string/title_activity_signup"></activity>
+        <activity android:name=".LoginActivity">
+
+        </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
