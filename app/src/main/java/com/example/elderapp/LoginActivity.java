@@ -48,10 +48,13 @@ public class LoginActivity extends AppCompatActivity{
         if(!account.equals("")){
             StringRequest stringRequest = new StringRequest(Request.Method.POST, url, response -> {
                 Log.d("connect", "Response: "+response);
-                if (response.equals("success")) {
-                    Intent it = new Intent(LoginActivity.this, VolunteerActivity.class);
+                if (response.startsWith("success")) {
+                    Intent it = new Intent(LoginActivity.this, ElderActivity.class);;
+                    if(response.endsWith("1")){
+                        it = new Intent(LoginActivity.this, VolunteerActivity.class);;
+                    }
                     startActivity(it);
-                    finish();
+//                    finish();
                 } else if (response.equals("NoUser")) {
                     Toast.makeText(LoginActivity.this, "登入失敗 - 查無此使用者", Toast.LENGTH_SHORT).show();
                 }else if (response.equals("WrongPass")) {
