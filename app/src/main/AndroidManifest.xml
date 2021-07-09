@@ -30,7 +30,7 @@
             android:name=".volunteer.VolunteerActivity"
             android:label="@string/title_activity_volunteer" />
         <activity
-            android:name=".elder.register.RegisterActivity"
+            android:name=".register.RegisterActivity"
             android:label="@string/title_activity_signup" />
         <activity android:name=".LoginActivity"></activity>
 

@@ -7,6 +7,8 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 
 import com.example.elderapp.R;
+import com.example.elderapp.register.RegisterElderFragment;
+import com.example.elderapp.register.RegisterVolunteerFragment;
 import com.google.android.material.button.MaterialButtonToggleGroup;
 
 public class RegisterActivity extends AppCompatActivity{
