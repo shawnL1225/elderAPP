@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/orange"
+    android:background="@color/background"
     android:padding="20dp"
     tools:context=".LoginActivity">
 
     <EditText
-        android:id="@+id/et_account"
+        android:id="@+id/et_phone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
@@ -24,14 +24,13 @@
         android:id="@+id/et_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="密碼"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_account" />
+        app:layout_constraintTop_toBottomOf="@+id/et_phone" />
 
     <Button
         android:id="@+id/btn_login"
@@ -48,10 +47,10 @@
         app:layout_constraintVertical_bias="0.1" />
 
     <TextView
-        android:id="@+id/btn_register"
+        android:id="@+id/btn_toRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="register"
+        android:onClick="toRegister"
         android:text="還沒有帳戶?按此註冊"
         android:textAlignment="center"
         android:textSize="16dp"

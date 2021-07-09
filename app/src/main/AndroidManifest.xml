@@ -20,16 +20,16 @@
         </activity>
         <activity
             android:name=".AddEventActivity"
-            android:label="@string/title_activity_add_event"></activity>
+            android:label="@string/title_activity_add_event" />
         <activity
             android:name=".ElderActivity"
-            android:label="@string/title_activity_elder"></activity>
+            android:label="@string/title_activity_elder" />
         <activity
             android:name=".VolunteerActivity"
-            android:label="@string/title_activity_volunteer"></activity>
+            android:label="@string/title_activity_volunteer" />
         <activity
             android:name=".RegisterActivity"
-            android:label="@string/title_activity_signup"></activity>
+            android:label="@string/title_activity_signup" />
         <activity android:name=".LoginActivity">
 
         </activity>

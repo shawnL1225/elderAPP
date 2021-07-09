@@ -4,9 +4,10 @@
     <color name="purple_200">#F3CB8F</color>
     <color name="actionBar_brown">#B65602</color>
     <color name="toolBar">#ECB04B</color>
-    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_200">#F87F23</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="orange">#FBD5AF</color>
+    <color name="background">#FBD5AF</color>
+    <color name="editT_transparent">#95DFAB8E</color>
 </resources>

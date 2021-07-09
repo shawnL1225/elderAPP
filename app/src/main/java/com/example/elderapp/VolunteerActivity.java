@@ -23,7 +23,7 @@ public class VolunteerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_volunteer);
 
         BottomNavigationView mBottomNav = findViewById(R.id.bottomNavigationView);
-        NavController navController = Navigation.findNavController(this, R.id.fragment);
+        NavController navController = Navigation.findNavController(this, R.id.fragment_volunteer);
         NavigationUI.setupWithNavController(mBottomNav, navController);
 
         appBarConfiguration = new AppBarConfiguration.Builder(R.id.caseFragment, R.id.vtEventFragment, R.id.hourRecordFragment).build();
