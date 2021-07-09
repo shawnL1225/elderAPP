@@ -1,4 +1,4 @@
-package com.example.elderapp;
+package com.example.elderapp.register;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,56 +19,54 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.elderapp.LoginActivity;
+import com.example.elderapp.R;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.zip.Inflater;
 
 
-public class RegisterElderFragment extends Fragment {
+public class RegisterVolunteerFragment extends Fragment {
 
-    private EditText etName, etPhone, etPassword, etPasswordC, etRemarks;
-    private String url = "https://www2.cs.ccu.edu.tw/~lwx109u/elderApp/register.php";
-    private String username, phone, pass, passC, remarks = "";
-
+    EditText etName, etPhone, etPassword, etPasswordC;
+    String username, phone, pass, passC;
+    private final String url = "https://www2.cs.ccu.edu.tw/~lwx109u/elderApp/register.php";
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View root = inflater.inflate(R.layout.fragment_register_elder, container, false);
+        View root = inflater.inflate(R.layout.fragment_register_volunteer, container, false);
+
         etName = root.findViewById(R.id.et_name);
         etPhone = root.findViewById(R.id.et_phone);
         etPassword = root.findViewById(R.id.et_password);
         etPasswordC = root.findViewById(R.id.et_passwordCheck);
-        etRemarks = root.findViewById(R.id.et_remarks);
         Button register = root.findViewById(R.id.btn_register);
         TextView toLogin = root.findViewById(R.id.tv_toLogin);
-
         register.setOnClickListener(view -> {
             username = etName.getText().toString().trim();
             phone = etPhone.getText().toString().trim();
             pass = etPassword.getText().toString().trim();
             passC = etPasswordC.getText().toString().trim();
-            remarks = etRemarks.getText().toString().trim();
+
 
             if(!pass.equals(passC)){
                 Toast.makeText(getContext(), "密碼不相符", Toast.LENGTH_SHORT).show();
             }
-            else if(!username.equals("") && !phone.equals("") && !pass.equals("")){
+            else if(!username.equals("") && !phone.equals("")){
                 SQL();
             }
         });
         toLogin.setOnClickListener(view -> {
-            startActivity(new Intent(getContext(),LoginActivity.class));
+            startActivity(new Intent(getContext(), LoginActivity.class));
         });
 
         return root;
     }
 
-    public void SQL() {
+    private void SQL(){
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, response -> {
             Log.d("connect", "Response: "+response);
-            if (response.equals("success")) {
+            if (response.startsWith("success")) {
                 Toast.makeText(getContext(), "已完成註冊", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getContext(), LoginActivity.class));
                 getActivity().finish();
@@ -85,14 +83,12 @@ public class RegisterElderFragment extends Fragment {
                 data.put("username", username);
                 data.put("phone", phone);
                 data.put("password", pass);
-                data.put("identity", "0");
-                data.put("remarks", remarks);
+                data.put("identity", "1");
+
                 return data;
             }
         };
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         requestQueue.add(stringRequest);
     }
-
-
 }

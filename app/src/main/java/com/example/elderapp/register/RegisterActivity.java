@@ -1,13 +1,12 @@
-package com.example.elderapp;
+package com.example.elderapp.register;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
-import android.view.View;
 
+import com.example.elderapp.R;
 import com.google.android.material.button.MaterialButtonToggleGroup;
 
 public class RegisterActivity extends AppCompatActivity{

@@ -1,4 +1,4 @@
-package com.example.elderapp;
+package com.example.elderapp.volunteer;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
@@ -11,6 +11,7 @@ import androidx.navigation.ui.NavigationUI;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.elderapp.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class VolunteerActivity extends AppCompatActivity {

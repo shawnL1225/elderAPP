@@ -1,8 +1,10 @@
-package com.example.elderapp;
+package com.example.elderapp.elder;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.elderapp.R;
 
 public class ElderActivity extends AppCompatActivity {
 
