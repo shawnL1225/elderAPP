@@ -19,6 +19,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.elderapp.Global;
 import com.example.elderapp.LoginActivity;
 import com.example.elderapp.R;
 
@@ -67,9 +68,12 @@ public class RegisterVolunteerFragment extends Fragment {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, response -> {
             Log.d("connect", "Response: "+response);
             if (response.startsWith("success")) {
-                Toast.makeText(getContext(), "已完成註冊", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(getContext(), LoginActivity.class));
+                Intent it = new Intent(getContext(), LoginActivity.class);
+                it.putExtra("signUp", true);
+                startActivity(it);
                 getActivity().finish();
+
+
             }
             else if (response.startsWith("failure")) {
                 Toast.makeText(getContext(), "註冊失敗", Toast.LENGTH_SHORT).show();

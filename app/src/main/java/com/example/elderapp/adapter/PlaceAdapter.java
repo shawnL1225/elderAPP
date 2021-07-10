@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -53,11 +54,13 @@ public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.ViewHolder> 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView title, desc;
+        ImageView delete;
         ViewHolder(View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.tv_placeTitle);
             desc =  itemView.findViewById(R.id.tv_placeDesc);
-            itemView.setOnClickListener(this);
+            delete = itemView.findViewById(R.id.img_delete);
+            delete.setOnClickListener(this);
         }
 
         @Override
@@ -67,7 +70,7 @@ public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.ViewHolder> 
 //            Toast.makeText(mContext, title.getText().toString()+"hi", Toast.LENGTH_SHORT).show();
         }
         public void setData(Place data){
-            title.setText(data.placeTitle+" -");
+            title.setText(data.placeTitle);
             desc.setText(data.placeDesc);
         }
     }
@@ -77,8 +80,8 @@ public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.ViewHolder> 
     public String getTitle(int id) {
         return data.get(id).placeTitle;
     }
-    public String getDesc(int id) {
-        return data.get(id).placeDesc;
+    public int getId(int id) {
+        return data.get(id).id;
     }
 
     // allows clicks events to be caught
@@ -89,5 +92,6 @@ public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.ViewHolder> 
     // parent activity will implement this method to respond to click events
     public interface ItemClickListener {
         void onItemClick(View view, int position);
+
     }
 }

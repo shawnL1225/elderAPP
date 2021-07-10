@@ -55,9 +55,51 @@ public class EditPlaceActivity extends AppCompatActivity implements PlaceAdapter
 
     @Override
     public void onItemClick(View view, int position) {
-
-        Toast.makeText(this, "You clicked " + adapter.getTitle(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        String title = adapter.getTitle(position);
+        int placeId = adapter.getId(position);
+        builder.setTitle("刪除地點  -  "+title)
+                .setPositiveButton("確定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        SQL_deletePlace(placeId);
+                    }
+                })
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                })
+                .show();
+//        Toast.makeText(this, "You clicked " + adapter.getTitle(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
     }
+
+    private void SQL_deletePlace(int placeId){
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, response -> {
+            Log.d("connect", "delete Response: "+response);
+            if(response.startsWith("success")){
+                Global.putSnackBar(recyclerView, "成功刪除地點");
+                SQL_getPlaces();
+            }
+
+        }, error -> {
+            Toast.makeText(this, error.getMessage(), Toast.LENGTH_SHORT).show();
+        }){
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> data = new HashMap<>();
+                data.put("delete", "");
+                data.put("id", String.valueOf(placeId));
+                Log.d("connect", "placeid"+placeId);
+                return data;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+
 
     private void SQL_getPlaces(){
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, response -> {
@@ -113,13 +155,18 @@ public class EditPlaceActivity extends AppCompatActivity implements PlaceAdapter
                     public void onClick(DialogInterface dialogInterface, int i) {
                         insTitle = etPlaceTitle.getText().toString().trim();
                         insDesc = etPlaceDesc.getText().toString().trim();
-                        SQL_storePlace();
+                        if(!insTitle.equals("")){
+                            SQL_storePlace();
+                        }else {
+                            Global.putSnackBarR(recyclerView, "請輸入地點名稱");
+                        }
+
                     }
                 })
                 .setNegativeButton("取消", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
+//                        dialogInterface.dismiss();
                     }
                 })
                 .show();

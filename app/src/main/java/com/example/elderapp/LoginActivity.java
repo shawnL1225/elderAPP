@@ -24,7 +24,7 @@ import java.util.Map;
 public class LoginActivity extends AppCompatActivity{
 
     String account, password;
-    EditText etAccount, etPassword;
+    public EditText etAccount, etPassword;
     String url = Global.url+"login.php";
 
     @Override
@@ -34,6 +34,11 @@ public class LoginActivity extends AppCompatActivity{
 
         etAccount = findViewById(R.id.et_phone);
         etPassword = findViewById(R.id.et_password);
+
+
+        boolean isSignUp = getIntent().getBooleanExtra("signUp", false);
+        if(isSignUp) Global.putSnackBar(etAccount, "已註冊成功 !");
+
     }
 
 
@@ -48,7 +53,7 @@ public class LoginActivity extends AppCompatActivity{
         password = etPassword.getText().toString().trim();
 
         if(account.equals("")){
-            Toast.makeText(this, "請輸入帳號", Toast.LENGTH_SHORT).show();
+            Global.putSnackBarR(etAccount, "請輸入帳號");
 
         }else{
             SQL();

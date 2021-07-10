@@ -2,13 +2,14 @@
 <resources>
     <color name="purple_700">#D58FF3</color>
     <color name="purple_200">#F3CB8F</color>
-    <color name="actionBar_brown">#AF7746</color>
+    <color name="brown">#AF7746</color>
     <color name="toolBar">#ECB04B</color>
     <color name="orange">#F87F23</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="background">#EDCEB0</color>
-    <color name="coffee">#7F5539</color>
+    <color name="actionBar_coffee">#7F5539</color>
     <color name="editT_transparent">#95DFAB8E</color>
+    <color name="warning">#F64012</color>
 </resources>
