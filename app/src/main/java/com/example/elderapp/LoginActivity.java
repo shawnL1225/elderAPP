@@ -3,6 +3,7 @@ package com.example.elderapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -24,13 +25,12 @@ public class LoginActivity extends AppCompatActivity{
 
     String account, password;
     EditText etAccount, etPassword;
-    private String url = "https://www2.cs.ccu.edu.tw/~lwx109u/elderApp/login.php";
+    String url = Global.url+"login.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        getSupportActionBar().hide();
 
         etAccount = findViewById(R.id.et_phone);
         etPassword = findViewById(R.id.et_password);
@@ -59,11 +59,19 @@ public class LoginActivity extends AppCompatActivity{
     private void SQL(){
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, response -> {
             Log.d("connect", "Response: "+response);
+
             if (response.startsWith("success")) {
+                // formation would be "success-userID-userIdentity"
+                String[] sep = response.split("-");
+                getSharedPreferences("mySP", MODE_PRIVATE)
+                        .edit().putString("uid", sep[1]).apply();
+
                 Intent it = new Intent(LoginActivity.this, ElderActivity.class);;
-                if(response.endsWith("1")){
+                if(sep[2].equals("1")){
                     it = new Intent(LoginActivity.this, VolunteerActivity.class);;
                 }
+
+
                 startActivity(it);
 //                    finish();
             } else if (response.equals("NoUser")) {

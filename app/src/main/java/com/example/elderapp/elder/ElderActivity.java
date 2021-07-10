@@ -2,8 +2,11 @@ package com.example.elderapp.elder;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
+import com.example.elderapp.EditPlaceActivity;
 import com.example.elderapp.R;
 
 public class ElderActivity extends AppCompatActivity {
@@ -13,5 +16,9 @@ public class ElderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_elder);
 
+    }
+
+    public void setPlace(View view) {
+        startActivity(new Intent(this, EditPlaceActivity.class));
     }
 }

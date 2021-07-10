@@ -16,7 +16,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class VolunteerActivity extends AppCompatActivity {
 
-    AppBarConfiguration appBarConfiguration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +26,8 @@ public class VolunteerActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.fragment_volunteer);
         NavigationUI.setupWithNavController(mBottomNav, navController);
 
-        appBarConfiguration = new AppBarConfiguration.Builder(R.id.caseFragment, R.id.vtEventFragment, R.id.hourRecordFragment).build();
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+//        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(R.id.caseFragment, R.id.vtEventFragment, R.id.hourRecordFragment).build();
+//        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
 
     }

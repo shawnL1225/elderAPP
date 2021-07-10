@@ -18,23 +18,26 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        getSupportActionBar().hide();
 
-        ImageView logo = findViewById(R.id.img_Logo);
-        animateIn(logo);
+//        ImageView logo = findViewById(R.id.img_Logo);
+//        animateIn(logo);
+//
+//        Handler handler = new Handler();
+//        handler.postDelayed(() -> {
+//            animateOut(logo);
+//            logo.setImageResource(R.drawable.ccu);
+//            animateIn(logo);
+//        }, 1500);
+//
+//        handler.postDelayed(() -> {
+//            Intent it = new Intent(SplashActivity.this, LoginActivity.class);
+//            startActivity(it);
+//            finish();
+//        }, 3000);
 
-        Handler handler = new Handler();
-        handler.postDelayed(() -> {
-            animateOut(logo);
-            logo.setImageResource(R.drawable.ccu);
-            animateIn(logo);
-        }, 1500);
-
-        handler.postDelayed(() -> {
-            Intent it = new Intent(SplashActivity.this, LoginActivity.class);
-            startActivity(it);
-            finish();
-        }, 3000);
+        Intent it = new Intent(SplashActivity.this, LoginActivity.class);
+        startActivity(it);
+        finish();
 
     }
 
