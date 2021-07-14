@@ -28,14 +28,18 @@
                 android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                tools:src="@tools:sample/avatars" />
+                tools:src="@drawable/jogging"
+                android:background="#FFFFFF"
+                android:scaleType="fitCenter"/>
 
             <ImageButton
                 android:id="@+id/ibtn_to_do"
                 android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                tools:src="@tools:sample/avatars" />
+                tools:src="@drawable/notification"
+                android:background="#FFFFFF"
+                android:scaleType="fitCenter"/>
         </LinearLayout>
 
         <LinearLayout
@@ -48,14 +52,18 @@
                 android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                tools:src="@tools:sample/avatars" />
+                tools:src="@drawable/social"
+                android:background="#FFFFFF"
+                android:scaleType="fitCenter"/>
 
             <ImageButton
                 android:id="@+id/ibtn_contact"
                 android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                tools:src="@tools:sample/avatars" />
+                tools:src="@drawable/call"
+                android:background="#FFFFFF"
+                android:scaleType="fitCenter"/>
         </LinearLayout>
 
     </LinearLayout>
