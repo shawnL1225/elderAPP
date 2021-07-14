@@ -20,4 +20,19 @@
         android:name="com.example.elderapp.elder.TodoFragment"
         android:label="fragment_todo"
         tools:layout="@layout/fragment_todo" />
+    <fragment
+        android:id="@+id/elderFragment"
+        android:name="com.example.elderapp.elder.ElderFragment"
+        android:label="fragment_elder"
+        tools:layout="@layout/fragment_elder" >
+        <action
+            android:id="@+id/action_elderFragment_to_goOutFragment"
+            app:destination="@id/goOutFragment" />
+        <action
+            android:id="@+id/action_elderFragment_to_edEventFragment"
+            app:destination="@id/edEventFragment" />
+        <action
+            android:id="@+id/action_elderFragment_to_todoFragment"
+            app:destination="@id/todoFragment" />
+    </fragment>
 </navigation>
