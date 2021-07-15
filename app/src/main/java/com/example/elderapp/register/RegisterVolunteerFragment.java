@@ -29,8 +29,8 @@ import java.util.Map;
 
 public class RegisterVolunteerFragment extends Fragment {
 
-    EditText etName, etPhone, etPassword, etPasswordC;
-    String username, phone, pass, passC;
+    EditText etName, etPhone, etPassword, etPasswordC, etDepartment;
+    String username, phone, pass, passC, department;
     private final String url = "https://www2.cs.ccu.edu.tw/~lwx109u/elderApp/register.php";
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,6 +41,7 @@ public class RegisterVolunteerFragment extends Fragment {
         etPhone = root.findViewById(R.id.et_phone);
         etPassword = root.findViewById(R.id.et_password);
         etPasswordC = root.findViewById(R.id.et_passwordCheck);
+        etDepartment = root.findViewById(R.id.et_department);
         Button register = root.findViewById(R.id.btn_register);
         TextView toLogin = root.findViewById(R.id.tv_toLogin);
         register.setOnClickListener(view -> {
@@ -48,12 +49,15 @@ public class RegisterVolunteerFragment extends Fragment {
             phone = etPhone.getText().toString().trim();
             pass = etPassword.getText().toString().trim();
             passC = etPasswordC.getText().toString().trim();
-
+            department = etDepartment.getText().toString().trim();
 
             if(!pass.equals(passC)){
-                Toast.makeText(getContext(), "密碼不相符", Toast.LENGTH_SHORT).show();
+                Global.putSnackBarR(etName, "密碼不相符");
             }
-            else if(!username.equals("") && !phone.equals("")){
+            else if(username.equals("") || phone.equals("")){
+                Global.putSnackBarR(etName, "請輸入完整資訊");
+            }
+            else {
                 SQL();
             }
         });
@@ -88,6 +92,7 @@ public class RegisterVolunteerFragment extends Fragment {
                 data.put("phone", phone);
                 data.put("password", pass);
                 data.put("identity", "1");
+                data.put("department", department);
 
                 return data;
             }

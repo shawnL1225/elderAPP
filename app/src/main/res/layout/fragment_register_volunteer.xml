@@ -52,7 +52,13 @@
                 android:hint="確認密碼" />
 
 
-
+            <EditText
+                android:id="@+id/et_department"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
+                android:inputType="textPassword"
+                android:hint="所屬單位" />
 
             <Button
                 android:id="@+id/btn_register"
@@ -66,8 +72,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="已有帳戶? 按此登入"/>
-
-
 
 
         </LinearLayout>

@@ -8,6 +8,8 @@ import com.google.android.material.snackbar.Snackbar;
 
 public class Global extends Application {
     public static String url = "https://www2.cs.ccu.edu.tw/~lwx109u/elderApp/";
+//    public static String url = "http://140.123.105.178/~tcus/elderApp/";
+
 
     public static void putSnackBar(View view, String s){
         Snackbar snackbar = Snackbar.make(view, s, Snackbar.LENGTH_SHORT);

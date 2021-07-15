@@ -19,6 +19,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.elderapp.Global;
 import com.example.elderapp.LoginActivity;
 import com.example.elderapp.R;
 
@@ -28,9 +29,9 @@ import java.util.Map;
 
 public class RegisterElderFragment extends Fragment {
 
-    private EditText etName, etPhone, etPassword, etPasswordC, etRemarks1, etRemarks2,etRemarks3, etContactPhone, etContactEmail;
+    private EditText etName, etPhone, etPassword, etPasswordC, etRemarks_ill, etRemarks_eating, etRemarks_other, etContactPhone, etContactEmail;
     private final String url = "https://www2.cs.ccu.edu.tw/~lwx109u/elderApp/register.php";
-    private String username, phone, pass, passC, remarks1 = "", remarks2 = "", remarks3 = "", contactPhone, contactEmail;
+    private String username, phone, pass, passC, remarks_ill = "", remarks_eating = "", remarks_other = "", contactPhone, contactEmail;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,9 +42,9 @@ public class RegisterElderFragment extends Fragment {
         etPhone = root.findViewById(R.id.et_phone);
         etPassword = root.findViewById(R.id.et_password);
         etPasswordC = root.findViewById(R.id.et_passwordCheck);
-        etRemarks1 = root.findViewById(R.id.et_remarks1);
-        etRemarks2 = root.findViewById(R.id.et_remarks2);
-        etRemarks3 = root.findViewById(R.id.et_remarks3);
+        etRemarks_ill = root.findViewById(R.id.et_remarks1);
+        etRemarks_eating = root.findViewById(R.id.et_remarks2);
+        etRemarks_other = root.findViewById(R.id.et_remarks3);
         etContactPhone = root.findViewById(R.id.et_contactPhone);
         etContactEmail = root.findViewById(R.id.et_contactEmail);
         Button register = root.findViewById(R.id.btn_register);
@@ -54,19 +55,22 @@ public class RegisterElderFragment extends Fragment {
             phone = etPhone.getText().toString().trim();
             pass = etPassword.getText().toString().trim();
             passC = etPasswordC.getText().toString().trim();
-            remarks1 = etRemarks1.getText().toString().trim();
-            remarks2 = etRemarks2.getText().toString().trim();
-            remarks3 = etRemarks3.getText().toString().trim();
+            remarks_ill = etRemarks_ill.getText().toString().trim();
+            remarks_eating = etRemarks_eating.getText().toString().trim();
+            remarks_other = etRemarks_other.getText().toString().trim();
             contactPhone = etContactPhone.getText().toString().trim();
             contactEmail = etContactEmail.getText().toString().trim();
 
             if(!pass.equals(passC)){
-                Toast.makeText(getContext(), "密碼不相符", Toast.LENGTH_SHORT).show();
+                Global.putSnackBarR(etName, "密碼不相符");
             }
-            else if(!username.equals("") && !phone.equals("") && !contactPhone.equals("")){
+            else if(username.equals("") || phone.equals("") || contactPhone.equals("")){
+                Global.putSnackBarR(etName, "請輸入完整資訊");
+            }
+            else {
                 SQL();
             }
-            
+
         });
         toLogin.setOnClickListener(view -> {
             startActivity(new Intent(getContext(), LoginActivity.class));
@@ -97,11 +101,12 @@ public class RegisterElderFragment extends Fragment {
                 data.put("phone", phone);
                 data.put("password", pass);
                 data.put("identity", "0");
-                data.put("remarks1", remarks1);
-                data.put("remarks2", remarks2);
-                data.put("remarks3", remarks3);
+                data.put("remarks_ill", remarks_ill);
+                data.put("remarks_eating", remarks_eating);
+                data.put("remarks_other", remarks_other);
                 data.put("contactPhone", contactPhone);
                 data.put("contactEmail", contactEmail);
+                Log.d("connect", remarks_eating);
                 return data;
             }
         };
