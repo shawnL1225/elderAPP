@@ -18,7 +18,4 @@ public class ElderActivity extends AppCompatActivity {
 
     }
 
-    public void setPlace(View view) {
-        startActivity(new Intent(this, EditPlaceActivity.class));
-    }
 }

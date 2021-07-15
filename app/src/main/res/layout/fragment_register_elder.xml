@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/background"
     android:padding="20dp"
-    tools:context=".elder.register.RegisterElderFragment">
+    tools:context=".register.RegisterElderFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -27,13 +27,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="5dp"
-                android:hint="姓名"/>
+                android:hint="姓名  (必填)"/>
             <EditText
                 android:id="@+id/et_phone"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="5dp"
-                android:hint="電話號碼"
+                android:hint="電話號碼  (必填)"
                 android:inputType="phone" />
             <EditText
                 android:id="@+id/et_password"
@@ -50,45 +50,55 @@
                 android:inputType="textPassword"
                 android:hint="確認密碼" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
+
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="特殊事項備註: "
-                    android:textSize="26dp"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="e.g.生理疾病、飲食習慣等"
-                    android:textSize="16dp"/>
-            </LinearLayout>
-
-
+                android:text="生理疾病:"
+                android:textSize="26dp"/>
             <EditText
-                android:id="@+id/et_remarks"
+                android:id="@+id/et_remarks1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/custom_editext_view"
                 android:padding="10dp"
                 android:inputType="textMultiLine"
-                android:text="\n\n" />
+                android:text="\n" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="聯絡人資訊"
+                android:text="飲食習慣:"
                 android:textSize="26dp"/>
+            <EditText
+                android:id="@+id/et_remarks2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/custom_editext_view"
+                android:padding="10dp"
+                android:inputType="textMultiLine"
+                android:text="\n" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="其他注意事項:"
+                android:textSize="26dp"/>
+            <EditText
+                android:id="@+id/et_remarks3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/custom_editext_view"
+                android:padding="10dp"
+                android:inputType="textMultiLine"
+                android:text="\n" />
+
+
             <EditText
                 android:id="@+id/et_contactPhone"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="5dp"
-                android:hint="聯絡人電話號碼"
+                android:hint="聯絡人電話號碼  (必填)"
                 android:inputType="phone"/>
             <EditText
                 android:id="@+id/et_contactEmail"

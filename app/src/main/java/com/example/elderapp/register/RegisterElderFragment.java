@@ -19,20 +19,18 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.elderapp.Global;
 import com.example.elderapp.LoginActivity;
 import com.example.elderapp.R;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.zip.Inflater;
 
 
 public class RegisterElderFragment extends Fragment {
 
-    private EditText etName, etPhone, etPassword, etPasswordC, etRemarks, etContactPhone, etContactEmail;
+    private EditText etName, etPhone, etPassword, etPasswordC, etRemarks1, etRemarks2,etRemarks3, etContactPhone, etContactEmail;
     private final String url = "https://www2.cs.ccu.edu.tw/~lwx109u/elderApp/register.php";
-    private String username, phone, pass, passC, remarks = "", contactPhone, contactEmail;
+    private String username, phone, pass, passC, remarks1 = "", remarks2 = "", remarks3 = "", contactPhone, contactEmail;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,7 +41,9 @@ public class RegisterElderFragment extends Fragment {
         etPhone = root.findViewById(R.id.et_phone);
         etPassword = root.findViewById(R.id.et_password);
         etPasswordC = root.findViewById(R.id.et_passwordCheck);
-        etRemarks = root.findViewById(R.id.et_remarks);
+        etRemarks1 = root.findViewById(R.id.et_remarks1);
+        etRemarks2 = root.findViewById(R.id.et_remarks2);
+        etRemarks3 = root.findViewById(R.id.et_remarks3);
         etContactPhone = root.findViewById(R.id.et_contactPhone);
         etContactEmail = root.findViewById(R.id.et_contactEmail);
         Button register = root.findViewById(R.id.btn_register);
@@ -54,16 +54,19 @@ public class RegisterElderFragment extends Fragment {
             phone = etPhone.getText().toString().trim();
             pass = etPassword.getText().toString().trim();
             passC = etPasswordC.getText().toString().trim();
-            remarks = etRemarks.getText().toString().trim();
+            remarks1 = etRemarks1.getText().toString().trim();
+            remarks2 = etRemarks2.getText().toString().trim();
+            remarks3 = etRemarks3.getText().toString().trim();
             contactPhone = etContactPhone.getText().toString().trim();
             contactEmail = etContactEmail.getText().toString().trim();
 
             if(!pass.equals(passC)){
                 Toast.makeText(getContext(), "密碼不相符", Toast.LENGTH_SHORT).show();
             }
-            else if(!username.equals("") && !phone.equals("")){
+            else if(!username.equals("") && !phone.equals("") && !contactPhone.equals("")){
                 SQL();
             }
+            
         });
         toLogin.setOnClickListener(view -> {
             startActivity(new Intent(getContext(), LoginActivity.class));
@@ -94,7 +97,9 @@ public class RegisterElderFragment extends Fragment {
                 data.put("phone", phone);
                 data.put("password", pass);
                 data.put("identity", "0");
-                data.put("remarks", remarks);
+                data.put("remarks1", remarks1);
+                data.put("remarks2", remarks2);
+                data.put("remarks3", remarks3);
                 data.put("contactPhone", contactPhone);
                 data.put("contactEmail", contactEmail);
                 return data;

@@ -6,65 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".elder.ElderFragment">
 
-    <LinearLayout
+    <Button
+        android:id="@+id/btn_editPlace"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:text="Button" />
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/vp_elder"
-            android:layout_width="match_parent"
-            android:layout_height="250dp" >
-
-        </androidx.viewpager2.widget.ViewPager2>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:orientation="horizontal">
-
-            <ImageButton
-                android:id="@+id/ibtn_go_out"
-                android:layout_width="150dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                tools:src="@drawable/jogging"
-                android:background="#FFFFFF"
-                android:scaleType="fitCenter"/>
-
-            <ImageButton
-                android:id="@+id/ibtn_to_do"
-                android:layout_width="150dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                tools:src="@drawable/notification"
-                android:background="#FFFFFF"
-                android:scaleType="fitCenter"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:orientation="horizontal">
-
-            <ImageButton
-                android:id="@+id/ibtn_event_ed"
-                android:layout_width="150dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                tools:src="@drawable/social"
-                android:background="#FFFFFF"
-                android:scaleType="fitCenter"/>
-
-            <ImageButton
-                android:id="@+id/ibtn_contact"
-                android:layout_width="150dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                tools:src="@drawable/call"
-                android:background="#FFFFFF"
-                android:scaleType="fitCenter"/>
-        </LinearLayout>
-
-    </LinearLayout>
 </FrameLayout>
+
