@@ -3,24 +3,26 @@
 if(isset($_POST['username']) && isset($_POST['phone'])){
     require_once "config.php";
     require_once "validate.php";
-    $username = validate($_POST['username']);
-    $password = validate($_POST['password']);
-    $phone = validate($_POST['phone']);
-    $identity = validate($_POST['identity']);
-    $remarks_ill = validate($_POST['remarks_ill']);
-    $remarks_eating = validate($_POST['remarks_eating']);
-    $remarks_other = validate($_POST['remarks_other']);
-    $contactPhone = validate($_POST['contactPhone']);
-    $contactEmail = validate($_POST['contactEmail']);
-    $department = validate($_POST['department']);
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $phone = $_POST['phone'];
+    $identity = $_POST['identity'];
+    $remarks_ill = $_POST['remarks_ill'];
+    $remarks_eating = $_POST['remarks_eating'];
+    $remarks_other = $_POST['remarks_other'];
+    $contactPhone = $_POST['contactPhone'];
+    $contactEmail = $_POST['contactEmail'];
+    $department = $_POST['department'];
+    $sex = $_POST['sex'];
+    $address = $_POST['address'];
 
     if($identity == "0"){   //長者
         $sql = "insert into user 
-            (username, phone, password, identity, remarks_illness, remarks_eating, remarks_other, contactPhone, contactEmail) 
-            values (?,?,?,?,?,?,?,?,?)";
+            (username, phone, password, identity, sex, address, remarks_illness, remarks_eating, remarks_other, contactPhone, contactEmail) 
+            values (?,?,?,?,?,?,?,?,?,?,?)";
 
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("sssisssss", $username, $phone, md5($password), $identity, 
+        $stmt->bind_param("sssisssssss", $username, $phone, md5($password), $identity, $sex, $address,
                         $remarks_ill, $remarks_eating, $remarks_other, $contactPhone, $contactEmail);
         $stmt->execute();
 
@@ -35,11 +37,11 @@ if(isset($_POST['username']) && isset($_POST['phone'])){
 
     else if($identity == "1"){ //志工
         $sql = "insert into user 
-            (username, phone, password, identity, department) 
-            values (?,?,?,?,?)";
+            (username, phone, password, identity, sex, department) 
+            values (?,?,?,?,?,?)";
 
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("sssis", $username, $phone, md5($password), $identity, $department);
+        $stmt->bind_param("sssiss", $username, $phone, md5($password), $identity, $sex, $department);
         $stmt->execute();
 
         if($stmt->affected_rows > 0){

@@ -62,29 +62,35 @@
 
 
             <RadioGroup
-                android:id="@+id/radio_sex"
+                android:id="@+id/RadioGroup_sex"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="16dp"
-                    android:text="男"
-                    android:layout_weight="1"/>
 
                 <RadioButton
+                    android:id="@+id/RadioButton_M"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16dp"
-                    android:text="女"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:text="男"
+                    android:textSize="16dp" />
+
                 <RadioButton
+                    android:id="@+id/RadioButton_F"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16dp"
+                    android:layout_weight="1"
+                    android:text="女"
+                    android:textSize="16dp" />
+
+                <RadioButton
+                    android:id="@+id/RadioButton_N"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="true"
                     android:text="不公開"
-                    android:layout_weight="1"/>
+                    android:textSize="16dp" />
             </RadioGroup>
 
 

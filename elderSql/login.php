@@ -4,8 +4,8 @@ if(isset($_POST['phone']) && isset($_POST['password'])){
 
     require_once "config.php";
     require_once "validate.php";
-    $phone = validate($_POST['phone']);
-    $password = validate($_POST['password']);
+    $phone = $_POST['phone'];
+    $password = $_POST['password'];
     
     $sql = "select * from user where phone='$phone'";
     $result = $conn->query($sql);

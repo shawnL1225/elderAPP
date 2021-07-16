@@ -1,6 +1,7 @@
 package com.example.elderapp
 
 import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -24,27 +25,28 @@ import org.json.JSONException
 import java.util.*
 
 class EditPlaceActivity : AppCompatActivity(), ItemClickListener {
-    private val url: String? = Global.url + "setPlace.php"
-    var adapter: PlaceAdapter? = null
-    var placeList: MutableList<Place?>? = ArrayList()
-    var recyclerView: RecyclerView? = null
+    private val url: String = Global.url + "setPlace.php"
+    lateinit var adapter: PlaceAdapter
+    var placeList: MutableList<Place> = ArrayList()
+    lateinit var recyclerView: RecyclerView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_place)
         recyclerView = findViewById(R.id.recycler)
-        recyclerView.setLayoutManager(LinearLayoutManager(this))
+        recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.addItemDecoration(DividerItemDecoration(this,
                 DividerItemDecoration.VERTICAL))
         SQL_getPlaces()
     }
 
-    override fun onItemClick(view: View?, position: Int) {
+    override fun onItemClick(position: Int) {
         val builder = AlertDialog.Builder(this)
         val title = adapter.getTitle(position)
         val placeId = adapter.getId(position)
         builder.setTitle("刪除地點  -  $title")
-                .setPositiveButton("確定") { dialogInterface, i -> SQL_deletePlace(placeId) }
-                .setNegativeButton("取消") { dialogInterface, i -> dialogInterface.dismiss() }
+                .setPositiveButton("確定") { _, _ -> SQL_deletePlace(placeId) }
+                .setNegativeButton("取消") { dialogInterface, _ -> dialogInterface.dismiss() }
                 .show()
         //        Toast.makeText(this, "You clicked " + adapter.getTitle(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
     }
@@ -52,16 +54,15 @@ class EditPlaceActivity : AppCompatActivity(), ItemClickListener {
     private fun SQL_deletePlace(placeId: Int) {
         val stringRequest: StringRequest = object : StringRequest(Method.POST, url, Response.Listener { response: String? ->
             Log.d("connect", "delete Response: $response")
-            if (response.startsWith("success")) {
+            if (response!!.startsWith("success")) {
                 Global.putSnackBar(recyclerView, "成功刪除地點")
                 SQL_getPlaces()
             }
-        }, Response.ErrorListener { error: VolleyError? -> Toast.makeText(this, error.message, Toast.LENGTH_SHORT).show() }) {
-            override fun getParams(): MutableMap<String?, String?>? {
+        }, Response.ErrorListener { error: VolleyError? -> Toast.makeText(this, error.toString(), Toast.LENGTH_SHORT).show() }) {
+            override fun getParams(): MutableMap<String?, String?> {
                 val data: MutableMap<String?, String?> = HashMap()
                 data["delete"] = ""
                 data["id"] = placeId.toString()
-                Log.d("connect", "placeid$placeId")
                 return data
             }
         }
@@ -82,14 +83,14 @@ class EditPlaceActivity : AppCompatActivity(), ItemClickListener {
                     val id = placeObj.getInt("id")
                     placeList.add(Place(title, description, id))
                 }
-                adapter = PlaceAdapter(this, placeList)
+                adapter = PlaceAdapter(placeList)
                 adapter.setClickListener(this)
-                recyclerView.setAdapter(adapter)
+                recyclerView.adapter = adapter
             } catch (e: JSONException) {
                 e.printStackTrace()
             }
-        }, Response.ErrorListener { error: VolleyError? -> Toast.makeText(this, error.message, Toast.LENGTH_SHORT).show() }) {
-            override fun getParams(): MutableMap<String?, String?>? {
+        }, Response.ErrorListener { error: VolleyError? -> Toast.makeText(this, error.toString(), Toast.LENGTH_SHORT).show() }) {
+            override fun getParams(): MutableMap<String?, String?> {
                 val data: MutableMap<String?, String?> = HashMap()
                 val uid = getSharedPreferences("mySP", MODE_PRIVATE).getString("uid", "")
                 data["select"] = ""
@@ -105,29 +106,27 @@ class EditPlaceActivity : AppCompatActivity(), ItemClickListener {
     var etPlaceDesc: EditText? = null
     var insTitle: String? = null
     var insDesc: String? = null
-    fun addPlace(view: View?) {  //floating button
+    fun addPlace(view: View) {  //floating button
         val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_add_place, null)
         etPlaceDesc = dialogView.findViewById(R.id.et_placeDesc)
         etPlaceTitle = dialogView.findViewById(R.id.et_placeTitle)
         val builder = AlertDialog.Builder(this)
         builder.setView(dialogView).setTitle("新增地點")
-                .setPositiveButton("確定") { dialogInterface, i ->
-                    insTitle = etPlaceTitle.getText().toString().trim { it <= ' ' }
-                    insDesc = etPlaceDesc.getText().toString().trim { it <= ' ' }
+                .setPositiveButton("確定") { _, _ ->
+                    insTitle = etPlaceTitle?.text.toString().trim()
+                    insDesc = etPlaceDesc?.text.toString().trim()
                     if (insTitle != "") {
                         SQL_storePlace()
                     } else {
                         Global.putSnackBarR(recyclerView, "請輸入地點名稱")
                     }
                 }
-                .setNegativeButton("取消") { dialogInterface, i ->
-                    //                        dialogInterface.dismiss();
-                }
+                .setNegativeButton("取消") { _, _-> }
                 .show()
     }
 
     private fun SQL_storePlace() {
-        val stringRequest: StringRequest = object : StringRequest(Method.POST, url, Response.Listener { response: String? ->
+        val stringRequest: StringRequest = object : StringRequest(Method.POST, url, Response.Listener { response: String ->
             Log.d("connect", "store Response: $response")
             if (response.startsWith("success")) {
                 SQL_getPlaces()
@@ -135,8 +134,8 @@ class EditPlaceActivity : AppCompatActivity(), ItemClickListener {
             } else if (response.startsWith("failure")) {
                 Toast.makeText(this@EditPlaceActivity, "儲存失敗", Toast.LENGTH_SHORT).show()
             }
-        }, Response.ErrorListener { error: VolleyError? -> Toast.makeText(this, error.message, Toast.LENGTH_SHORT).show() }) {
-            override fun getParams(): MutableMap<String?, String?>? {
+        }, Response.ErrorListener { error: VolleyError -> Toast.makeText(this, error.message, Toast.LENGTH_SHORT).show() }) {
+            override fun getParams(): MutableMap<String?, String?> {
                 val data: MutableMap<String?, String?> = HashMap()
                 val uid = getSharedPreferences("mySP", MODE_PRIVATE).getString("uid", "")
                 data["insert"] = ""

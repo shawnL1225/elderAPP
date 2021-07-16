@@ -8,11 +8,12 @@ import androidx.fragment.app.Fragment
 import com.example.elderapp.R
 
 
-class HourRecordFragment : Fragment() {
+class VtEventFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_hour_record, container, false)
+        return inflater.inflate(R.layout.fragment_event_vt, container, false)
     }
+
 }

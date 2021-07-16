@@ -6,10 +6,11 @@ import androidx.fragment.app.FragmentManager
 import com.example.elderapp.R
 import com.google.android.material.button.MaterialButtonToggleGroup
 
+
 class RegisterActivity : AppCompatActivity() {
-    var manager: FragmentManager? = supportFragmentManager
-    var elderFragment: RegisterElderFragment? = RegisterElderFragment()
-    var volunteerFragment: RegisterVolunteerFragment? = RegisterVolunteerFragment()
+    var manager: FragmentManager = supportFragmentManager
+    var elderFragment: RegisterElderFragment = RegisterElderFragment()
+    var volunteerFragment: RegisterVolunteerFragment = RegisterVolunteerFragment()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
