@@ -1,3 +1,3 @@
 package com.example.elderapp.adapter
 
-class Place(var placeTitle: String, var placeDesc: String, var id: Int)
+class Place(var placeTitle: String, var placeDesc: String, var id: Int, var iconID: Int)

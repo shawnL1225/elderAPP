@@ -3,11 +3,11 @@
 if( isset($_POST['select'])){
 
     $selectUID = $_POST['uid'];
-    $sql = "SELECT id, title, description, uid FROM place WHERE uid = ?";
+    $sql = "SELECT id, title, description, uid, iconID FROM place WHERE uid = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $selectUID);
     $stmt->execute();
-    $stmt->bind_result($id, $title, $description, $uid);
+    $stmt->bind_result($id, $title, $description, $uid, $iconID);
 
 
     $place = array();
@@ -16,7 +16,7 @@ if( isset($_POST['select'])){
         $temp['id'] = $id;
         $temp['title'] = $title;
         $temp['description'] = $description;
-        $temp['uid'] = $uid;
+        $temp['iconID'] = $iconID;
         array_push($place, $temp);
     }
     echo json_encode($place,JSON_UNESCAPED_UNICODE);
@@ -27,11 +27,12 @@ if(isset($_POST['insert'])){
     $title = $_POST['title'];
     $desc = $_POST['desc'];
     $uid = $_POST['uid'];
+    $iconID = $_POST['iconID'];
 
-    $sql = "insert into place (title, description, uid) values (?,?,?)";
+    $sql = "insert into place (title, description, uid, iconID) values (?,?,?,?)";
 
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssi", $title, $desc, $uid);
+    $stmt->bind_param("ssii", $title, $desc, $uid, $iconID);
     $stmt->execute();
 
     if($stmt->affected_rows > 0){

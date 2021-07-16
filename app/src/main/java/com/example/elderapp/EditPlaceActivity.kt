@@ -20,6 +20,7 @@ import com.example.elderapp.EditPlaceActivity
 import com.example.elderapp.adapter.Place
 import com.example.elderapp.adapter.PlaceAdapter
 import com.example.elderapp.adapter.PlaceAdapter.ItemClickListener
+import com.google.android.material.button.MaterialButtonToggleGroup
 import org.json.JSONArray
 import org.json.JSONException
 import java.util.*
@@ -81,7 +82,8 @@ class EditPlaceActivity : AppCompatActivity(), ItemClickListener {
                     val title = placeObj.getString("title")
                     val description = placeObj.getString("description")
                     val id = placeObj.getInt("id")
-                    placeList.add(Place(title, description, id))
+                    val iconID = placeObj.getInt("iconID")
+                    placeList.add(Place(title, description, id, iconID))
                 }
                 adapter = PlaceAdapter(placeList)
                 adapter.setClickListener(this)
@@ -106,15 +108,26 @@ class EditPlaceActivity : AppCompatActivity(), ItemClickListener {
     var etPlaceDesc: EditText? = null
     var insTitle: String? = null
     var insDesc: String? = null
+    var iconID: String? = null
     fun addPlace(view: View) {  //floating button
         val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_add_place, null)
         etPlaceDesc = dialogView.findViewById(R.id.et_placeDesc)
         etPlaceTitle = dialogView.findViewById(R.id.et_placeTitle)
+        val toggleGroup = dialogView.findViewById<MaterialButtonToggleGroup?>(R.id.tg_placeIcon)
+
         val builder = AlertDialog.Builder(this)
         builder.setView(dialogView).setTitle("新增地點")
                 .setPositiveButton("確定") { _, _ ->
                     insTitle = etPlaceTitle?.text.toString().trim()
                     insDesc = etPlaceDesc?.text.toString().trim()
+                    when (toggleGroup.checkedButtonId) {
+                        R.id.btn_icon1 -> iconID = "1"
+                        R.id.btn_icon2 -> iconID = "2"
+                        R.id.btn_icon3 -> iconID = "3"
+                        R.id.btn_icon4 -> iconID = "4"
+                        R.id.btn_icon5 -> iconID = "5"
+                    }
+
                     if (insTitle != "") {
                         SQL_storePlace()
                     } else {
@@ -142,6 +155,7 @@ class EditPlaceActivity : AppCompatActivity(), ItemClickListener {
                 data["title"] = insTitle
                 data["desc"] = insDesc
                 data["uid"] = uid
+                data["iconID"] = iconID
                 return data
             }
         }

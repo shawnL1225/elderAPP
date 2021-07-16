@@ -1,6 +1,5 @@
 package com.example.elderapp.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,11 +31,20 @@ class PlaceAdapter(private val data: MutableList<Place>) : RecyclerView.Adapter<
         private var title = itemView.findViewById<TextView>(R.id.tv_placeTitle)
         private var desc = itemView.findViewById<TextView>(R.id.tv_placeDesc)
         private var delete = itemView.findViewById<ImageView>(R.id.img_delete)
+        private var icon = itemView.findViewById<ImageView>(R.id.img_icon)
 
 
         fun setData(data: Place) {
             title.text = data.placeTitle
             desc.text = data.placeDesc
+            when(data.iconID){
+                1 -> icon.setImageResource(R.drawable.ic_baseline_home_24)
+                2 -> icon.setImageResource(R.drawable.ic_baseline_park_24)
+                3 -> icon.setImageResource(R.drawable.ic_baseline_people_alt_24)
+                4 -> icon.setImageResource(R.drawable.ic_baseline_local_hospital_24)
+                5 -> icon.setImageResource(R.drawable.ic_baseline_coffee_24)
+            }
+
             delete.setOnClickListener {
                 if (mClickListener != null) mClickListener!!.onItemClick(adapterPosition)
             }
