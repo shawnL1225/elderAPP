@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--Confirmed Colors-->
+    <color name="background">#EDCEB0</color>
     <color name="brown_light">#F3CB8F</color>
     <color name="brown">#AF7746</color>
     <color name="brown_dark">#7F5539</color>
@@ -18,16 +19,17 @@
     <color name="dangerous_red">#F64012</color>
 
     <color name="gray_dark">#9D9D9D</color>
+    <color name="gray_light">#D7D7D7</color>
 
 
-    <!--Confirmed Colors-->
+    <!--unchecked Colors-->
     <color name="purple_700">#D58FF3</color>
     <color name="toolBar">#ECB04B</color>
     <color name="orange">#F87F23</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="background">#EDCEB0</color>
+
     <color name="editT_transparent">#95DFAB8E</color>
 
 </resources>
