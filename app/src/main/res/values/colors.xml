@@ -1,15 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_700">#D58FF3</color>
-    <color name="purple_200">#F3CB8F</color>
+    <!--Confirmed Colors-->
+    <color name="brown_light">#F3CB8F</color>
     <color name="brown">#AF7746</color>
+    <color name="brown_dark">#7F5539</color>
+
+    <color name="blue_light">#BDE7FF</color>
+    <color name="blue_dark">#005382</color>
+    <color name="green_light">#BDFFDB</color>
+    <color name="green_dark">#00823B</color>
+    <color name="yellow_light">#FFF4BD</color>
+    <color name="yellow_dark">#8E7800</color>
+    <color name="pink_light">#FFBDD5</color>
+    <color name="pink_dark">#880031</color>
+
+    <color name="successful_green">#1BAD03</color>
+    <color name="dangerous_red">#F64012</color>
+
+    <color name="gray_dark">#9D9D9D</color>
+
+
+    <!--Confirmed Colors-->
+    <color name="purple_700">#D58FF3</color>
     <color name="toolBar">#ECB04B</color>
     <color name="orange">#F87F23</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="background">#EDCEB0</color>
-    <color name="actionBar_coffee">#7F5539</color>
     <color name="editT_transparent">#95DFAB8E</color>
-    <color name="warning">#F64012</color>
+
 </resources>

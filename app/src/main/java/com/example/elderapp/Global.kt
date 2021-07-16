@@ -18,7 +18,7 @@ class Global : Application() {
 
         fun putSnackBarR(view: View, s: String) {
             val snackBar = Snackbar.make(view, s, Snackbar.LENGTH_SHORT)
-            snackBar.view.setBackgroundResource(R.color.warning)
+            snackBar.view.setBackgroundResource(R.color.dangerous_red)
             snackBar.show()
         }
     }
