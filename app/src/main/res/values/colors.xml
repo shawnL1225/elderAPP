@@ -4,7 +4,7 @@
     <color name="background">#EDCEB0</color>
     <color name="brown_light">#F3CB8F</color>
     <color name="brown">#AF7746</color>
-    <color name="brown_dark">#7F5539</color>
+    <color name="brown_dark">#865B31</color>
 
     <color name="blue_light">#BDE7FF</color>
     <color name="blue_dark">#005382</color>
@@ -30,6 +30,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="editT_transparent">#95DFAB8E</color>
 
 </resources>

@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
     android:padding="20dp"
     tools:context=".register.RegisterElderFragment">
 
@@ -21,34 +20,39 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="長者資訊"
-                android:textSize="36dp"/>
+                android:textSize="36dp" />
+
             <EditText
                 android:id="@+id/et_name"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="5dp"
-                android:hint="姓名  (必填)"/>
+                android:hint="姓名  (必填)" />
+
             <EditText
                 android:id="@+id/et_phone"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="5dp"
                 android:hint="電話號碼  (必填)"
-                android:inputType="phone" />
+                android:inputType="phone"
+                android:textColorLink="@color/brown_dark" />
+
             <EditText
                 android:id="@+id/et_password"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="5dp"
-                android:inputType="textPassword"
-                android:hint="密碼" />
+                android:hint="密碼"
+                android:inputType="textPassword" />
+
             <EditText
                 android:id="@+id/et_passwordCheck"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="5dp"
-                android:inputType="textPassword"
-                android:hint="確認密碼" />
+                android:hint="確認密碼"
+                android:inputType="textPassword" />
 
 
             <EditText
@@ -58,7 +62,6 @@
                 android:layout_marginTop="5dp"
                 android:hint="住家地址"
                 android:inputType="textPersonName" />
-
 
 
             <RadioGroup
@@ -94,48 +97,49 @@
             </RadioGroup>
 
 
-
-
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="生理疾病:"
-                android:textSize="26dp"/>
+                android:textSize="26dp" />
+
             <EditText
                 android:id="@+id/et_remarks1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/custom_editext_view"
-                android:padding="10dp"
                 android:inputType="textMultiLine"
+                android:padding="10dp"
                 android:text="\n" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="飲食習慣:"
-                android:textSize="26dp"/>
+                android:textSize="26dp" />
+
             <EditText
                 android:id="@+id/et_remarks2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/custom_editext_view"
-                android:padding="10dp"
                 android:inputType="textMultiLine"
+                android:padding="10dp"
                 android:text="\n" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="其他注意事項:"
-                android:textSize="26dp"/>
+                android:textSize="26dp" />
+
             <EditText
                 android:id="@+id/et_remarks3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/custom_editext_view"
-                android:padding="10dp"
                 android:inputType="textMultiLine"
+                android:padding="10dp"
                 android:text="\n" />
 
 
@@ -145,7 +149,8 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="5dp"
                 android:hint="聯絡人電話號碼  (必填)"
-                android:inputType="phone"/>
+                android:inputType="phone" />
+
             <EditText
                 android:id="@+id/et_contactEmail"
                 android:layout_width="match_parent"
@@ -158,15 +163,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="20dp"
-                android:text="註冊"/>
+                android:text="註冊" />
+
             <TextView
                 android:id="@+id/tv_toLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="已有帳戶? 按此登入"/>
-
-
+                android:text="已有帳戶? 按此登入" />
 
 
         </LinearLayout>
