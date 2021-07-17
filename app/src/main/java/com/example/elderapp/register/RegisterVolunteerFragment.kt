@@ -59,7 +59,7 @@ class RegisterVolunteerFragment : Fragment() {
         val upload = root.findViewById<FloatingActionButton?>(R.id.btn_upload)
 
         upload.setOnClickListener {
-            getContext()?.let { context ->
+            context?.let { context ->
                 CropImage.activity().setCropShape(CropImageView.CropShape.OVAL)
                         .setAspectRatio(1, 1)
                         .start(context, this)
