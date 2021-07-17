@@ -62,7 +62,7 @@
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                app:srcCompat="@drawable/ic_baseline_settings_24"
+                app:srcCompat="@drawable/ic_setting"
                 app:tint="@color/brown_dark" />
 
             <TextView

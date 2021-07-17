@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_weight="0"
-            android:background="@drawable/layout_background"
+            android:background="@drawable/style_layout_background"
             android:backgroundTint="@color/brown"
             android:gravity="center"
             android:text="這裡可以放公告"
@@ -55,7 +55,7 @@
                     android:id="@+id/btn_event"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/radius_block"
+                    android:background="@drawable/style_radius_block"
                     android:backgroundTint="@color/blue_light"
                     android:gravity="center"
                     android:orientation="vertical">
@@ -64,7 +64,7 @@
                         android:id="@+id/imageView5"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        app:srcCompat="@drawable/ic_elder_theater"
+                        app:srcCompat="@drawable/ic_elder_event"
                         app:tint="@color/blue_dark" />
 
                     <TextView
@@ -89,7 +89,7 @@
                     android:id="@+id/btn_goOut"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/radius_block"
+                    android:background="@drawable/style_radius_block"
                     android:backgroundTint="@color/green_light"
                     android:gravity="center"
                     android:orientation="vertical">
@@ -123,7 +123,7 @@
                     android:id="@+id/btn_call"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/radius_block"
+                    android:background="@drawable/style_radius_block"
                     android:backgroundTint="@color/pink_light"
                     android:gravity="center"
                     android:orientation="vertical">
@@ -157,7 +157,7 @@
                     android:id="@+id/btn_todo"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/radius_block"
+                    android:background="@drawable/style_radius_block"
                     android:backgroundTint="@color/yellow_light"
                     android:gravity="center"
                     android:orientation="vertical">

@@ -4,13 +4,13 @@
     <item
         android:title="服務工作"
         android:id="@+id/caseFragment"
-        android:icon="@drawable/ic_baseline_elderly_24"/>
+        android:icon="@drawable/ic_volunteer_elderly"/>
     <item
         android:title="活動"
         android:id="@+id/vtEventFragment"
-        android:icon="@drawable/ic_baseline_event_24"/>
+        android:icon="@drawable/ic_volunteer_calender"/>
     <item
         android:id="@+id/hourRecordFragment"
-        android:icon="@drawable/ic_baseline_more_time_24"
+        android:icon="@drawable/ic_volunteer_more_time"
         android:title="時數登記" />
 </menu>

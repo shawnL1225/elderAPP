@@ -38,14 +38,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="login"
+        app:icon="@drawable/ic_login"
+        app:iconGravity="textEnd"
         android:text="登入"
         android:textSize="30dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.551"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_password"
-        app:layout_constraintVertical_bias="0.1" />
+        app:layout_constraintTop_toBottomOf="@+id/et_password" />
 
     <TextView
         android:id="@+id/btn_toRegister"

@@ -106,7 +106,7 @@
                 android:id="@+id/et_remarks1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/custom_editext_view"
+                android:background="@drawable/style_editext"
                 android:inputType="textMultiLine"
                 android:padding="10dp"
                 android:text="\n" />
@@ -121,7 +121,7 @@
                 android:id="@+id/et_remarks2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/custom_editext_view"
+                android:background="@drawable/style_editext"
                 android:inputType="textMultiLine"
                 android:padding="10dp"
                 android:text="\n" />
@@ -136,7 +136,7 @@
                 android:id="@+id/et_remarks3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/custom_editext_view"
+                android:background="@drawable/style_editext"
                 android:inputType="textMultiLine"
                 android:padding="10dp"
                 android:text="\n" />
