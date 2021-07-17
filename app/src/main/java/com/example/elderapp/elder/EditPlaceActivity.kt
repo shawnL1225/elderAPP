@@ -1,7 +1,6 @@
-package com.example.elderapp
+package com.example.elderapp.elder
 
 import android.app.AlertDialog
-import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -16,7 +15,8 @@ import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.example.elderapp.EditPlaceActivity
+import com.example.elderapp.Global
+import com.example.elderapp.R
 import com.example.elderapp.adapter.Place
 import com.example.elderapp.adapter.PlaceAdapter
 import com.example.elderapp.adapter.PlaceAdapter.ItemClickListener

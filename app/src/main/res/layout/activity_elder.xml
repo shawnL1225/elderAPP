@@ -14,8 +14,8 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_image"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:background="#FFFFFF"
@@ -32,7 +32,7 @@
             android:layout_marginTop="4dp"
             android:text="王阿發"
             android:textColor="@color/brown_dark"
-            android:textSize="24sp"
+            android:textSize="30sp"
             app:layout_constraintStart_toEndOf="@+id/profile_image"
             app:layout_constraintTop_toTopOf="@+id/profile_image" />
 
@@ -48,7 +48,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
         <LinearLayout
-            android:id="@+id/setting_btn"
+            android:id="@+id/btn_setting"
             android:layout_width="96dp"
             android:layout_height="39dp"
             android:layout_marginEnd="20dp"
@@ -77,103 +77,13 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:layout_margin="10dp"
-        android:background="#F44A4A"
-        android:rotationX="0"
-        android:scaleType="centerCrop"
-        app:srcCompat="@drawable/banner"
-        tools:srcCompat="@drawable/banner" />
-
-    <LinearLayout
+    <fragment
+        android:id="@+id/fragment_elder"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/layout_background"
-        android:orientation="vertical">
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/elder_nav" />
 
-        <TextView
-            android:id="@+id/textView8"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_weight="0"
-            android:background="@drawable/layout_background"
-            android:backgroundTint="@color/brown"
-            android:gravity="center"
-            android:text="這裡可以放公告"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="18dp" />
 
-        <GridLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:columnCount="2"
-            android:foregroundGravity="center">
-
-            <LinearLayout
-                android:layout_width="160dp"
-                android:layout_height="160dp"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
-                android:orientation="vertical"
-                android:padding="10dp"
-                android:weightSum="1">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/radius_block"
-                    android:backgroundTint="@color/blue_light"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:id="@+id/imageView5"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        app:srcCompat="@drawable/ic_baseline_home_24"
-                        app:tint="@color/blue_dark" />
-
-                    <TextView
-                        android:id="@+id/textView11"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="TextView"
-                        android:textColor="@color/blue_dark"
-                        android:textSize="24dp" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="160dp"
-                android:layout_height="160dp"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
-                android:orientation="vertical"
-                android:weightSum="1"></LinearLayout>
-
-            <LinearLayout
-                android:layout_width="160dp"
-                android:layout_height="160dp"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
-                android:orientation="vertical"
-                android:weightSum="1">
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="160dp"
-                android:layout_height="160dp"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
-                android:orientation="vertical"
-                android:weightSum="1"></LinearLayout>
-
-        </GridLayout>
-
-    </LinearLayout>
 </LinearLayout>

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/brown_dark"
     android:orientation="vertical"
-    tools:context=".EditPlaceActivity">
+    tools:context=".elder.EditPlaceActivity">
 
     <TextView
         android:layout_gravity="center"

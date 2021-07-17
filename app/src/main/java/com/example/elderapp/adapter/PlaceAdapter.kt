@@ -38,11 +38,11 @@ class PlaceAdapter(private val data: MutableList<Place>) : RecyclerView.Adapter<
             title.text = data.placeTitle
             desc.text = data.placeDesc
             when(data.iconID){
-                1 -> icon.setImageResource(R.drawable.ic_baseline_home_24)
-                2 -> icon.setImageResource(R.drawable.ic_baseline_park_24)
-                3 -> icon.setImageResource(R.drawable.ic_baseline_people_alt_24)
-                4 -> icon.setImageResource(R.drawable.ic_baseline_local_hospital_24)
-                5 -> icon.setImageResource(R.drawable.ic_baseline_coffee_24)
+                1 -> icon.setImageResource(R.drawable.ic_place_home)
+                2 -> icon.setImageResource(R.drawable.ic_place_park)
+                3 -> icon.setImageResource(R.drawable.ic_place_people)
+                4 -> icon.setImageResource(R.drawable.ic_place_hospital)
+                5 -> icon.setImageResource(R.drawable.ic_place_coffee)
             }
 
             delete.setOnClickListener {

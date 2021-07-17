@@ -53,7 +53,7 @@
         <Button
             android:id="@+id/btn_icon1"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            app:icon="@drawable/ic_baseline_home_24"
+            app:icon="@drawable/ic_place_home"
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -61,28 +61,28 @@
         <Button
             android:id="@+id/btn_icon2"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            app:icon="@drawable/ic_baseline_park_24"
+            app:icon="@drawable/ic_place_park"
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <Button
             android:id="@+id/btn_icon3"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            app:icon="@drawable/ic_baseline_people_alt_24"
+            app:icon="@drawable/ic_place_people"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
         <Button
             android:id="@+id/btn_icon4"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            app:icon="@drawable/ic_baseline_local_hospital_24"
+            app:icon="@drawable/ic_place_hospital"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
         <Button
             android:id="@+id/btn_icon5"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            app:icon="@drawable/ic_baseline_coffee_24"
+            app:icon="@drawable/ic_place_coffee"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
