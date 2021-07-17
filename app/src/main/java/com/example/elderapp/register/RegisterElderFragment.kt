@@ -69,8 +69,13 @@ class RegisterElderFragment : Fragment() {
             remarksOther = etRemarksOther!!.text.toString().trim { it <= ' ' }
             contactPhone = etContactPhone!!.text.toString().trim { it <= ' ' }
             contactEmail = etContactEmail!!.text.toString().trim { it <= ' ' }
+
             addr = etAddress!!.text.toString().trim()
-            sex = root.findViewById<RadioButton>(radioGroup.checkedRadioButtonId).text.toString()
+            when(radioGroup.checkedRadioButtonId){
+                R.id.RadioButton_M -> sex = "M"
+                R.id.RadioButton_F -> sex = "F"
+                R.id.RadioButton_N -> sex = "N"
+            }
 
             if (pass != passC) {
                 Global.putSnackBarR(etName!!, "密碼不相符")

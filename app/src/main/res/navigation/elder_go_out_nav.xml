@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/elder_go_out_nav"
+    app:startDestination="@id/fragment_go_out_main">
+
+    <fragment
+        android:id="@+id/fragment_go_out_main"
+        android:name="com.example.elderapp.elder.fragment_go_out_main"
+        android:label="fragment_go_out_main" />
+</navigation>

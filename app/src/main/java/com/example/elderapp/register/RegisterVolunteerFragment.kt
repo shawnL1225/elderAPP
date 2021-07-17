@@ -1,7 +1,12 @@
 package com.example.elderapp.register
 
+import android.app.Activity.RESULT_OK
 import android.content.Intent
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
+import android.util.Base64
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -13,12 +18,20 @@ import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.bumptech.glide.Glide
 import com.example.elderapp.Global
 import com.example.elderapp.LoginActivity
 import com.example.elderapp.R
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.theartofdev.edmodo.cropper.CropImage
+import com.theartofdev.edmodo.cropper.CropImageView
+import java.io.ByteArrayOutputStream
 import java.util.*
 
+
 class RegisterVolunteerFragment : Fragment() {
+
+    lateinit var imgHeadshot: ImageView
     lateinit var etName: EditText
     lateinit var etPhone: EditText
     lateinit var etPassword: EditText
@@ -39,9 +52,19 @@ class RegisterVolunteerFragment : Fragment() {
         etPassword = root.findViewById(R.id.et_password)
         etPasswordC = root.findViewById(R.id.et_passwordCheck)
         etDepartment = root.findViewById(R.id.et_department)
+        imgHeadshot = root.findViewById(R.id.img_headshot)
         val register = root.findViewById<Button?>(R.id.btn_register)
         val toLogin = root.findViewById<TextView?>(R.id.tv_toLogin)
         val radioGroup = root.findViewById<RadioGroup>(R.id.RadioGroup_sex)
+        val upload = root.findViewById<FloatingActionButton?>(R.id.btn_upload)
+
+        upload.setOnClickListener {
+            getContext()?.let { context ->
+                CropImage.activity().setCropShape(CropImageView.CropShape.OVAL)
+                        .setAspectRatio(1, 1)
+                        .start(context, this)
+            };
+        }
 
         register.setOnClickListener {
             username = etName.text.toString().trim { it <= ' ' }
@@ -54,8 +77,8 @@ class RegisterVolunteerFragment : Fragment() {
                 R.id.RadioButton_M -> sex = "M"
                 R.id.RadioButton_F -> sex = "F"
                 R.id.RadioButton_N -> sex = "N"
-
             }
+
             if (pass != passC) {
                 Global.putSnackBarR(etName, "密碼不相符")
             } else if (username == "" || phone == "") {
@@ -94,5 +117,51 @@ class RegisterVolunteerFragment : Fragment() {
         }
         val requestQueue = Volley.newRequestQueue(context)
         requestQueue.add(stringRequest)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            var result:CropImage.ActivityResult = CropImage.getActivityResult(data);
+            if (resultCode == RESULT_OK) {
+                var resultUri:Uri = result.getUri();
+                val bitmap = getResizedBitmap(
+                        MediaStore.Images.Media.getBitmap(this.context?.getContentResolver(), resultUri),
+                        200
+                )
+
+                Glide.with(this)
+                        .load(bitmap)
+                        .circleCrop()
+                        .into(imgHeadshot);
+
+                val baos = ByteArrayOutputStream()
+                bitmap?.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+                val b = baos.toByteArray()
+                val base64 = Base64.encodeToString(b, Base64.DEFAULT)
+                Log.d("base64", base64)
+            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                var error:Exception = result.getError();
+            }
+        }
+    }
+
+    /**
+     * reduces the size of the image
+     * @param image
+     * @param maxSize
+     * @return
+     */
+    fun getResizedBitmap(image: Bitmap, maxSize: Int): Bitmap? {
+        var width = image.width
+        var height = image.height
+        val bitmapRatio = width.toFloat() / height.toFloat()
+        if (bitmapRatio > 1) {
+            width = maxSize
+            height = (width / bitmapRatio).toInt()
+        } else {
+            height = maxSize
+            width = (height * bitmapRatio).toInt()
+        }
+        return Bitmap.createScaledBitmap(image, width, height, true)
     }
 }
