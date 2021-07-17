@@ -51,7 +51,6 @@ if(isset($_POST['username']) && isset($_POST['phone'])){
             echo "failure".$stmt->error;
         }
     }
-    
 }
 
 ?>

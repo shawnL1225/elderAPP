@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.Navigation
 import com.example.elderapp.R
 
 class ElderActivity : AppCompatActivity() {
@@ -18,6 +19,7 @@ class ElderActivity : AppCompatActivity() {
         btnSetting.setOnClickListener {
            startActivity(Intent(this, ElderSettingActivity::class.java))
         }
+
 
 
     }

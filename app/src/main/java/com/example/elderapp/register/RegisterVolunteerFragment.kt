@@ -49,8 +49,13 @@ class RegisterVolunteerFragment : Fragment() {
             pass = etPassword.text.toString().trim { it <= ' ' }
             passC = etPasswordC.text.toString().trim { it <= ' ' }
             department = etDepartment.text.toString().trim { it <= ' ' }
-            sex = root.findViewById<RadioButton>(radioGroup.checkedRadioButtonId).text.toString()
 
+            when(radioGroup.checkedRadioButtonId){
+                R.id.RadioButton_M -> sex = "M"
+                R.id.RadioButton_F -> sex = "F"
+                R.id.RadioButton_N -> sex = "N"
+
+            }
             if (pass != passC) {
                 Global.putSnackBarR(etName, "密碼不相符")
             } else if (username == "" || phone == "") {

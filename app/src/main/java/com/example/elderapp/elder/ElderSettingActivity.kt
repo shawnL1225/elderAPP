@@ -20,6 +20,6 @@ class ElderSettingActivity : AppCompatActivity() {
 
         btnBack.setOnClickListener { finish() }
         btnPlace.setOnClickListener { startActivity(Intent(this, EditPlaceActivity::class.java)) }
-
+        btnFriend.setOnClickListener { startActivity(Intent(this, EdFriendActivity::class.java)) }
     }
 }
