@@ -48,7 +48,7 @@ class FriendAdapter(private val data: MutableList<User>) : RecyclerView.Adapter<
     }
 
     // convenience method for getting data at click position
-    fun getTitle(id: Int): String {
+    fun getName(id: Int): String {
         return data[id].name
     }
 

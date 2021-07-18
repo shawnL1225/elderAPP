@@ -1,10 +1,13 @@
 package com.example.elderapp.elder
 
+import android.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,6 +20,7 @@ import com.example.elderapp.Global
 import com.example.elderapp.R
 import com.example.elderapp.adapter.User
 import com.example.elderapp.adapter.FriendAdapter
+import com.google.android.material.button.MaterialButtonToggleGroup
 import org.json.JSONArray
 import org.json.JSONException
 import java.util.ArrayList
@@ -27,6 +31,7 @@ class EdFriendActivity : AppCompatActivity(), FriendAdapter.ItemClickListener {
     lateinit var adapter: FriendAdapter
     var userList: MutableList<User> = ArrayList()
     lateinit var recyclerView: RecyclerView
+    var uid :String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,18 +41,26 @@ class EdFriendActivity : AppCompatActivity(), FriendAdapter.ItemClickListener {
         btnBack.setOnClickListener {
             finish()
         }
+        uid = getSharedPreferences("mySP", MODE_PRIVATE).getString("uid", "")
         recyclerView = findViewById(R.id.recycler_ed_friend)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
-
-        requestGetPlaces();
+        recyclerView.itemAnimator
+        requestGetFriends();
+    }
+    override fun onItemClick(position: Int) {
+        val builder = AlertDialog.Builder(this)
+        val name = adapter.getName(position)
+        val friendId = adapter.getId(position)
+        builder.setTitle("刪除朋友  -  $name")
+                .setPositiveButton("確定") { _, _ -> requestDeleteFriend(friendId) }
+                .setNegativeButton("取消") { dialogInterface, _ -> dialogInterface.dismiss() }
+                .show()
     }
 
-    fun addFriend(view: View) {
 
-    }
 
-    private fun requestGetPlaces() {
+    private fun requestGetFriends() {
         val stringRequest: StringRequest = object : StringRequest(Method.POST, url, Response.Listener { response: String? ->
             Log.d("connect", "select Response: $response")
             userList.clear()
@@ -70,7 +83,6 @@ class EdFriendActivity : AppCompatActivity(), FriendAdapter.ItemClickListener {
         }, Response.ErrorListener { error: VolleyError? -> Toast.makeText(this, error.toString(), Toast.LENGTH_SHORT).show() }) {
             override fun getParams(): MutableMap<String?, String?> {
                 val data: MutableMap<String?, String?> = HashMap()
-                val uid = getSharedPreferences("mySP", MODE_PRIVATE).getString("uid", "")
                 data["type"] = "select"
                 data["uid"] = uid
                 return data
@@ -80,8 +92,76 @@ class EdFriendActivity : AppCompatActivity(), FriendAdapter.ItemClickListener {
         requestQueue.add(stringRequest)
     }
 
-    override fun onItemClick(position: Int) {
 
+
+
+    private fun requestDeleteFriend(friendId: Int) {
+        val stringRequest: StringRequest = object : StringRequest(Method.POST, url, Response.Listener { response: String? ->
+            Log.d("connect", "delete Response: $response")
+            if (response!!.startsWith("success")) {
+                Global.putSnackBar(recyclerView, "成功刪除志工朋友")
+               requestGetFriends()
+            }
+        }, Response.ErrorListener { error: VolleyError? -> Toast.makeText(this, error.toString(), Toast.LENGTH_SHORT).show() }) {
+            override fun getParams(): MutableMap<String?, String?> {
+                val data: MutableMap<String?, String?> = HashMap()
+                data["type"] = "delete"
+                data["volunteerID"] = friendId.toString()
+                data["elderID"] = uid.toString()
+                return data
+            }
+        }
+        val requestQueue = Volley.newRequestQueue(this)
+        requestQueue.add(stringRequest)
+    }
+
+    var etPhone :EditText? = null
+    var insPhone :String? = null
+    fun addFriend(view: View) {
+        val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_add_friend, null)
+        etPhone = dialogView.findViewById(R.id.et_phone)
+
+        val builder = AlertDialog.Builder(this)
+        builder.setView(dialogView).setTitle("新增志工朋友")
+                .setPositiveButton("確定") { _, _ ->
+                    insPhone = etPhone!!.text.toString().trim()
+                    if (insPhone!="") {
+                        requestStoreFriend()
+                    } else {
+                        Global.putSnackBarR(recyclerView, "請輸入完整志工電話")
+                    }
+                }
+                .setNegativeButton("取消") { _, _-> }
+                .show()
+    }
+
+    private fun requestStoreFriend() {
+        val stringRequest: StringRequest = object : StringRequest(Method.POST, url, Response.Listener { response: String ->
+            Log.d("connect", "store Response: $response")
+            when {
+                response.startsWith("success") -> {
+                    requestGetFriends()
+                    Global.putSnackBar(recyclerView, "已新增志工好友")
+                }
+                response == "NoUser" -> {
+                    Global.putSnackBarR(recyclerView, "查無使用者")
+                }
+                response == "Exist" -> {
+                    Global.putSnackBarR(recyclerView, "使用者已存在")
+                }
+            }
+        }, Response.ErrorListener { error: VolleyError -> Toast.makeText(this, error.message, Toast.LENGTH_SHORT).show() }) {
+            override fun getParams(): MutableMap<String?, String?> {
+                val data: MutableMap<String?, String?> = HashMap()
+
+                data["type"] = "insert"
+                data["elderID"] = uid
+                data["phone"] = insPhone
+                return data
+            }
+        }
+        val requestQueue = Volley.newRequestQueue(this)
+        requestQueue.add(stringRequest)
     }
 
 }
