@@ -68,7 +68,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="5dp"
-                    android:hint="密碼"
+                    android:hint="如要更改請直接輸入"
                     android:inputType="textPassword" />
 
                 <EditText
@@ -182,6 +182,12 @@
                     android:layout_height="match_parent"
                     android:hint="聯絡人電子郵件"
                     android:inputType="textEmailAddress" />
+                <Button
+                    android:id="@+id/btn_update"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:text="更新" />
 
             </LinearLayout>
         </ScrollView>

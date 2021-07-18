@@ -7,17 +7,12 @@ if( isset($_POST['select'])){
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $selectUID);
     $stmt->execute();
-    $stmt->bind_result($id, $title, $description, $uid, $iconID);
+    $result = $stmt->get_result();
 
 
     $place = array();
-    while($stmt->fetch()){
-        $temp = array();
-        $temp['id'] = $id;
-        $temp['title'] = $title;
-        $temp['description'] = $description;
-        $temp['iconID'] = $iconID;
-        array_push($place, $temp);
+    while($row = $result->fetch_assoc()){
+        array_push($place, $row);
     }
     echo json_encode($place,JSON_UNESCAPED_UNICODE);
 }

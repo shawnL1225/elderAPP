@@ -20,7 +20,6 @@ import com.example.elderapp.Global
 import com.example.elderapp.R
 import com.example.elderapp.adapter.User
 import com.example.elderapp.adapter.FriendAdapter
-import com.google.android.material.button.MaterialButtonToggleGroup
 import org.json.JSONArray
 import org.json.JSONException
 import java.util.ArrayList
@@ -65,12 +64,12 @@ class EdFriendActivity : AppCompatActivity(), FriendAdapter.ItemClickListener {
             Log.d("connect", "select Response: $response")
             userList.clear()
             try {
-                val places = JSONArray(response)
-                for (i in 0 until places.length()) {
-                    val placeObj = places.getJSONObject(i)
-                    val id = placeObj.getInt("id")
-                    val name = placeObj.getString("name")
-                    val phone = placeObj.getString("phone")
+                val users = JSONArray(response)
+                for (i in 0 until users.length()) {
+                    val userObj = users.getJSONObject(i)
+                    val id = userObj.getInt("id")
+                    val name = userObj.getString("name")
+                    val phone = userObj.getString("phone")
 
                     userList.add(User(id, name, phone))
                 }

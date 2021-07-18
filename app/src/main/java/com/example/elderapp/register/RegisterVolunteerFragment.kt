@@ -43,7 +43,7 @@ class RegisterVolunteerFragment : Fragment() {
     lateinit var passC: String
     lateinit var department: String
     private var sex: String? = null
-    private val url: String = "https://www2.cs.ccu.edu.tw/~lwx109u/elderApp/register.php"
+    private val url: String = Global.url+"register.php"
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val root = inflater.inflate(R.layout.fragment_register_volunteer, container, false)
