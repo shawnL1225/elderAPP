@@ -29,7 +29,7 @@ class RegisterElderFragment : Fragment() {
     private var etContactPhone: EditText? = null
     private var etContactEmail: EditText? = null
     private var etAddress: EditText? = null
-    private var username: String? = null
+    private var name: String? = null
     private var phone: String? = null
     private var pass: String? = null
     private var passC: String? = null
@@ -60,7 +60,7 @@ class RegisterElderFragment : Fragment() {
         val radioGroup = root.findViewById<RadioGroup>(R.id.RadioGroup_sex)
 
         register.setOnClickListener {
-            username = etName!!.text.toString().trim { it <= ' ' }
+            name = etName!!.text.toString().trim { it <= ' ' }
             phone = etPhone!!.text.toString().trim { it <= ' ' }
             pass = etPassword!!.text.toString().trim { it <= ' ' }
             passC = etPasswordC!!.text.toString().trim { it <= ' ' }
@@ -79,7 +79,7 @@ class RegisterElderFragment : Fragment() {
 
             if (pass != passC) {
                 Global.putSnackBarR(etName!!, "密碼不相符")
-            } else if (username == "" || phone == "" || contactPhone == "") {
+            } else if (name == "" || phone == "" || contactPhone == "") {
                 Global.putSnackBarR(etName!!, "請輸入完整資訊")
             } else {
                 SQL()
@@ -104,7 +104,7 @@ class RegisterElderFragment : Fragment() {
             @Throws(AuthFailureError::class)
             override fun getParams(): MutableMap<String?, String?> {
                 val data: MutableMap<String?, String?> = HashMap()
-                data["username"] = username
+                data["name"] = name
                 data["phone"] = phone
                 data["password"] = pass
                 data["identity"] = "0"

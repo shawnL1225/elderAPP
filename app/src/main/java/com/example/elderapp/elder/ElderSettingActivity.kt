@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.LinearLayout
+import com.example.elderapp.LoginActivity
 import com.example.elderapp.R
 
 class ElderSettingActivity : AppCompatActivity() {
@@ -21,5 +22,11 @@ class ElderSettingActivity : AppCompatActivity() {
         btnBack.setOnClickListener { finish() }
         btnPlace.setOnClickListener { startActivity(Intent(this, EditPlaceActivity::class.java)) }
         btnFriend.setOnClickListener { startActivity(Intent(this, EdFriendActivity::class.java)) }
+        btnProfile.setOnClickListener { startActivity(Intent(this, EdProfileActivity::class.java)) }
+        btnLogout.setOnClickListener {
+            getSharedPreferences("loginUser", MODE_PRIVATE)
+                    .edit().putString("uid", "").apply()
+            startActivity(Intent(this, LoginActivity::class.java))
+        }
     }
 }

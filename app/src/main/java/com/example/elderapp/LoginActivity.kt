@@ -32,6 +32,13 @@ class LoginActivity : AppCompatActivity() {
 
         val isSignUp = intent.getBooleanExtra("signUp", false)
         if (isSignUp) Global.putSnackBar(etPassword!!, "已註冊成功 !")
+
+        val uid = getSharedPreferences("loginUser", MODE_PRIVATE).getString("uid", "")
+        val uIdentity = getSharedPreferences("loginUser", MODE_PRIVATE).getString("uIdentity", "")
+        if(uid != ""){
+            if(uIdentity == "0") startActivity(Intent(this, ElderActivity::class.java))
+            if(uIdentity == "1") startActivity(Intent(this, VolunteerActivity::class.java))
+        }
     }
 
     fun toRegister(view: View) {
@@ -44,19 +51,21 @@ class LoginActivity : AppCompatActivity() {
         if (account == "") {
             Global.putSnackBarR(etAccount!!, "請輸入帳號")
         } else {
-            SQL()
+            requestCheckUser()
         }
     }
 
-    private fun SQL() {
+    private fun requestCheckUser() {
         val stringRequest: StringRequest = object : StringRequest(Method.POST, url, Response.Listener { response: String ->
             Log.d("connect", "Response: $response")
             when {
                 response.startsWith("success") -> {
                     // formation would be "success-userID-userIdentity"
                     val sep: Array<String?> = response.split("-").toTypedArray()
-                    getSharedPreferences("mySP", MODE_PRIVATE)
-                            .edit().putString("uid", sep[1]).apply()
+                    getSharedPreferences("loginUser", MODE_PRIVATE).edit()
+                            .putString("uid", sep[1])
+                            .putString("uIdentity", sep[2])
+                            .apply()
 
                     var it = Intent(this@LoginActivity, ElderActivity::class.java)
                     if (sep[2] == "1") {

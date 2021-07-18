@@ -37,7 +37,7 @@ class RegisterVolunteerFragment : Fragment() {
     lateinit var etPassword: EditText
     lateinit var etPasswordC: EditText
     lateinit var etDepartment: EditText
-    lateinit var username: String
+    lateinit var name: String
     lateinit var phone: String
     lateinit var pass: String
     lateinit var passC: String
@@ -67,7 +67,7 @@ class RegisterVolunteerFragment : Fragment() {
         }
 
         register.setOnClickListener {
-            username = etName.text.toString().trim { it <= ' ' }
+            name = etName.text.toString().trim { it <= ' ' }
             phone = etPhone.text.toString().trim { it <= ' ' }
             pass = etPassword.text.toString().trim { it <= ' ' }
             passC = etPasswordC.text.toString().trim { it <= ' ' }
@@ -81,7 +81,7 @@ class RegisterVolunteerFragment : Fragment() {
 
             if (pass != passC) {
                 Global.putSnackBarR(etName, "密碼不相符")
-            } else if (username == "" || phone == "") {
+            } else if (name == "" || phone == "") {
                 Global.putSnackBarR(etName, "請輸入完整資訊")
             } else {
                 SQL()
@@ -106,7 +106,7 @@ class RegisterVolunteerFragment : Fragment() {
             @Throws(AuthFailureError::class)
             override fun getParams(): MutableMap<String?, String?> {
                 val data: MutableMap<String?, String?> = HashMap()
-                data["username"] = username
+                data["name"] = name
                 data["phone"] = phone
                 data["password"] = pass
                 data["identity"] = "1"

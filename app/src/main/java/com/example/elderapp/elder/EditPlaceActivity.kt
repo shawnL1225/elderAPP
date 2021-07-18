@@ -31,10 +31,12 @@ class EditPlaceActivity : AppCompatActivity(), ItemClickListener {
     lateinit var adapter: PlaceAdapter
     var placeList: MutableList<Place> = ArrayList()
     lateinit var recyclerView: RecyclerView
-
+    var uid :String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_place)
+
+        uid = getSharedPreferences("loginUser", MODE_PRIVATE).getString("uid", "")
         recyclerView = findViewById(R.id.recycler_place)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
@@ -99,7 +101,7 @@ class EditPlaceActivity : AppCompatActivity(), ItemClickListener {
         }, Response.ErrorListener { error: VolleyError? -> Toast.makeText(this, error.toString(), Toast.LENGTH_SHORT).show() }) {
             override fun getParams(): MutableMap<String?, String?> {
                 val data: MutableMap<String?, String?> = HashMap()
-                val uid = getSharedPreferences("mySP", MODE_PRIVATE).getString("uid", "")
+
                 data["select"] = ""
                 data["uid"] = uid
                 return data

@@ -41,7 +41,7 @@ class EdFriendActivity : AppCompatActivity(), FriendAdapter.ItemClickListener {
         btnBack.setOnClickListener {
             finish()
         }
-        uid = getSharedPreferences("mySP", MODE_PRIVATE).getString("uid", "")
+        uid = getSharedPreferences("loginUser", MODE_PRIVATE).getString("uid", "")
         recyclerView = findViewById(R.id.recycler_ed_friend)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
