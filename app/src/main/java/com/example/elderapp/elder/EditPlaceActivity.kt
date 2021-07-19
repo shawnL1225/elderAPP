@@ -157,7 +157,6 @@ class EditPlaceActivity : AppCompatActivity(), ItemClickListener {
         }, Response.ErrorListener { error: VolleyError -> Toast.makeText(this, error.message, Toast.LENGTH_SHORT).show() }) {
             override fun getParams(): MutableMap<String?, String?> {
                 val data: MutableMap<String?, String?> = HashMap()
-                val uid = getSharedPreferences("mySP", MODE_PRIVATE).getString("uid", "")
                 data["insert"] = ""
                 data["title"] = insTitle
                 data["desc"] = insDesc

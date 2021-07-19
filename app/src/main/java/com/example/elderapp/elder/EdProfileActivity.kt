@@ -86,7 +86,7 @@ class EdProfileActivity : AppCompatActivity() {
             }
         }
         btnBack.setOnClickListener { finish() }
-        
+
     }
 
     private fun requestUpdateData() {
