@@ -82,7 +82,7 @@ class EdFriendActivity : AppCompatActivity(), FriendAdapter.ItemClickListener {
         }, Response.ErrorListener { error: VolleyError? -> Toast.makeText(this, error.toString(), Toast.LENGTH_SHORT).show() }) {
             override fun getParams(): MutableMap<String?, String?> {
                 val data: MutableMap<String?, String?> = HashMap()
-                data["type"] = "select"
+                data["type"] = "select-elder"
                 data["uid"] = uid
                 return data
             }

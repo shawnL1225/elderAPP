@@ -1,16 +1,27 @@
 package com.example.elderapp.elder
 
+import android.Manifest
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import com.example.elderapp.Global
 import com.example.elderapp.R
+import com.example.elderapp.RawUser
 
 
 class ElderFragment : Fragment() {
+    private var callNumber :String = "0900000000"
+    private var uid :String? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -23,7 +34,19 @@ class ElderFragment : Fragment() {
         btnEvent.setOnClickListener { Navigation.findNavController(view).navigate(R.id.action_elderFragment_to_edEventFragment) }
         btnGoOut.setOnClickListener { Navigation.findNavController(view).navigate(R.id.action_elderFragment_to_goOutFragment) }
         btnTodo.setOnClickListener { Navigation.findNavController(view).navigate(R.id.action_elderFragment_to_todoFragment) }
+
+        uid = requireActivity().getSharedPreferences("loginUser", AppCompatActivity.MODE_PRIVATE).getString("uid", "")
+        Global.profile(requireContext(),uid!!){ user: RawUser ->
+            callNumber = user.contactPhone
+        }
         btnCall.setOnClickListener {
+            if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(requireActivity(),
+                        arrayOf(Manifest.permission.CALL_PHONE), 2)
+            }else{
+                val intent = Intent(Intent.ACTION_CALL, Uri.parse("tel:$callNumber"))
+                startActivity(intent)
+            }
 
         }
         return view

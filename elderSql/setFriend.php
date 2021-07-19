@@ -2,10 +2,27 @@
     require_once "config.php";
     $type = $_POST['type'];
 
-    if($type == 'select'){
+    if($type == 'select-elder'){
 
         $selectUID = $_POST['uid'];
         $sql = "SELECT user.name, user.phone, user.id FROM friend INNER JOIN user ON friend.volunteerID=user.id WHERE elderID = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $selectUID);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+
+        $friend = array();
+        while($row = $result->fetch_assoc()){
+            array_push($friend, $row);
+        }
+        echo json_encode($friend,JSON_UNESCAPED_UNICODE);
+
+    }
+    else if($type == 'select-volunteer'){
+
+        $selectUID = $_POST['uid'];
+        $sql = "SELECT user.name, user.phone, user.id FROM friend INNER JOIN user ON friend.elderID=user.id WHERE volunteerID = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("i", $selectUID);
         $stmt->execute();
