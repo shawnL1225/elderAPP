@@ -61,19 +61,19 @@ class RegisterElderFragment : Fragment() {
         val toLogin = root.findViewById<TextView?>(R.id.tv_toLogin)
         val radioGroup = root.findViewById<RadioGroup>(R.id.RadioGroup_sex)
 
-        radioGroup.setOnCheckedChangeListener{ radioGroup: RadioGroup, i: Int ->
-                val idx = when(radioGroup.checkedRadioButtonId){
-                    R.id.RadioButton_M -> 0
-                    R.id.RadioButton_F -> 1
-                    R.id.RadioButton_N -> 2
-                    else -> 2
-                }
-
-                headshot = arrayOf("default_m","default_f","default_n")[idx]
-                val res = arrayOf(R.drawable.male,R.drawable.female,R.drawable.nonsex)[idx]
-
-                Log.d("headshot",headshot)
-        }
+//        radioGroup.setOnCheckedChangeListener{ radioGroup: RadioGroup, i: Int ->
+//                val idx = when(radioGroup.checkedRadioButtonId){
+//                    R.id.RadioButton_M -> 0
+//                    R.id.RadioButton_F -> 1
+//                    R.id.RadioButton_N -> 2
+//                    else -> 2
+//                }
+//
+//                headshot = arrayOf("default_m","default_f","default_n")[idx]
+//                val res = arrayOf(R.drawable.male,R.drawable.female,R.drawable.nonsex)[idx]
+//
+//                Log.d("headshot",headshot)
+//        }
 
         register.setOnClickListener {
             name = etName!!.text.toString().trim()
@@ -87,9 +87,15 @@ class RegisterElderFragment : Fragment() {
             contactEmail = etContactEmail!!.text.toString().trim()
             addr = etAddress!!.text.toString().trim()
             when(radioGroup.checkedRadioButtonId){
-                R.id.RadioButton_M -> sex = "M"
-                R.id.RadioButton_F -> sex = "F"
-                R.id.RadioButton_N -> sex = "N"
+                R.id.RadioButton_M -> {
+                    sex = "M"; headshot = "default_m"
+                }
+                R.id.RadioButton_F -> {
+                    sex = "F"; headshot = "default_f"
+                }
+                R.id.RadioButton_N -> {
+                    sex = "N"; headshot = "default_n"
+                }
             }
 
 

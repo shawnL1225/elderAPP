@@ -27,12 +27,13 @@ else if($type == "updateElder"){
     $sex = $_POST['sex'];
     $address = $_POST['address'];
     $uid = $_POST['uid'];
+    $headshot = $_POST['headshot'];
 
     $sql = "UPDATE user SET name=?, phone=?, remarks_illness=?, remarks_eating=?, remarks_other=?,
-                contactPhone=?, contactEmail=?, address=?, sex=? WHERE id=?";
+                contactPhone=?, contactEmail=?, address=?, sex=?, headshot=? WHERE id=?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sssssssssi", $name, $phone,  $remarks_ill, $remarks_eating, $remarks_other,
-                    $contactPhone, $contactEmail, $address, $sex, $uid);
+    $stmt->bind_param("ssssssssssi", $name, $phone,  $remarks_ill, $remarks_eating, $remarks_other,
+                    $contactPhone, $contactEmail, $address, $sex, $headshot, $uid);
     $stmt->execute();
 
 

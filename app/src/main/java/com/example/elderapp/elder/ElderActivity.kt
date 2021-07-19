@@ -1,7 +1,9 @@
 package com.example.elderapp.elder
 
 import android.content.Intent
+import android.media.Image
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -13,6 +15,10 @@ import com.example.elderapp.R
 import com.example.elderapp.RawUser
 
 class ElderActivity : AppCompatActivity() {
+    private var profileImage :ImageView? = null
+    private var txtName :TextView? = null
+    private var txtPhone :TextView? = null
+    var uid :String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_elder)
@@ -23,19 +29,22 @@ class ElderActivity : AppCompatActivity() {
            startActivity(Intent(this, ElderSettingActivity::class.java))
         }
 
-        val profileImage = findViewById<ImageView>(R.id.profile_image)
-        val txtName = findViewById<TextView>(R.id.txt_name)
-        val txtPhone = findViewById<TextView>(R.id.txt_phone)
+        profileImage = findViewById<ImageView>(R.id.profile_image)
+        txtName = findViewById<TextView>(R.id.txt_name)
+        txtPhone = findViewById<TextView>(R.id.txt_phone)
 
-        val uid = getSharedPreferences("loginUser", MODE_PRIVATE).getString("uid", "")
+        uid = getSharedPreferences("loginUser", MODE_PRIVATE).getString("uid", "")
 
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("life", "onResume")
         Global.profile(this, uid!!) { user: RawUser ->
-            Global.headup(this,profileImage,user.headshot)
-            txtName.text = user.name
-            txtPhone.text = user.phone
+            Global.headup(this,profileImage!!,user.headshot)
+            txtName!!.text = user.name
+            txtPhone!!.text = user.phone
         }
-
-
-
     }
 }

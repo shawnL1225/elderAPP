@@ -12,6 +12,7 @@ import com.android.volley.toolbox.Volley
 import com.example.elderapp.Global
 import com.example.elderapp.LoginActivity
 import com.example.elderapp.R
+import com.example.elderapp.RawUser
 import org.json.JSONException
 import org.json.JSONObject
 import java.util.HashMap
@@ -38,6 +39,7 @@ class EdProfileActivity : AppCompatActivity() {
     private var contactEmail: String? = ""
     private var sex: String? = ""
     private var addr: String? = ""
+    private var headshot: String? = ""
     private var radioGroup: RadioGroup? = null
     private val url: String? = Global.url+"setProfile.php"
     var uid :String? = null
@@ -72,9 +74,15 @@ class EdProfileActivity : AppCompatActivity() {
             contactEmail = etContactEmail!!.text.toString().trim()
             addr = etAddress!!.text.toString().trim()
             when(radioGroup!!.checkedRadioButtonId){
-                R.id.RadioButton_M -> sex = "M"
-                R.id.RadioButton_F -> sex = "F"
-                R.id.RadioButton_N -> sex = "N"
+                R.id.RadioButton_M -> {
+                    sex = "M"; headshot = "default_m"
+                }
+                R.id.RadioButton_F -> {
+                    sex = "F"; headshot = "default_f"
+                }
+                R.id.RadioButton_N -> {
+                    sex = "N"; headshot = "default_n"
+                }
             }
 
             if (pass != passC) {
@@ -95,6 +103,7 @@ class EdProfileActivity : AppCompatActivity() {
             if (response.startsWith("success")) {
                 Global.putSnackBar(etName!!,"更新成功!")
                 requestGetData()
+
             } else if (response.startsWith("failure")) {
                 Global.putSnackBarR(etName!!,"沒有資料有更動")
             }
@@ -114,6 +123,7 @@ class EdProfileActivity : AppCompatActivity() {
                 data["contactEmail"] = contactEmail
                 data["address"] = addr
                 data["sex"] = sex
+                data["headshot"] = headshot
                 return data
             }
         }
