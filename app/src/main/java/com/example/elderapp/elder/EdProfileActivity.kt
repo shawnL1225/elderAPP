@@ -29,15 +29,15 @@ class EdProfileActivity : AppCompatActivity() {
     private var etAddress: EditText? = null
     private var name: String? = null
     private var phone: String? = null
-    private var pass: String? = null
-    private var passC: String? = null
+    private var pass: String? = ""
+    private var passC: String? = ""
     private var remarksIll: String? = ""
     private var remarksEating: String? = ""
     private var remarksOther: String? = ""
-    private var contactPhone: String? = null
-    private var contactEmail: String? = null
-    private var sex: String? = null
-    private var addr: String? = null
+    private var contactPhone: String? = ""
+    private var contactEmail: String? = ""
+    private var sex: String? = ""
+    private var addr: String? = ""
     private var radioGroup: RadioGroup? = null
     private val url: String? = Global.url+"setProfile.php"
     var uid :String? = null
@@ -56,29 +56,53 @@ class EdProfileActivity : AppCompatActivity() {
         etContactPhone = findViewById(R.id.et_contactPhone)
         etContactEmail = findViewById(R.id.et_contactEmail)
         etAddress = findViewById(R.id.et_address)
-        radioGroup = findViewById<RadioGroup>(R.id.RadioGroup_sex)
+        radioGroup = findViewById(R.id.RadioGroup_sex)
         val btnUpdate = findViewById<Button>(R.id.btn_update)
-        btnUpdate.setOnClickListener {
-            requestUpdateData()
-        }
-
+        val btnBack = findViewById<Button>(R.id.btn_back)
         requestGetData()
+        btnUpdate.setOnClickListener {
+            name = etName!!.text.toString().trim()
+            phone = etPhone!!.text.toString().trim()
+            pass = etPassword!!.text.toString().trim()
+            passC = etPasswordC!!.text.toString().trim ()
+            remarksIll = etRemarksIll!!.text.toString().trim()
+            remarksEating = etRemarksEating!!.text.toString().trim()
+            remarksOther = etRemarksOther!!.text.toString().trim()
+            contactPhone = etContactPhone!!.text.toString().trim()
+            contactEmail = etContactEmail!!.text.toString().trim()
+            addr = etAddress!!.text.toString().trim()
+            when(radioGroup!!.checkedRadioButtonId){
+                R.id.RadioButton_M -> sex = "M"
+                R.id.RadioButton_F -> sex = "F"
+                R.id.RadioButton_N -> sex = "N"
+            }
+
+            if (pass != passC) {
+                Global.putSnackBarR(etName!!, "密碼不相符")
+            } else if (name == "" || phone == "" || contactPhone == "") {
+                Global.putSnackBarR(etName!!, "請輸入完整資訊")
+            } else {
+                requestUpdateData()
+            }
+        }
+        btnBack.setOnClickListener { finish() }
+        
     }
 
     private fun requestUpdateData() {
         val stringRequest: StringRequest = object : StringRequest(Method.POST, url, Response.Listener { response: String ->
             Log.d("connect", "Response: $response")
             if (response.startsWith("success")) {
-                Global.putSnackBar(etName!!,"更新成功")
-
+                Global.putSnackBar(etName!!,"更新成功!")
+                requestGetData()
             } else if (response.startsWith("failure")) {
-                Toast.makeText(this, "更新失敗", Toast.LENGTH_SHORT).show()
+                Global.putSnackBarR(etName!!,"沒有資料有更動")
             }
-            
+
         }, Response.ErrorListener { error: VolleyError -> Toast.makeText(this, error.toString() , Toast.LENGTH_SHORT).show() }) {
             override fun getParams(): MutableMap<String?, String?> {
                 val data: MutableMap<String?, String?> = HashMap()
-                data["type"] = "updateData"
+                data["type"] = "updateElder"
                 data["uid"] = uid
                 data["name"] = name
                 data["phone"] = phone

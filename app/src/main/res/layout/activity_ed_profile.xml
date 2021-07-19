@@ -68,7 +68,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="5dp"
-                    android:hint="如要更改請直接輸入"
+                    android:hint="密碼 (如要更改才需輸入)"
                     android:inputType="textPassword" />
 
                 <EditText

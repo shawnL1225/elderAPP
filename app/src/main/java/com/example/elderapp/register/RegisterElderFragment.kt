@@ -60,16 +60,15 @@ class RegisterElderFragment : Fragment() {
         val radioGroup = root.findViewById<RadioGroup>(R.id.RadioGroup_sex)
 
         register.setOnClickListener {
-            name = etName!!.text.toString().trim { it <= ' ' }
-            phone = etPhone!!.text.toString().trim { it <= ' ' }
-            pass = etPassword!!.text.toString().trim { it <= ' ' }
-            passC = etPasswordC!!.text.toString().trim { it <= ' ' }
-            remarksIll = etRemarksIll!!.text.toString().trim { it <= ' ' }
-            remarksEating = etRemarksEating!!.text.toString().trim { it <= ' ' }
-            remarksOther = etRemarksOther!!.text.toString().trim { it <= ' ' }
-            contactPhone = etContactPhone!!.text.toString().trim { it <= ' ' }
-            contactEmail = etContactEmail!!.text.toString().trim { it <= ' ' }
-
+            name = etName!!.text.toString().trim()
+            phone = etPhone!!.text.toString().trim()
+            pass = etPassword!!.text.toString().trim()
+            passC = etPasswordC!!.text.toString().trim ()
+            remarksIll = etRemarksIll!!.text.toString().trim()
+            remarksEating = etRemarksEating!!.text.toString().trim()
+            remarksOther = etRemarksOther!!.text.toString().trim()
+            contactPhone = etContactPhone!!.text.toString().trim()
+            contactEmail = etContactEmail!!.text.toString().trim()
             addr = etAddress!!.text.toString().trim()
             when(radioGroup.checkedRadioButtonId){
                 R.id.RadioButton_M -> sex = "M"
