@@ -42,6 +42,7 @@ class RegisterVolunteerFragment : Fragment() {
     lateinit var pass: String
     lateinit var passC: String
     lateinit var department: String
+    var headshot: String = "default_n"
     private var sex: String? = null
     private val url: String = Global.url+"register.php"
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -66,6 +67,33 @@ class RegisterVolunteerFragment : Fragment() {
             };
         }
 
+        Glide.with(this)
+                .load(R.drawable.nonsex)
+                .circleCrop()
+                .into(imgHeadshot)
+
+        radioGroup.setOnCheckedChangeListener{ radioGroup: RadioGroup, i: Int ->
+            Log.d("headshot","change${headshot.startsWith("default")}")
+            if(headshot.startsWith("default")){
+                val idx = when(radioGroup.checkedRadioButtonId){
+                    R.id.RadioButton_M -> 0
+                    R.id.RadioButton_F -> 1
+                    R.id.RadioButton_N -> 2
+                    else -> 2
+                }
+
+                headshot = arrayOf("default_m","default_f","default_n")[idx]
+                val res = arrayOf(R.drawable.male,R.drawable.female,R.drawable.nonsex)[idx]
+
+                Log.d("headshot",headshot)
+
+                Glide.with(this)
+                        .load(res)
+                        .circleCrop()
+                        .into(imgHeadshot)
+            }
+        }
+
         register.setOnClickListener {
             name = etName.text.toString().trim { it <= ' ' }
             phone = etPhone.text.toString().trim { it <= ' ' }
@@ -73,10 +101,11 @@ class RegisterVolunteerFragment : Fragment() {
             passC = etPasswordC.text.toString().trim { it <= ' ' }
             department = etDepartment.text.toString().trim { it <= ' ' }
 
-            when(radioGroup.checkedRadioButtonId){
-                R.id.RadioButton_M -> sex = "M"
-                R.id.RadioButton_F -> sex = "F"
-                R.id.RadioButton_N -> sex = "N"
+            sex = when(radioGroup.checkedRadioButtonId){
+                R.id.RadioButton_M ->  "M"
+                R.id.RadioButton_F -> "F"
+                R.id.RadioButton_N -> "N"
+                else -> "_"
             }
 
             if (pass != passC) {
@@ -112,6 +141,7 @@ class RegisterVolunteerFragment : Fragment() {
                 data["identity"] = "1"
                 data["department"] = department
                 data["sex"] = sex
+                data["headshot"] = headshot
                 return data
             }
         }
@@ -129,16 +159,12 @@ class RegisterVolunteerFragment : Fragment() {
                         200
                 )
 
-                Glide.with(this)
-                        .load(bitmap)
-                        .circleCrop()
-                        .into(imgHeadshot);
-
                 val baos = ByteArrayOutputStream()
                 bitmap?.compress(Bitmap.CompressFormat.JPEG, 100, baos)
                 val b = baos.toByteArray()
                 val base64 = Base64.encodeToString(b, Base64.DEFAULT)
                 Log.d("base64", base64)
+                uploadHeadShot(base64)
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 var error:Exception = result.getError();
             }
@@ -163,5 +189,28 @@ class RegisterVolunteerFragment : Fragment() {
             width = (height * bitmapRatio).toInt()
         }
         return Bitmap.createScaledBitmap(image, width, height, true)
+    }
+
+    private fun uploadHeadShot(base64string : String) {
+        val stringRequest: StringRequest = object : StringRequest(Method.POST, Global.url + "headshot.php", Response.Listener { response: String ->
+
+                var url ="${Global.url}headshot/${response}.jpg"
+                Toast.makeText(context, "上傳成功", Toast.LENGTH_SHORT).show()
+                Glide.with(this)
+                        .load(url)
+                        .circleCrop()
+                        .into(imgHeadshot)
+                headshot = response
+
+        }, Response.ErrorListener { error: VolleyError -> Toast.makeText(context, error.toString().trim { it <= ' ' }, Toast.LENGTH_SHORT).show() }) {
+            @Throws(AuthFailureError::class)
+            override fun getParams(): MutableMap<String?, String?> {
+                val data: MutableMap<String?, String?> = HashMap()
+                data["imageBase64"] = base64string
+                return data
+            }
+        }
+        val requestQueue = Volley.newRequestQueue(context)
+        requestQueue.add(stringRequest)
     }
 }
