@@ -4,12 +4,14 @@ import android.app.Application
 import android.content.Context
 import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
 import com.android.volley.AuthFailureError
 import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import org.json.JSONException
@@ -57,6 +59,32 @@ class Global : Application() {
             val requestQueue = Volley.newRequestQueue(context)
             requestQueue.add(stringRequest)
         }
+
+        fun headup(context:Context, img: ImageView, headshot:String){
+                val idx = when(headshot){
+                    "default_m" -> 0
+                    "default_f" -> 1
+                    "default_n" -> 2
+                    else -> 3
+                }
+                if(idx==3){
+                    var url ="${Global.url}headshot/${headshot}.jpg"
+                    Glide.with(context)
+                            .load(url)
+                            .circleCrop()
+                            .into(img)
+                    Log.d("Load as url",url)
+                }else {
+                    Glide.with(context)
+                            .load(arrayOf(R.drawable.male, R.drawable.female, R.drawable.nonsex)[idx])
+                            .circleCrop()
+                            .into(img)
+
+                    Log.d("Loading", "Load as draw")
+                }
+        }
+
+
     }
 
 

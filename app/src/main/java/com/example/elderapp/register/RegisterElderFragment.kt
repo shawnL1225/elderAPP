@@ -40,6 +40,8 @@ class RegisterElderFragment : Fragment() {
     private var contactEmail: String? = null
     private var sex: String? = null
     private var addr: String? = null
+    private var headshot: String = "default_n"
+
     private val url: String? = Global.url+"register.php"
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -59,6 +61,20 @@ class RegisterElderFragment : Fragment() {
         val toLogin = root.findViewById<TextView?>(R.id.tv_toLogin)
         val radioGroup = root.findViewById<RadioGroup>(R.id.RadioGroup_sex)
 
+        radioGroup.setOnCheckedChangeListener{ radioGroup: RadioGroup, i: Int ->
+                val idx = when(radioGroup.checkedRadioButtonId){
+                    R.id.RadioButton_M -> 0
+                    R.id.RadioButton_F -> 1
+                    R.id.RadioButton_N -> 2
+                    else -> 2
+                }
+
+                headshot = arrayOf("default_m","default_f","default_n")[idx]
+                val res = arrayOf(R.drawable.male,R.drawable.female,R.drawable.nonsex)[idx]
+
+                Log.d("headshot",headshot)
+        }
+
         register.setOnClickListener {
             name = etName!!.text.toString().trim()
             phone = etPhone!!.text.toString().trim()
@@ -75,6 +91,8 @@ class RegisterElderFragment : Fragment() {
                 R.id.RadioButton_F -> sex = "F"
                 R.id.RadioButton_N -> sex = "N"
             }
+
+
 
             if (pass != passC) {
                 Global.putSnackBarR(etName!!, "密碼不相符")
@@ -114,6 +132,7 @@ class RegisterElderFragment : Fragment() {
                 data["contactEmail"] = contactEmail
                 data["address"] = addr
                 data["sex"] = sex
+                data["headshot"] = headshot
 
                 return data
             }

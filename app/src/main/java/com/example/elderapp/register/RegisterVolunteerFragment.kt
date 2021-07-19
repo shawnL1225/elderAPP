@@ -87,10 +87,7 @@ class RegisterVolunteerFragment : Fragment() {
 
                 Log.d("headshot",headshot)
 
-                Glide.with(this)
-                        .load(res)
-                        .circleCrop()
-                        .into(imgHeadshot)
+
             }
         }
 
