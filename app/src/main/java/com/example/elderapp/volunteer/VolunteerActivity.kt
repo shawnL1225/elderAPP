@@ -2,13 +2,16 @@ package com.example.elderapp.volunteer
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.Navigation
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
+import com.example.elderapp.Global
 import com.example.elderapp.R
+import com.example.elderapp.RawUser
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class VolunteerActivity : AppCompatActivity() {
@@ -25,5 +28,9 @@ class VolunteerActivity : AppCompatActivity() {
             startActivity(Intent(this, VolunteerSettingActivity::class.java))
         }
 
+        Global.profile(this, "72") { user: RawUser ->
+            Log.d("Name", user.name)
+        }
     }
+
 }
