@@ -4,7 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.Navigation
 import androidx.navigation.ui.AppBarConfiguration
@@ -28,8 +30,16 @@ class VolunteerActivity : AppCompatActivity() {
             startActivity(Intent(this, VolunteerSettingActivity::class.java))
         }
 
-        Global.profile(this, "72") { user: RawUser ->
-            Log.d("Name", user.name)
+        val profileImage = findViewById<ImageView>(R.id.profile_image)
+        val txtName = findViewById<TextView>(R.id.txt_name)
+        val txtPhone = findViewById<TextView>(R.id.txt_phone)
+
+        val uid = getSharedPreferences("loginUser", MODE_PRIVATE).getString("uid", "")
+
+        Global.profile(this, uid!!) { user: RawUser ->
+            Global.headup(this,profileImage,user.headshot)
+            txtName.text = user.name
+            txtPhone.text = user.phone
         }
     }
 
