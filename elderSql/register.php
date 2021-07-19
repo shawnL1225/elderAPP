@@ -18,12 +18,12 @@ if(isset($_POST['name']) && isset($_POST['phone'])){
 
     if($identity == "0"){   //長者
         $sql = "insert into user 
-            (name, phone, password, identity, sex, address, remarks_illness, remarks_eating, remarks_other, contactPhone, contactEmail) 
-            values (?,?,?,?,?,?,?,?,?,?,?)";
+            (name, phone, password, identity, sex, address, remarks_illness, remarks_eating, remarks_other, contactPhone, contactEmail, headshot) 
+            values (?,?,?,?,?,?,?,?,?,?,?,?)";
 
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("sssissssssss", $name, $phone, md5($password), $identity, $sex, $address,
-                        $remarks_ill, $remarks_eating, $remarks_other, $contactPhone, $contactEmail);
+                        $remarks_ill, $remarks_eating, $remarks_other, $contactPhone, $contactEmail, $headshot);
         $stmt->execute();
 
 
