@@ -2,7 +2,6 @@
 
 if(isset($_POST['name']) && isset($_POST['phone'])){
     require_once "config.php";
-    require_once "validate.php";
     $name = $_POST['name'];
     $password = $_POST['password'];
     $phone = $_POST['phone'];
@@ -15,6 +14,7 @@ if(isset($_POST['name']) && isset($_POST['phone'])){
     $department = $_POST['department'];
     $sex = $_POST['sex'];
     $address = $_POST['address'];
+    $headshot = $_POST['headshot'];
 
     if($identity == "0"){   //長者
         $sql = "insert into user 
@@ -22,7 +22,7 @@ if(isset($_POST['name']) && isset($_POST['phone'])){
             values (?,?,?,?,?,?,?,?,?,?,?)";
 
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("sssisssssss", $name, $phone, md5($password), $identity, $sex, $address,
+        $stmt->bind_param("sssissssssss", $name, $phone, md5($password), $identity, $sex, $address,
                         $remarks_ill, $remarks_eating, $remarks_other, $contactPhone, $contactEmail);
         $stmt->execute();
 
@@ -37,11 +37,11 @@ if(isset($_POST['name']) && isset($_POST['phone'])){
 
     else if($identity == "1"){ //志工
         $sql = "insert into user 
-            (name, phone, password, identity, sex, department) 
-            values (?,?,?,?,?,?)";
+            (name, phone, password, identity, sex, department, headshot) 
+            values (?,?,?,?,?,?,?)";
 
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("sssiss", $name, $phone, md5($password), $identity, $sex, $department);
+        $stmt->bind_param("sssisss", $name, $phone, md5($password), $identity, $sex, $department, $headshot);
         $stmt->execute();
 
         if($stmt->affected_rows > 0){
