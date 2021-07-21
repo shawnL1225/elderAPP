@@ -73,10 +73,10 @@ class Global : Application() {
                             .load(url)
                             .circleCrop()
                             .into(img)
-                    Log.d("Load as url",url)
+                    Log.d("Loading", "url$url")
                 }else {
                     Glide.with(context)
-                            .load(arrayOf(R.drawable.male, R.drawable.female, R.drawable.nonsex)[idx])
+                            .load(arrayOf(R.drawable.male_nobg, R.drawable.female_nobg, R.drawable.nonsex)[idx])
                             .circleCrop()
                             .into(img)
 

@@ -83,7 +83,7 @@ class RegisterVolunteerFragment : Fragment() {
                 }
 
                 headshot = arrayOf("default_m","default_f","default_n")[idx]
-                val res = arrayOf(R.drawable.male,R.drawable.female,R.drawable.nonsex)[idx]
+                val res = arrayOf(R.drawable.male_nobg,R.drawable.female_nobg,R.drawable.nonsex)[idx]
 
                 Log.d("headshot",headshot)
 

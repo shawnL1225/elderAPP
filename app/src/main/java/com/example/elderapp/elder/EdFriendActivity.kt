@@ -44,7 +44,6 @@ class EdFriendActivity : AppCompatActivity(), FriendAdapter.ItemClickListener {
         recyclerView = findViewById(R.id.recycler_ed_friend)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
-        recyclerView.itemAnimator
         requestGetFriends();
     }
     override fun onItemClick(position: Int) {
