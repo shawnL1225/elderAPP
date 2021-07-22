@@ -27,14 +27,12 @@ class RegisterActivity : AppCompatActivity() {
         toggleGroup.addOnButtonCheckedListener { group, checkedId, isChecked ->
             if(isChecked){
                 if (checkedId == R.id.elderPage) {
-                    Log.d("button", "elder")
                     val transaction = manager.beginTransaction()
                     transaction.replace(R.id.fragment_register, elderFragment)
                     transaction.commit()
                     btnElder.textSize = 20.0F
                     btnVolunteer.textSize = 14.0F
                 } else if (checkedId == R.id.volunteerPage) {
-                    Log.d("button", "volun")
                     val transaction = manager.beginTransaction()
                     transaction.replace(R.id.fragment_register, volunteerFragment)
                     transaction.commit()

@@ -7,8 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.DialogFragment.STYLE_NORMAL
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,13 +25,14 @@ import com.example.elderapp.Global
 import com.example.elderapp.R
 import com.example.elderapp.adapter.Event
 import com.example.elderapp.adapter.EventAdapter
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.button.MaterialButtonToggleGroup
 import org.json.JSONArray
 import org.json.JSONException
 import java.util.HashMap
 
 
-class VtEventFragment : Fragment() {
+class VtEventFragment : Fragment(),EventAdapter.ItemClickListener{
     var uid: String? = null
     var url = Global.url+"event.php"
     lateinit var adapter: EventAdapter
@@ -49,11 +53,9 @@ class VtEventFragment : Fragment() {
         toggleGroup.addOnButtonCheckedListener { group, checkedId, isChecked ->
             if(isChecked){
                 if (checkedId == R.id.btn_all){
-                    Log.d("button", "ALL")
                     requestEventAll()
                 }else if (checkedId == R.id.btn_mine){
                     requestEventMine()
-                    Log.d("button", "MINE")
                 }
             }
 
@@ -72,7 +74,7 @@ class VtEventFragment : Fragment() {
                     val id = eventObj.getInt("id")
                     val title = eventObj.getString("title")
                     val location = eventObj.getString("location")
-                    val description = eventObj.getString("description")
+                    val content = eventObj.getString("content")
                     val holder = eventObj.getString("holder")
                     val date = eventObj.getString("date")
                     val attendeeArr: MutableList<Int> = ArrayList()
@@ -81,10 +83,10 @@ class VtEventFragment : Fragment() {
                         attendeeArr.add(attendeeObj[j] as Int)
                     }
 
-                    eventList.add(Event(id, title, location, description, holder, date, attendeeArr))
+                    eventList.add(Event(id, title, location, content, holder, date, attendeeArr))
                 }
-                adapter = EventAdapter(eventList)
-//                adapter.setClickListener(this)
+                adapter = EventAdapter(eventList, uid!!.toInt())
+                adapter.setClickListener(this)
                 recyclerView.adapter = adapter
             } catch (e: JSONException) {
                 e.printStackTrace()
@@ -112,7 +114,7 @@ class VtEventFragment : Fragment() {
                     val id = eventObj.getInt("id")
                     val title = eventObj.getString("title")
                     val location = eventObj.getString("location")
-                    val description = eventObj.getString("description")
+                    val content = eventObj.getString("content")
                     val holder = eventObj.getString("holder")
                     val date = eventObj.getString("date")
                     val attendeeArr: MutableList<Int> = ArrayList()
@@ -121,11 +123,11 @@ class VtEventFragment : Fragment() {
                         attendeeArr.add(attendeeObj[j] as Int)
                     }
 
-                    eventList.add(Event(id, title, location, description, holder, date, attendeeArr))
+                    eventList.add(Event(id, title, location, content, holder, date, attendeeArr))
                 }
 
-                adapter = EventAdapter(eventList)
-//                adapter.setClickListener(this)
+                adapter = EventAdapter(eventList, uid!!.toInt())
+                adapter.setClickListener(this)
                 recyclerView.adapter = adapter
             } catch (e: JSONException) {
                 e.printStackTrace()
@@ -141,6 +143,31 @@ class VtEventFragment : Fragment() {
         }
         val requestQueue = Volley.newRequestQueue(context)
         requestQueue.add(stringRequest)
+    }
+
+    override fun onItemClick(position: Int) {
+        val event = adapter.getEvent(position)
+        val bottomSheetDialog = BottomSheetDialog(requireContext(),R.style.BottomSheetDialog)
+        val view = LayoutInflater.from(context).inflate(R.layout.dialog_event, null)
+        var tvTitle = view.findViewById<TextView>(R.id.tv_title)
+        var tvLocation = view.findViewById<TextView>(R.id.tv_location)
+        var tvDate = view.findViewById<TextView>(R.id.tv_date)
+        var tvHolder = view.findViewById<TextView>(R.id.tv_holder)
+        var tvCount = view.findViewById<TextView>(R.id.tv_count)
+        var tvCheck = view.findViewById<TextView>(R.id.tv_check)
+        var tvContent = view.findViewById<TextView>(R.id.tv_content)
+        var imgEvent = view.findViewById<ImageView>(R.id.img_event)
+        tvTitle.text = event.title
+        tvLocation.text = event.location
+        tvDate.text = event.date
+        tvHolder.text = event.holder
+        tvCount.text = event.attendee.size.toString()+" 人已參與"
+        tvContent.text = event.content
+        if(event.attendee.contains(uid!!.toInt())){
+            tvCheck.visibility = View.VISIBLE
+        }
+        bottomSheetDialog.setContentView(view)
+        bottomSheetDialog.show()
     }
 
 

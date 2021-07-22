@@ -49,6 +49,7 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
     api 'com.theartofdev.edmodo:android-image-cropper:2.8.+'
     implementation 'com.google.code.gson:gson:2.8.7'
+    implementation 'com.makeramen:roundedimageview:2.3.0'
 
 }
 repositories {
