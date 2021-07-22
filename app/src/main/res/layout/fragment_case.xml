@@ -1,14 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/style_layout_background"
+    android:padding="25dp"
     tools:context=".volunteer.CaseFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="case" />
+        android:orientation="vertical">
+
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:id="@+id/eventButtonToggleGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:checkedButton="@+id/btn_all"
+            app:selectionRequired="true"
+            app:singleSelection="true">
+
+
+            <Button
+                android:id="@+id/btn_all"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="所有活動"
+                tools:layout_editor_absoluteX="102dp"
+                tools:layout_editor_absoluteY="28dp" />
+
+            <Button
+                android:id="@+id/btn_mine"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="我的活動"
+                tools:layout_editor_absoluteX="214dp"
+                tools:layout_editor_absoluteY="28dp" />
+
+        </com.google.android.material.button.MaterialButtonToggleGroup>
+
+        <fragment
+            android:id="@+id/fragment2"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:defaultNavHost="true"
+            app:navGraph="@navigation/volunteer_case_nav" />
+
+    </LinearLayout>
 
 </FrameLayout>

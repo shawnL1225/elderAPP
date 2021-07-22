@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/volunteer_case_nav"
+    app:startDestination="@id/volunteerAllCaseFragment">
+
+    <fragment
+        android:id="@+id/volunteerAllCaseFragment"
+        android:name="com.example.elderapp.volunteer.VolunteerAllCaseFragment"
+        android:label="VolunteerAllCaseFragment" >
+        <action
+            android:id="@+id/action_volunteerAllCaseFragment_to_volunteerMyCaseFragment2"
+            app:destination="@id/volunteerMyCaseFragment2" />
+        <action
+            android:id="@+id/action_volunteerAllCaseFragment_to_volunteerMyCaseFragment22"
+            app:destination="@id/volunteerMyCaseFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/volunteerMyCaseFragment2"
+        android:name="com.example.elderapp.volunteer.VolunteerMyCaseFragment"
+        android:label="fragment_volunteer_my_case"
+        tools:layout="@layout/fragment_volunteer_my_case" >
+        <action
+            android:id="@+id/action_volunteerMyCaseFragment2_to_volunteerAllCaseFragment"
+            app:destination="@id/volunteerAllCaseFragment" />
+    </fragment>
+</navigation>
