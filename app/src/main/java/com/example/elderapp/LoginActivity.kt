@@ -75,10 +75,10 @@ class LoginActivity : AppCompatActivity() {
                     //                    finish();
                 }
                 response == "NoUser" -> {
-                    Toast.makeText(this@LoginActivity, "登入失敗 - 查無此使用者", Toast.LENGTH_SHORT).show()
+                    Global.putSnackBarR(etAccount!!, "登入失敗 - 查無此使用者")
                 }
                 response == "WrongPass" -> {
-                    Toast.makeText(this@LoginActivity, "登入失敗 - 密碼錯誤", Toast.LENGTH_SHORT).show()
+                    Global.putSnackBarR(etAccount!!, "登入失敗 - 密碼錯誤")
                 }
             }
         }, Response.ErrorListener { error: VolleyError -> Toast.makeText(this@LoginActivity, error.toString() , Toast.LENGTH_SHORT).show() }) {

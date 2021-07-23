@@ -4,9 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".volunteer.VtEventFragment">
+    tools:context=".EventFragment">
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_addEvent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:clickable="true"
+        android:src="@drawable/ic_add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/style_layout_background"
@@ -40,7 +52,7 @@
                 android:id="@+id/btn_mine"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="我的活動"
                 tools:layout_editor_absoluteX="214dp"
@@ -48,11 +60,23 @@
 
         </com.google.android.material.button.MaterialButtonToggleGroup>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_event"
-            android:layoutAnimation="@anim/recycler_layout_animation"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_event"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layoutAnimation="@anim/recycler_layout_animation" />
+
+            </LinearLayout>
+        </ScrollView>
 
     </LinearLayout>
 

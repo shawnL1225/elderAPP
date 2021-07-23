@@ -77,7 +77,7 @@ class RegisterVolunteerFragment : Fragment() {
             if(headshot.startsWith("default")){
                 val idx = when(radioGroup.checkedRadioButtonId){
                     R.id.RadioButton_M -> 0
-                    R.id.RadioButton_F -> 1
+                    R.id.holder -> 1
                     R.id.RadioButton_N -> 2
                     else -> 2
                 }
@@ -100,7 +100,7 @@ class RegisterVolunteerFragment : Fragment() {
 
             sex = when(radioGroup.checkedRadioButtonId){
                 R.id.RadioButton_M ->  "M"
-                R.id.RadioButton_F -> "F"
+                R.id.holder -> "F"
                 R.id.RadioButton_N -> "N"
                 else -> "_"
             }

@@ -1,6 +1,7 @@
-package com.example.elderapp.volunteer
+package com.example.elderapp
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,7 +12,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.DialogFragment.STYLE_NORMAL
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,28 +22,28 @@ import com.android.volley.VolleyError
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.bumptech.glide.Glide
-import com.example.elderapp.Global
-import com.example.elderapp.R
 import com.example.elderapp.adapter.Event
 import com.example.elderapp.adapter.EventAdapter
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.button.MaterialButtonToggleGroup
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import org.json.JSONArray
 import org.json.JSONException
 import java.util.HashMap
 
 
-class VtEventFragment : Fragment(),EventAdapter.ItemClickListener{
+class EventFragment : Fragment(),EventAdapter.ItemClickListener{
     var uid: String? = null
     var url = Global.url+"event.php"
     lateinit var adapter: EventAdapter
     var eventList: MutableList<Event> = ArrayList()
     lateinit var recyclerView: RecyclerView
     var selectMine:Boolean = false
+    var nameList: String = ""
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_event_vt, container, false)
+        val view = inflater.inflate(R.layout.fragment_event, container, false)
         uid = requireActivity().getSharedPreferences("loginUser", AppCompatActivity.MODE_PRIVATE).getString("uid", "")
 
         recyclerView = view.findViewById(R.id.recycler_event)
@@ -61,14 +61,16 @@ class VtEventFragment : Fragment(),EventAdapter.ItemClickListener{
                     requestEvent()
                 }
             }
-
-
+        }
+        val btnAddEvent = view.findViewById<FloatingActionButton>(R.id.btn_addEvent)
+        btnAddEvent.setOnClickListener {
+            startActivity(Intent(requireContext(), AddEventActivity::class.java))
         }
         return view
     }
     private fun requestEvent(){
         val stringRequest: StringRequest = object : StringRequest(Method.POST, url, Response.Listener { response: String ->
-            Log.d("connect", "all Response: $response")
+            Log.d("connect", "Response: $response")
             eventList.clear()
             try {
                 val events = JSONArray(response)
@@ -85,7 +87,7 @@ class VtEventFragment : Fragment(),EventAdapter.ItemClickListener{
                     for (j in 0 until attendeeObj.length()) {
                         attendeeArr.add(attendeeObj[j] as Int)
                     }
-                    if(!selectMine || !attendeeArr.contains(uid!!.toInt()))
+                    if(!selectMine || attendeeArr.contains(uid!!.toInt()))
                         eventList.add(Event(id, title, location, content, holder, date, attendeeArr))
                 }
                 adapter = EventAdapter(requireContext(), eventList, uid!!.toInt())
@@ -106,8 +108,62 @@ class VtEventFragment : Fragment(),EventAdapter.ItemClickListener{
         val requestQueue = Volley.newRequestQueue(context)
         requestQueue.add(stringRequest)
     }
+    private fun attend(eid: Int){
+        val stringRequest: StringRequest = object : StringRequest(Method.POST, url, Response.Listener { response: String ->
+            Log.d("connect", "Response: $response")
+            if(response.startsWith("success")){
+                requestEvent()
+            }
 
+        }, Response.ErrorListener { error: VolleyError -> Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show() }) {
+            @Throws(AuthFailureError::class)
+            override fun getParams(): MutableMap<String?, String?> {
+                val data: MutableMap<String?, String?> = HashMap()
+                data["type"] = "attend"
+                data["uid"] = uid
+                data["eid"] = eid.toString()
+                return data
+            }
+        }
+        val requestQueue = Volley.newRequestQueue(context)
+        requestQueue.add(stringRequest)
+    }
+    private fun disAttend(eid: Int){
+        val stringRequest: StringRequest = object : StringRequest(Method.POST, url, Response.Listener { response: String ->
+            Log.d("connect", "Response: $response")
+            if(response.startsWith("success")){
+                requestEvent()
+            }
 
+        }, Response.ErrorListener { error: VolleyError -> Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show() }) {
+            @Throws(AuthFailureError::class)
+            override fun getParams(): MutableMap<String?, String?> {
+                val data: MutableMap<String?, String?> = HashMap()
+                data["type"] = "disAttend"
+                data["uid"] = uid
+                data["eid"] = eid.toString()
+                return data
+            }
+        }
+        val requestQueue = Volley.newRequestQueue(context)
+        requestQueue.add(stringRequest)
+    }
+    private fun getNameList(eid: Int, view:TextView){
+        val stringRequest: StringRequest = object : StringRequest(Method.POST, url, Response.Listener { response: String ->
+            Log.d("connect", "Response: $response")
+            view.text = response
+        }, Response.ErrorListener { error: VolleyError -> Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show() }) {
+            @Throws(AuthFailureError::class)
+            override fun getParams(): MutableMap<String?, String?> {
+                val data: MutableMap<String?, String?> = HashMap()
+                data["type"] = "getNameList"
+                data["eid"] = eid.toString()
+                return data
+            }
+        }
+        val requestQueue = Volley.newRequestQueue(context)
+        requestQueue.add(stringRequest)
+    }
     override fun onItemClick(position: Int) {
         val event = adapter.getEvent(position)
         val bottomSheetDialog = BottomSheetDialog(requireContext(),R.style.BottomSheetDialog)
@@ -121,23 +177,45 @@ class VtEventFragment : Fragment(),EventAdapter.ItemClickListener{
         var tvContent = view.findViewById<TextView>(R.id.tv_content)
         var imgEvent = view.findViewById<ImageView>(R.id.img_event)
         var btnAttend = view.findViewById<Button>(R.id.btn_attend)
+        var tvList = view.findViewById<TextView>(R.id.tv_list)
         tvTitle.text = event.title
-        tvLocation.text = "地點: "+event.location
-        tvDate.text = "時間: "+event.date
+        tvLocation.text = event.location
+        tvDate.text = event.date
         tvHolder.text = event.holder
         tvCount.text = event.attendee.size.toString()+" 人已參與"
         tvContent.text = event.content
-        if(event.attendee.contains(uid!!.toInt())){
-            tvCheck.visibility = View.VISIBLE
+        getNameList(event.id, tvList)
+
+
+        if(!event.attendee.contains(uid!!.toInt())){
+            tvCheck.visibility = View.GONE
+            btnAttend.text = "參加"
         }
         var imgUrl ="${Global.url}event_img/${event.id}.jpg"
         Glide.with(requireContext())
                 .load(imgUrl)
                 .centerCrop()
                 .into(imgEvent)
-        btnAttend.setOnClickListener {
 
+        btnAttend.setOnClickListener {
+            if(btnAttend.text == "參加"){
+                attend(event.id)
+                tvCheck.visibility = View.VISIBLE
+                btnAttend.text = "取消參加"
+                getNameList(event.id, tvList)
+                bottomSheetDialog.setContentView(view)
+                bottomSheetDialog.show()
+            }
+            else if(btnAttend.text == "取消參加"){
+                disAttend(event.id)
+                tvCheck.visibility = View.GONE
+                btnAttend.text = "參加"
+                getNameList(event.id, tvList)
+                bottomSheetDialog.setContentView(view)
+                bottomSheetDialog.show()
+            }
         }
+
         bottomSheetDialog.setContentView(view)
         bottomSheetDialog.show()
     }

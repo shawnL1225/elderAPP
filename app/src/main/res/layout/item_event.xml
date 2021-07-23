@@ -12,7 +12,7 @@
         android:id="@+id/tv_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="15dp"
         android:text="公園健走"
         android:textColor="@color/brown_dark"
         android:textSize="30sp"
@@ -36,6 +36,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="4dp"
         android:text="發起人: 王曉明"
+        android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_count" />
@@ -55,13 +56,13 @@
         android:id="@+id/tv_check"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="16dp"
         android:text="已參加"
         android:textColor="@color/green_dark"
         android:textSize="18sp"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_title"
         app:layout_constraintStart_toEndOf="@+id/tv_title"
-        app:layout_constraintTop_toTopOf="@+id/tv_title" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

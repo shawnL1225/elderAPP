@@ -7,7 +7,7 @@
         android:icon="@drawable/ic_volunteer_elderly"/>
     <item
         android:title="活動"
-        android:id="@+id/vtEventFragment"
+        android:id="@+id/EventFragment"
         android:icon="@drawable/ic_volunteer_calender"/>
     <item
         android:id="@+id/hourRecordFragment"

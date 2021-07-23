@@ -31,7 +31,7 @@ class ElderFragment : Fragment() {
         val btnGoOut = view.findViewById<LinearLayout>(R.id.btn_goOut)
         val btnCall = view.findViewById<LinearLayout>(R.id.btn_call)
         val btnTodo = view.findViewById<LinearLayout>(R.id.btn_todo)
-        btnEvent.setOnClickListener { Navigation.findNavController(view).navigate(R.id.action_elderFragment_to_edEventFragment) }
+        btnEvent.setOnClickListener { Navigation.findNavController(view).navigate(R.id.action_elderFragment_to_eventFragment) }
         btnGoOut.setOnClickListener { Navigation.findNavController(view).navigate(R.id.action_elderFragment_to_goOutFragment) }
         btnTodo.setOnClickListener { Navigation.findNavController(view).navigate(R.id.action_elderFragment_to_todoFragment) }
 

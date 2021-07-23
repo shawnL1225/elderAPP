@@ -6,11 +6,6 @@
     app:startDestination="@id/elderFragment">
 
     <fragment
-        android:id="@+id/edEventFragment"
-        android:name="com.example.elderapp.elder.EdEventFragment"
-        android:label="fragment_event_ed"
-        tools:layout="@layout/fragment_event_ed" />
-    <fragment
         android:id="@+id/goOutFragment"
         android:name="com.example.elderapp.elder.GoOutFragment"
         android:label="fragment_go_out"
@@ -29,10 +24,15 @@
             android:id="@+id/action_elderFragment_to_goOutFragment"
             app:destination="@id/goOutFragment" />
         <action
-            android:id="@+id/action_elderFragment_to_edEventFragment"
-            app:destination="@id/edEventFragment" />
-        <action
             android:id="@+id/action_elderFragment_to_todoFragment"
             app:destination="@id/todoFragment" />
+        <action
+            android:id="@+id/action_elderFragment_to_eventFragment"
+            app:destination="@id/eventFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/eventFragment"
+        android:name="com.example.elderapp.EventFragment"
+        android:label="fragment_event"
+        tools:layout="@layout/fragment_event" />
 </navigation>

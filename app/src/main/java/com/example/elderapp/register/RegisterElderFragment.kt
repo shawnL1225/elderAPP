@@ -90,7 +90,7 @@ class RegisterElderFragment : Fragment() {
                 R.id.RadioButton_M -> {
                     sex = "M"; headshot = "default_m"
                 }
-                R.id.RadioButton_F -> {
+                R.id.holder -> {
                     sex = "F"; headshot = "default_f"
                 }
                 R.id.RadioButton_N -> {

@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/volunteer_nav"
-    app:startDestination="@id/vtEventFragment">
+    app:startDestination="@id/EventFragment">
 
     <fragment
-        android:id="@+id/vtEventFragment"
-        android:name="com.example.elderapp.volunteer.VtEventFragment"
+        android:id="@+id/EventFragment"
+        android:name="com.example.elderapp.EventFragment"
         android:label="志工 - 活動"
-        tools:layout="@layout/fragment_event_vt" />
+        tools:layout="@layout/fragment_event" />
     <fragment
         android:id="@+id/hourRecordFragment"
         android:name="com.example.elderapp.volunteer.HourRecordFragment"

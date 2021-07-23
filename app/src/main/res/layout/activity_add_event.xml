@@ -1,52 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddEventActivity"
-    android:background="@color/background">
+    android:background="@color/background"
+    android:orientation="vertical"
+    tools:context=".AddEventActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:text="新增活動"
+        android:textColor="@color/brown_dark"
+        android:textSize="36sp" />
+    <Button
+        android:id="@+id/btn_back"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:icon="@drawable/ic_elder_setting_arrow"
+        android:textSize="15dp"
+        android:text="回設定" />
 
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbarStyle="insideInset"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:background="@drawable/style_layout_background"
+        android:orientation="vertical"
+        android:padding="16dp">
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
-            <TextView
-                android:layout_width="130dp"
-                android:layout_height="wrap_content"
-                android:text="活動名稱"
-                android:textSize="30dp"
-                android:layout_marginTop="50dp"
-                />
-            <TextView
-                android:layout_width="130dp"
-                android:layout_height="wrap_content"
-                android:text="    地點"
-                android:textSize="30dp"
-                android:layout_marginTop="50dp"/>
-            <TextView
-                android:layout_width="130dp"
-                android:layout_height="wrap_content"
-                android:text="    時間"
-                android:textSize="30dp"
-                android:layout_marginTop="50dp"/>
-            <TextView
-                android:layout_width="130dp"
-                android:layout_height="wrap_content"
-                android:text="活動介紹"
-                android:textSize="30dp"
-                android:layout_marginTop="50dp"/>
-        </LinearLayout>
-    </ScrollView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_gravity="center"
+                    android:layout_width="160dp"
+                    android:layout_height="160dp">
+
+                    <ImageView
+                        android:id="@+id/img_headshot"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:src="@tools:sample/avatars" />
+
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/btn_upload"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:src="@drawable/ic_upload"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <EditText
+                    android:id="@+id/et_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:textSize="24dp"
+                    android:hint="活動標題"
+                    android:inputType="textPersonName" />
+
+                <EditText
+                    android:id="@+id/et_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:textSize="24dp"
+                    android:hint="活動地址"
+                    android:inputType="text" />
+
+                <TextView
+                    android:id="@+id/TextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:textSize="24dp"
+                    android:text="活動內容:" />
+
+                <EditText
+                    android:id="@+id/et_context"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/style_editext"
+                    android:textSize="24dp"
+                    android:text="\n"
+                    android:inputType="textMultiLine" />
+
+                <RadioGroup
+                    android:layout_marginTop="15dp"
+                    android:id="@+id/RadioGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/holder"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:checked="true"
+                        android:text="舉辦人"
+                        android:textSize="16dp" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="分享者"
+                        android:textSize="16dp" />
+                </RadioGroup>
+
+                <LinearLayout
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/TextView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1"
+                        android:textSize="24dp"
+                        android:text="活動日期:" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="選擇日期"
+                        style="@style/Widget.MaterialComponents.TimePicker.Button"
+                        android:textSize="16dp" />
+                </LinearLayout>
+
+                <Button
+                    android:layout_marginTop="20dp"
+                    android:id="@+id/btn_finish"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="完成" />
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+
+</LinearLayout>
