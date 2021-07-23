@@ -21,6 +21,7 @@ import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.bumptech.glide.Glide
 import com.example.elderapp.Global
 import com.example.elderapp.R
 import com.example.elderapp.adapter.Event
@@ -38,7 +39,7 @@ class VtEventFragment : Fragment(),EventAdapter.ItemClickListener{
     lateinit var adapter: EventAdapter
     var eventList: MutableList<Event> = ArrayList()
     lateinit var recyclerView: RecyclerView
-
+    var selectMine:Boolean = false
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -48,14 +49,16 @@ class VtEventFragment : Fragment(),EventAdapter.ItemClickListener{
         recyclerView = view.findViewById(R.id.recycler_event)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
-        requestEventAll()
+        requestEvent()
         val toggleGroup = view.findViewById<MaterialButtonToggleGroup?>(R.id.eventButtonToggleGroup)
         toggleGroup.addOnButtonCheckedListener { group, checkedId, isChecked ->
             if(isChecked){
                 if (checkedId == R.id.btn_all){
-                    requestEventAll()
+                    selectMine = false
+                    requestEvent()
                 }else if (checkedId == R.id.btn_mine){
-                    requestEventMine()
+                    selectMine = true
+                    requestEvent()
                 }
             }
 
@@ -63,7 +66,7 @@ class VtEventFragment : Fragment(),EventAdapter.ItemClickListener{
         }
         return view
     }
-    private fun requestEventAll(){
+    private fun requestEvent(){
         val stringRequest: StringRequest = object : StringRequest(Method.POST, url, Response.Listener { response: String ->
             Log.d("connect", "all Response: $response")
             eventList.clear()
@@ -82,10 +85,10 @@ class VtEventFragment : Fragment(),EventAdapter.ItemClickListener{
                     for (j in 0 until attendeeObj.length()) {
                         attendeeArr.add(attendeeObj[j] as Int)
                     }
-
-                    eventList.add(Event(id, title, location, content, holder, date, attendeeArr))
+                    if(!selectMine || !attendeeArr.contains(uid!!.toInt()))
+                        eventList.add(Event(id, title, location, content, holder, date, attendeeArr))
                 }
-                adapter = EventAdapter(eventList, uid!!.toInt())
+                adapter = EventAdapter(requireContext(), eventList, uid!!.toInt())
                 adapter.setClickListener(this)
                 recyclerView.adapter = adapter
             } catch (e: JSONException) {
@@ -95,7 +98,7 @@ class VtEventFragment : Fragment(),EventAdapter.ItemClickListener{
             @Throws(AuthFailureError::class)
             override fun getParams(): MutableMap<String?, String?> {
                 val data: MutableMap<String?, String?> = HashMap()
-                data["type"] = "getEventAll"
+                data["type"] = "getEvent"
 
                 return data
             }
@@ -103,47 +106,7 @@ class VtEventFragment : Fragment(),EventAdapter.ItemClickListener{
         val requestQueue = Volley.newRequestQueue(context)
         requestQueue.add(stringRequest)
     }
-    private fun requestEventMine(){
-        val stringRequest: StringRequest = object : StringRequest(Method.POST, url, Response.Listener { response: String ->
-            Log.d("connect", "mine Response: $response")
-            eventList.clear()
-            try {
-                val events = JSONArray(response)
-                for (i in 0 until events.length()) {
-                    val eventObj = events.getJSONObject(i)
-                    val id = eventObj.getInt("id")
-                    val title = eventObj.getString("title")
-                    val location = eventObj.getString("location")
-                    val content = eventObj.getString("content")
-                    val holder = eventObj.getString("holder")
-                    val date = eventObj.getString("date")
-                    val attendeeArr: MutableList<Int> = ArrayList()
-                    val attendeeObj = eventObj.getJSONArray("attendee")
-                    for (j in 0 until attendeeObj.length()) {
-                        attendeeArr.add(attendeeObj[j] as Int)
-                    }
 
-                    eventList.add(Event(id, title, location, content, holder, date, attendeeArr))
-                }
-
-                adapter = EventAdapter(eventList, uid!!.toInt())
-                adapter.setClickListener(this)
-                recyclerView.adapter = adapter
-            } catch (e: JSONException) {
-                e.printStackTrace()
-            }
-        }, Response.ErrorListener { error: VolleyError -> Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show() }) {
-            @Throws(AuthFailureError::class)
-            override fun getParams(): MutableMap<String?, String?> {
-                val data: MutableMap<String?, String?> = HashMap()
-                data["type"] = "getEventMine"
-                data["uid"] = uid
-                return data
-            }
-        }
-        val requestQueue = Volley.newRequestQueue(context)
-        requestQueue.add(stringRequest)
-    }
 
     override fun onItemClick(position: Int) {
         val event = adapter.getEvent(position)
@@ -157,14 +120,23 @@ class VtEventFragment : Fragment(),EventAdapter.ItemClickListener{
         var tvCheck = view.findViewById<TextView>(R.id.tv_check)
         var tvContent = view.findViewById<TextView>(R.id.tv_content)
         var imgEvent = view.findViewById<ImageView>(R.id.img_event)
+        var btnAttend = view.findViewById<Button>(R.id.btn_attend)
         tvTitle.text = event.title
-        tvLocation.text = event.location
-        tvDate.text = event.date
+        tvLocation.text = "地點: "+event.location
+        tvDate.text = "時間: "+event.date
         tvHolder.text = event.holder
         tvCount.text = event.attendee.size.toString()+" 人已參與"
         tvContent.text = event.content
         if(event.attendee.contains(uid!!.toInt())){
             tvCheck.visibility = View.VISIBLE
+        }
+        var imgUrl ="${Global.url}event_img/${event.id}.jpg"
+        Glide.with(requireContext())
+                .load(imgUrl)
+                .centerCrop()
+                .into(imgEvent)
+        btnAttend.setOnClickListener {
+
         }
         bottomSheetDialog.setContentView(view)
         bottomSheetDialog.show()

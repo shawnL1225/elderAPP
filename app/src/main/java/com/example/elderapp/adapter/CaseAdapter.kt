@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.elderapp.Global
 import com.example.elderapp.R
 import java.text.SimpleDateFormat
-import java.time.format.DateTimeFormatter
 
 class CaseAdapter(val context: Context, private val data: MutableList<Case>) : RecyclerView.Adapter<CaseAdapter.ViewHolder?>() {
     private var mClickListener: ItemClickListener? = null
@@ -43,7 +42,7 @@ class CaseAdapter(val context: Context, private val data: MutableList<Case>) : R
             txt_place.text = data.place.placeTitle
             val format = SimpleDateFormat("MM-dd HH-mm")
             txt_date.text =   format.format(data.date)
-            Global.headup(context,imgEvent,data.submitter.headshot)
+            Global.headUp(context,imgEvent,data.submitter.headshot)
 
 //            itemView.setOnClickListener {
 //                if (mClickListener != null) mClickListener!!.onItemClick(adapterPosition)

@@ -60,7 +60,7 @@ class Global : Application() {
             requestQueue.add(stringRequest)
         }
 
-        fun headup(context:Context, img: ImageView, headshot:String){
+        fun headUp(context:Context, img: ImageView, headshot:String){
                 val idx = when(headshot){
                     "default_m" -> 0
                     "default_f" -> 1

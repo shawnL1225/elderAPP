@@ -1,6 +1,7 @@
 package com.example.elderapp.adapter
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -8,9 +9,11 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.elderapp.Global
 import com.example.elderapp.R
 
-class EventAdapter(private val data: MutableList<Event>, private val uid: Int) : RecyclerView.Adapter<EventAdapter.ViewHolder?>() {
+class EventAdapter(private val context: Context, private val data: MutableList<Event>, private val uid: Int) : RecyclerView.Adapter<EventAdapter.ViewHolder?>() {
     private var mClickListener: ItemClickListener? = null
 
     // inflates the row layout from xml when needed
@@ -43,14 +46,19 @@ class EventAdapter(private val data: MutableList<Event>, private val uid: Int) :
         @SuppressLint("SetTextI18n")
         fun setData(data: Event) {
             tvTitle.text = data.title
-            tvLocation.text = "地點: "+data.location
-            tvDate.text = "時間: "+data.date.replace(' ', '\n')
             tvHolder.text = "發起人:"+data.holder
             tvCount.text = data.attendee.size.toString()+" 人已參與"
 
             if(data.attendee.contains(uid)){
                 tvCheck.visibility = View.VISIBLE
             }
+            var imgUrl ="${Global.url}event_img/${data.id}.jpg"
+            Glide.with(context)
+                    .load(imgUrl)
+                    .centerCrop()
+                    .into(imgEvent)
+
+
 
 
 

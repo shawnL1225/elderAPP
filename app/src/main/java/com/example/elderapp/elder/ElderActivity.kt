@@ -1,15 +1,12 @@
 package com.example.elderapp.elder
 
 import android.content.Intent
-import android.media.Image
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.Navigation
 import com.example.elderapp.Global
 import com.example.elderapp.R
 import com.example.elderapp.RawUser
@@ -42,7 +39,7 @@ class ElderActivity : AppCompatActivity() {
         super.onResume()
         Log.d("life", "onResume")
         Global.profile(this, uid!!) { user: RawUser ->
-            Global.headup(this,profileImage!!,user.headshot)
+            Global.headUp(this,profileImage!!,user.headshot)
             txtName!!.text = user.name
             txtPhone!!.text = user.phone
         }

@@ -150,9 +150,9 @@ class RegisterVolunteerFragment : Fragment() {
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             var result:CropImage.ActivityResult = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {
-                var resultUri:Uri = result.getUri();
+                var resultUri:Uri = result.uri;
                 val bitmap = getResizedBitmap(
-                        MediaStore.Images.Media.getBitmap(this.context?.getContentResolver(), resultUri),
+                        MediaStore.Images.Media.getBitmap(this.context?.contentResolver, resultUri),
                         200
                 )
 
@@ -163,7 +163,7 @@ class RegisterVolunteerFragment : Fragment() {
                 Log.d("base64", base64)
                 uploadHeadShot(base64)
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
-                var error:Exception = result.getError();
+                var error:Exception = result.error;
             }
         }
     }
@@ -189,21 +189,21 @@ class RegisterVolunteerFragment : Fragment() {
     }
 
     private fun uploadHeadShot(base64string : String) {
-        val stringRequest: StringRequest = object : StringRequest(Method.POST, Global.url + "headshot.php", Response.Listener { response: String ->
+        val stringRequest: StringRequest = object : StringRequest(Method.POST, Global.url + "imageUpload.php", Response.Listener { response: String ->
 
-                var url ="${Global.url}headshot/${response}.jpg"
-                Toast.makeText(context, "上傳成功", Toast.LENGTH_SHORT).show()
-                Glide.with(this)
-                        .load(url)
-                        .circleCrop()
-                        .into(imgHeadshot)
-                headshot = response
+            var url ="${Global.url}headshot/${response}.jpg"
+            Toast.makeText(context, "上傳成功", Toast.LENGTH_SHORT).show()
+            Glide.with(this)
+                    .load(url)
+                    .circleCrop()
+                    .into(imgHeadshot)
+            headshot = response
 
         }, Response.ErrorListener { error: VolleyError -> Toast.makeText(context, error.toString().trim { it <= ' ' }, Toast.LENGTH_SHORT).show() }) {
             @Throws(AuthFailureError::class)
             override fun getParams(): MutableMap<String?, String?> {
                 val data: MutableMap<String?, String?> = HashMap()
-                data["imageBase64"] = base64string
+                data["headshot"] = base64string
                 return data
             }
         }

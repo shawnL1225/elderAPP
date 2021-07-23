@@ -31,11 +31,12 @@
         app:layout_constraintStart_toStartOf="@+id/tv_date"
         app:layout_constraintTop_toBottomOf="@+id/tv_date" />
 
-    <ImageView
+    <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/img_event"
         android:layout_width="112dp"
         android:layout_height="118dp"
         android:layout_marginStart="4dp"
+        app:riv_corner_radius="15dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ccu" />
@@ -46,8 +47,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
+        android:text="時間:  7/15  9:30"
         android:textColor="@color/black"
-        android:text="時間: 7/15   9:30"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/img_event" />
@@ -122,7 +123,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_content" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btn_attend"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
