@@ -46,7 +46,7 @@ class EventAdapter(private val context: Context, private val data: MutableList<E
         @SuppressLint("SetTextI18n")
         fun setData(data: Event) {
             tvTitle.text = data.title
-            tvHolder.text = "發起人:"+data.holder
+            tvHolder.text = data.holder
             tvCount.text = data.attendee.size.toString()+" 人已參與"
 
             if(data.attendee.contains(uid)){
@@ -57,11 +57,6 @@ class EventAdapter(private val context: Context, private val data: MutableList<E
                     .load(imgUrl)
                     .centerCrop()
                     .into(imgEvent)
-
-
-
-
-
 
             itemView.setOnClickListener {
                 if (mClickListener != null) mClickListener!!.onItemClick(adapterPosition)

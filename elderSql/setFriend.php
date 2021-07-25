@@ -5,7 +5,7 @@
     if($type == 'select-elder'){
 
         $selectUID = $_POST['uid'];
-        $sql = "SELECT user.name, user.phone, user.id FROM friend INNER JOIN user ON friend.volunteerID=user.id WHERE elderID = ?";
+        $sql = "SELECT user.name, user.phone, user.id, user.headshot FROM friend INNER JOIN user ON friend.volunteerID=user.id WHERE elderID = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("i", $selectUID);
         $stmt->execute();
@@ -22,7 +22,7 @@
     else if($type == 'select-volunteer'){
 
         $selectUID = $_POST['uid'];
-        $sql = "SELECT user.name, user.phone, user.id FROM friend INNER JOIN user ON friend.elderID=user.id WHERE volunteerID = ?";
+        $sql = "SELECT user.name, user.phone, user.id, user.headshot FROM friend INNER JOIN user ON friend.elderID=user.id WHERE volunteerID = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("i", $selectUID);
         $stmt->execute();

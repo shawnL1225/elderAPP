@@ -47,6 +47,8 @@ class VolunteerActivity : AppCompatActivity() {
             Global.headUp(this,profileImage!!,user.headshot)
             txtName!!.text = user.name
             txtPhone!!.text = user.phone
+            getSharedPreferences("loginUser", MODE_PRIVATE).edit()
+                    .putString("name",  user.name).apply()
         }
     }
 

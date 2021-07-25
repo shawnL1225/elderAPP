@@ -148,10 +148,10 @@ class RegisterVolunteerFragment : Fragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
-            var result:CropImage.ActivityResult = CropImage.getActivityResult(data);
+            var result:CropImage.ActivityResult? = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {
-                var resultUri:Uri = result.uri;
-                val bitmap = getResizedBitmap(
+                var resultUri:Uri = result!!.uri;
+                val bitmap = Global.getResizedBitmap(
                         MediaStore.Images.Media.getBitmap(this.context?.contentResolver, resultUri),
                         200
                 )
@@ -163,30 +163,11 @@ class RegisterVolunteerFragment : Fragment() {
                 Log.d("base64", base64)
                 uploadHeadShot(base64)
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
-                var error:Exception = result.error;
+                var error:Exception = result!!.error;
             }
         }
     }
 
-    /**
-     * reduces the size of the image
-     * @param image
-     * @param maxSize
-     * @return
-     */
-    fun getResizedBitmap(image: Bitmap, maxSize: Int): Bitmap? {
-        var width = image.width
-        var height = image.height
-        val bitmapRatio = width.toFloat() / height.toFloat()
-        if (bitmapRatio > 1) {
-            width = maxSize
-            height = (width / bitmapRatio).toInt()
-        } else {
-            height = maxSize
-            width = (height * bitmapRatio).toInt()
-        }
-        return Bitmap.createScaledBitmap(image, width, height, true)
-    }
 
     private fun uploadHeadShot(base64string : String) {
         val stringRequest: StringRequest = object : StringRequest(Method.POST, Global.url + "imageUpload.php", Response.Listener { response: String ->

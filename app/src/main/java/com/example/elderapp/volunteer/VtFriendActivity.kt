@@ -55,10 +55,10 @@ class VtFriendActivity : AppCompatActivity() {
                     val id = userObj.getInt("id")
                     val name = userObj.getString("name")
                     val phone = userObj.getString("phone")
-
-                    userList.add(User(id, name, phone))
+                    val headshot = userObj.getString("headshot")
+                    userList.add(User(id, name, phone).setHeadshot(headshot))
                 }
-                adapter = FriendAdapter(userList)
+                adapter = FriendAdapter(this, userList)
 //                adapter.setClickListener(this)
                 recyclerView.adapter = adapter
             } catch (e: JSONException) {

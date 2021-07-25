@@ -202,6 +202,7 @@ class EventFragment : Fragment(),EventAdapter.ItemClickListener{
                 attend(event.id)
                 tvCheck.visibility = View.VISIBLE
                 btnAttend.text = "取消參加"
+                tvCount.text = event.attendee.size.toString()+" 人已參與"
                 getNameList(event.id, tvList)
                 bottomSheetDialog.setContentView(view)
                 bottomSheetDialog.show()
@@ -210,6 +211,7 @@ class EventFragment : Fragment(),EventAdapter.ItemClickListener{
                 disAttend(event.id)
                 tvCheck.visibility = View.GONE
                 btnAttend.text = "參加"
+                tvCount.text = event.attendee.size.toString()+" 人已參與"
                 getNameList(event.id, tvList)
                 bottomSheetDialog.setContentView(view)
                 bottomSheetDialog.show()

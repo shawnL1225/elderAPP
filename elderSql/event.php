@@ -1,4 +1,7 @@
 <?php
+
+
+
 require_once 'config.php';
 $type = $_POST["type"];
 if($type == "getEvent"){
@@ -76,7 +79,40 @@ else if($type == "getNameList"){
 
 
 }
+else if($type == "addEvent"){
+    $title = $_POST["title"];
+    $location = $_POST["location"];
+    $content = $_POST["content"];
+    $holder = $_POST["holder"];
+    $date = $_POST["date"];
+    $img = $_POST["img"];
+    $sql = "INSERT INTO event (title, location, content, holder, date, status) VALUES (?,?,?,?,?,0)";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("sssss", $title, $location, $content, $holder, $date);
+    $stmt->execute();
 
 
+    if($stmt->affected_rows > 0){
+
+        $eid = $conn->insert_id;
+        echo "success add event {$eid} ";
+
+        $file_dir = "./event_img/".$eid.".jpg";
+        base64_to_jpg($img, $file_dir);
+        // header("Location: imageUpload.php?eid=".$eid."&img=".$img);
+
+        
+    }else{
+        echo "failure ".$stmt->error;
+    }
+
+    
+}
+function base64_to_jpg( $base64, $output_file ) {
+    $ifp = fopen( $output_file, "wb" ); 
+    fwrite( $ifp, base64_decode( $base64) ); 
+    fclose( $ifp ); 
+}
 
 ?>
