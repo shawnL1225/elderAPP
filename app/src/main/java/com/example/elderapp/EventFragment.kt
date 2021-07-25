@@ -222,5 +222,10 @@ class EventFragment : Fragment(),EventAdapter.ItemClickListener{
         bottomSheetDialog.show()
     }
 
+    override fun onResume() {
+        super.onResume()
+        requestEvent()
+    }
+
 
 }

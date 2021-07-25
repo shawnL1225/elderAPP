@@ -106,6 +106,7 @@
             android:id="@+id/tv_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="有 6 人參與"
             android:textColor="@color/blue_dark"
             android:textSize="24sp"
@@ -167,10 +168,10 @@
             android:id="@+id/btn_attend"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:text="取消參加"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_count"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tv_title" />
+            app:layout_constraintTop_toTopOf="@+id/tv_count" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
