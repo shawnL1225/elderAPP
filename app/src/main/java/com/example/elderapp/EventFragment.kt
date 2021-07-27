@@ -1,6 +1,7 @@
 package com.example.elderapp
 
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -82,13 +83,21 @@ class EventFragment : Fragment(),EventAdapter.ItemClickListener{
                     val content = eventObj.getString("content")
                     val holder = eventObj.getString("holder")
                     val date = eventObj.getString("date")
+                    val holderUid = eventObj.getInt("holderUid")
                     val attendeeArr: MutableList<Int> = ArrayList()
                     val attendeeObj = eventObj.getJSONArray("attendee")
                     for (j in 0 until attendeeObj.length()) {
                         attendeeArr.add(attendeeObj[j] as Int)
                     }
-                    if(!selectMine || attendeeArr.contains(uid!!.toInt()))
-                        eventList.add(Event(id, title, location, content, holder, date, attendeeArr))
+                    val status = eventObj.getInt("status")
+
+                    if(!selectMine || attendeeArr.contains(uid!!.toInt())){
+                        if(holderUid == uid!!.toInt()) //擁有者至頂
+                            eventList.add(0, Event(id, title, location, content, holder, holderUid, date, attendeeArr, status))
+                        else
+                            eventList.add(Event(id, title, location, content, holder, holderUid, date, attendeeArr, status))
+                    }
+
                 }
                 adapter = EventAdapter(requireContext(), eventList, uid!!.toInt())
                 adapter.setClickListener(this)
@@ -220,6 +229,35 @@ class EventFragment : Fragment(),EventAdapter.ItemClickListener{
 
         bottomSheetDialog.setContentView(view)
         bottomSheetDialog.show()
+    }
+    override fun onDeleteClick(position: Int) {
+        val builder = AlertDialog.Builder(context)
+        val event = adapter.getEvent(position)
+
+        builder.setTitle("刪除活動  -  ${event.title}")
+                .setPositiveButton("確定") { _, _ ->  deleteEvent(event.id)}
+                .setNegativeButton("取消") { dialogInterface, _ -> dialogInterface.dismiss() }
+                .show()
+    }
+
+    private fun deleteEvent(eid: Int) {
+        val stringRequest: StringRequest = object : StringRequest(Method.POST, url, Response.Listener { response: String ->
+            Log.d("connect", "Response: $response")
+            if(response.startsWith("success")){
+                requestEvent()
+            }
+
+        }, Response.ErrorListener { error: VolleyError -> Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show() }) {
+            @Throws(AuthFailureError::class)
+            override fun getParams(): MutableMap<String?, String?> {
+                val data: MutableMap<String?, String?> = HashMap()
+                data["type"] = "deleteEvent"
+                data["eid"] = eid.toString()
+                return data
+            }
+        }
+        val requestQueue = Volley.newRequestQueue(context)
+        requestQueue.add(stringRequest)
     }
 
     override fun onResume() {

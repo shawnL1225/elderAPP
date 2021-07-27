@@ -40,9 +40,9 @@ class EventAdapter(private val context: Context, private val data: MutableList<E
         private var tvCount = itemView.findViewById<TextView>(R.id.tv_count)
         private var tvCheck = itemView.findViewById<TextView>(R.id.tv_check)
         private var imgEvent = itemView.findViewById<ImageView>(R.id.img_event)
-
-
-
+        private var tvDelete = itemView.findViewById<TextView>(R.id.tv_delete)
+        private var tvStatus = itemView.findViewById<TextView>(R.id.tv_status)
+        private var tvOwn = itemView.findViewById<TextView>(R.id.tv_own)
         @SuppressLint("SetTextI18n")
         fun setData(data: Event) {
             tvTitle.text = data.title
@@ -59,7 +59,23 @@ class EventAdapter(private val context: Context, private val data: MutableList<E
                     .into(imgEvent)
 
             itemView.setOnClickListener {
-                if (mClickListener != null) mClickListener!!.onItemClick(adapterPosition)
+                mClickListener!!.onItemClick(adapterPosition)
+            }
+            if(data.status == -1){
+                tvTitle.alpha = 0.5f
+                tvHolder.alpha = 0.5f
+                tvCount.alpha = 0.5f
+                imgEvent.alpha = 0.5f
+                itemView.setBackgroundResource(R.drawable.style_recycler_item_delete)
+                tvStatus.visibility = View.VISIBLE
+                return
+            }
+            if(data.holderUid == uid){
+                tvOwn.visibility = View.VISIBLE
+                tvDelete.visibility = View.VISIBLE
+                tvDelete.setOnClickListener{
+                    mClickListener!!.onDeleteClick(adapterPosition)
+                }
             }
         }
 
@@ -81,5 +97,6 @@ class EventAdapter(private val context: Context, private val data: MutableList<E
     // parent activity will implement this method to respond to click events
     interface ItemClickListener {
         fun onItemClick(position: Int)
+        fun onDeleteClick(position: Int)
     }
 }

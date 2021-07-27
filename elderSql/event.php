@@ -14,6 +14,15 @@ if($type == "getEvent"){
 
     $event = array();
     while($row = $result->fetch_assoc()){
+        // check date
+        $date = new DateTime($row['date']);
+        $now = new DateTime();
+
+        if($date < $now) {
+            continue;
+        }
+
+
         $sql2 = "SELECT * FROM event_attendee WHERE eid=?";
         $stmt2 = $conn->prepare($sql2);
         $stmt2->bind_param("i", $row["id"]);
@@ -54,7 +63,7 @@ else if($type == "disAttend"){
     $stmt->execute();
 
     if($stmt->affected_rows > 0){
-        echo "success delete";
+        echo "success delete attend";
         
     }else{
         echo "failure ".$stmt->error;
@@ -86,10 +95,11 @@ else if($type == "addEvent"){
     $holder = $_POST["holder"];
     $date = $_POST["date"];
     $img = $_POST["img"];
-    $sql = "INSERT INTO event (title, location, content, holder, date, status) VALUES (?,?,?,?,?,0)";
+    $uid = $_POST["uid"];
+    $sql = "INSERT INTO event (title, location, content, holder, holderUid, date, status) VALUES (?,?,?,?,?,?,0)";
 
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sssss", $title, $location, $content, $holder, $date);
+    $stmt->bind_param("ssssis", $title, $location, $content, $holder, $uid, $date);
     $stmt->execute();
 
 
@@ -108,6 +118,21 @@ else if($type == "addEvent"){
     }
 
     
+}
+else if($type == "deleteEvent"){
+    $eid = $_POST["eid"];
+    $sql = "UPDATE event SET status=-1 WHERE id=?";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $eid);
+    $stmt->execute();
+
+    if($stmt->affected_rows > 0){
+        echo "success delete event";
+        
+    }else{
+        echo "failure ".$stmt->error;
+    }
 }
 function base64_to_jpg( $base64, $output_file ) {
     $ifp = fopen( $output_file, "wb" ); 

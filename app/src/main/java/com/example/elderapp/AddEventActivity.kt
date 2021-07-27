@@ -65,16 +65,17 @@ class AddEventActivity : AppCompatActivity() {
 
 
         btnFinish.setOnClickListener {
-            if(uploadImg == ""){
-                Global.putSnackBarR(imgEvent, "請上傳活動圖片")
-                return@setOnClickListener
-            }else if(date == ""){
-                Global.putSnackBarR(imgEvent, "請選擇活動日期")
-                return@setOnClickListener
-            }
             title = etTitle.text.toString().trim()
             location = etLocation.text.toString().trim()
             content = etContent.text.toString().trim()
+            if(uploadImg == ""){
+                Global.putSnackBarR(imgEvent, "請上傳活動圖片")
+                return@setOnClickListener
+            }else if(date == "" || title == "" || location == "" || content == ""){
+                Global.putSnackBarR(imgEvent, "請輸入完整活動資訊")
+                return@setOnClickListener
+            }
+
             holder = when(radioGroup.checkedRadioButtonId){
                 R.id.holder -> "發起人: "
                 R.id.sharer -> "分享人: "
@@ -91,7 +92,7 @@ class AddEventActivity : AppCompatActivity() {
         val stringRequest: StringRequest = object : StringRequest(Method.POST, Global.url+"event.php", Response.Listener { response: String ->
             Log.d("connect", "Response: $response")
             if (response.startsWith("success")) {
-                Toast.makeText(this, "成功新增", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "成功新增活動", Toast.LENGTH_SHORT).show()
                 finish()
             } else if (response.startsWith("failure")) {
                 Toast.makeText(this, "新增失敗", Toast.LENGTH_SHORT).show()
@@ -107,7 +108,8 @@ class AddEventActivity : AppCompatActivity() {
                 data["holder"] = holder
                 data["date"] = date
                 data["img"] = uploadImg
-                Log.d("see", holder)
+                data["uid"] = uid
+
                 return data
             }
         }

@@ -56,13 +56,59 @@
         android:id="@+id/tv_check"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="10dp"
         android:text="已參加"
         android:textColor="@color/green_dark"
         android:textSize="18sp"
         android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_count"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_count"
+        app:layout_constraintTop_toTopOf="@+id/tv_count" />
+
+    <TextView
+        android:id="@+id/tv_delete"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/style_radius_block"
+        android:backgroundTint="@color/dangerous_red"
+        android:text="刪除活動"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_own"
+        app:layout_constraintTop_toBottomOf="@+id/img_event" />
+
+    <TextView
+        android:id="@+id/tv_own"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_event_pin"
+        android:drawableTint="@color/brown_dark"
+        android:text="您是活動建立者"
+        android:textColor="@color/brown_dark"
+        android:textSize="18sp"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@+id/img_event"
+        app:layout_constraintTop_toTopOf="@+id/tv_delete" />
+
+    <TextView
+        android:id="@+id/tv_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/style_radius_block"
+        android:backgroundTint="@color/dangerous_red"
+        android:padding="10dp"
+        android:text="活動已刪除"
+        android:textColor="#FFFFFF"
+        android:textSize="36sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
