@@ -40,10 +40,11 @@ if($type == "getEvent"){
 else if($type == "attend"){
     $uid = $_POST["uid"];
     $eid = $_POST["eid"];
-    $sql = "INSERT INTO event_attendee (uid, eid) VALUES (?,?)";
+    $hide = $_POST["hide"];
+    $sql = "INSERT INTO event_attendee (uid, eid, hide) VALUES (?,?,?)";
 
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ii", $uid, $eid);
+    $stmt->bind_param("iis", $uid, $eid, $hide);
     $stmt->execute();
 
     if($stmt->affected_rows > 0){
@@ -72,7 +73,7 @@ else if($type == "disAttend"){
 else if($type == "getNameList"){
     $nameString = "";
     $eid = $_POST["eid"];
-    $sql = "SELECT user.name FROM event_attendee INNER JOIN user ON user.id=event_attendee.uid WHERE eid=?";
+    $sql = "SELECT user.name FROM event_attendee INNER JOIN user ON user.id=event_attendee.uid WHERE eid=? AND hide='N'";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $eid);
     $stmt->execute();
@@ -133,11 +134,25 @@ else if($type == "deleteEvent"){
     }else{
         echo "failure ".$stmt->error;
     }
+}else if($type == "hideState"){
+    $uid = $_POST["uid"];
+    $eid = $_POST["eid"];
+
+    $sql = "SELECT hide FROM event_attendee WHERE uid=? AND eid=?";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ii", $uid, $eid);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    echo $row['hide'];
+
+    
 }
+
 function base64_to_jpg( $base64, $output_file ) {
     $ifp = fopen( $output_file, "wb" ); 
     fwrite( $ifp, base64_decode( $base64) ); 
     fclose( $ifp ); 
 }
-
 ?>

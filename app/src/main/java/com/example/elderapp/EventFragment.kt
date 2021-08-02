@@ -4,14 +4,12 @@ package com.example.elderapp
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -40,7 +38,7 @@ class EventFragment : Fragment(),EventAdapter.ItemClickListener{
     var eventList: MutableList<Event> = ArrayList()
     lateinit var recyclerView: RecyclerView
     var selectMine:Boolean = false
-    var nameList: String = ""
+    var isHideAttend:String = "N"
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -131,6 +129,7 @@ class EventFragment : Fragment(),EventAdapter.ItemClickListener{
                 data["type"] = "attend"
                 data["uid"] = uid
                 data["eid"] = eid.toString()
+                data["hide"] = isHideAttend
                 return data
             }
         }
@@ -187,6 +186,7 @@ class EventFragment : Fragment(),EventAdapter.ItemClickListener{
         var imgEvent = view.findViewById<ImageView>(R.id.img_event)
         var btnAttend = view.findViewById<Button>(R.id.btn_attend)
         var tvList = view.findViewById<TextView>(R.id.tv_list)
+        var switchHide = view.findViewById<Switch>(R.id.swithc_hide)
         tvTitle.text = event.title
         tvLocation.text = event.location
         tvDate.text = event.date
@@ -200,6 +200,11 @@ class EventFragment : Fragment(),EventAdapter.ItemClickListener{
             tvCheck.visibility = View.GONE
             btnAttend.text = "參加"
         }
+        else{
+            setHideState(event.id, switchHide)
+        }
+
+
         var imgUrl ="${Global.url}event_img/${event.id}.jpg"
         Glide.with(requireContext())
                 .load(imgUrl)
@@ -211,25 +216,71 @@ class EventFragment : Fragment(),EventAdapter.ItemClickListener{
                 attend(event.id)
                 tvCheck.visibility = View.VISIBLE
                 btnAttend.text = "取消參加"
-                tvCount.text = event.attendee.size.toString()+" 人已參與"
-                getNameList(event.id, tvList)
-                bottomSheetDialog.setContentView(view)
-                bottomSheetDialog.show()
+                tvCount.text = (event.attendee.size+1).toString()+" 人已參與"
+                Handler().postDelayed({
+                    getNameList(event.id, tvList)
+                    bottomSheetDialog.setContentView(view)
+                    bottomSheetDialog.show()
+                }, 200)
             }
             else if(btnAttend.text == "取消參加"){
                 disAttend(event.id)
                 tvCheck.visibility = View.GONE
                 btnAttend.text = "參加"
-                tvCount.text = event.attendee.size.toString()+" 人已參與"
-                getNameList(event.id, tvList)
-                bottomSheetDialog.setContentView(view)
-                bottomSheetDialog.show()
+                tvCount.text = (event.attendee.size-1).toString()+" 人已參與"
+                Handler().postDelayed({
+                    getNameList(event.id, tvList)
+                    bottomSheetDialog.setContentView(view)
+                    bottomSheetDialog.show()
+                }, 200)
+            }
+        }
+        switchHide.setOnCheckedChangeListener { compoundButton, onSwitch ->
+            if(onSwitch){
+                isHideAttend = "Y"
+            }else{
+                isHideAttend = "N"
+            }
+            if(btnAttend.text == "取消參加"){
+                disAttend(event.id)
+                Handler().postDelayed({
+                    attend(event.id)
+                }, 200)
+                Handler().postDelayed({
+                    getNameList(event.id, tvList)
+                    bottomSheetDialog.setContentView(view)
+                    bottomSheetDialog.show()
+                }, 200)
+
+
             }
         }
 
         bottomSheetDialog.setContentView(view)
         bottomSheetDialog.show()
     }
+
+    private fun setHideState(eid: Int, swt:Switch) {
+        val stringRequest: StringRequest = object : StringRequest(Method.POST, url, Response.Listener { response: String ->
+            Log.d("switch", "Response: $response")
+            if(response == "Y")
+                swt.isChecked = true
+
+        }, Response.ErrorListener { error: VolleyError -> Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show() }) {
+            @Throws(AuthFailureError::class)
+            override fun getParams(): MutableMap<String?, String?> {
+                val data: MutableMap<String?, String?> = HashMap()
+                data["type"] = "hideState"
+                data["eid"] = eid.toString()
+                data["uid"] = uid
+                return data
+            }
+        }
+        val requestQueue = Volley.newRequestQueue(context)
+        requestQueue.add(stringRequest)
+    }
+
+
     override fun onDeleteClick(position: Int) {
         val builder = AlertDialog.Builder(context)
         val event = adapter.getEvent(position)

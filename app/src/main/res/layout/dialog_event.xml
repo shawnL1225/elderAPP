@@ -52,12 +52,11 @@
             android:id="@+id/tv_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:text="中正大學"
             android:textColor="@color/black"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="@+id/tv_date"
-            app:layout_constraintTop_toBottomOf="@+id/tv_date" />
+            app:layout_constraintTop_toTopOf="@+id/textView10" />
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/img_event"
@@ -72,24 +71,23 @@
             android:id="@+id/textView9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="15dp"
             android:text="時間:   "
             android:textColor="@color/brown_dark"
             android:textSize="24dp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/img_event" />
+            app:layout_constraintTop_toBottomOf="@+id/swithc_hide" />
 
         <TextView
             android:id="@+id/tv_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
             android:text="7/15  9:30"
             android:textColor="@color/black"
             android:textSize="24sp"
             app:layout_constraintStart_toEndOf="@+id/textView9"
-            app:layout_constraintTop_toBottomOf="@+id/img_event" />
+            app:layout_constraintTop_toTopOf="@+id/textView9" />
 
         <TextView
             android:id="@+id/tv_holder"
@@ -168,10 +166,20 @@
             android:id="@+id/btn_attend"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
             android:text="取消參加"
             app:layout_constraintBottom_toBottomOf="@+id/tv_count"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tv_count" />
+
+        <Switch
+            android:id="@+id/swithc_hide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="隱藏行蹤"
+            app:layout_constraintEnd_toEndOf="@+id/btn_attend"
+            app:layout_constraintStart_toStartOf="@+id/btn_attend"
+            app:layout_constraintTop_toBottomOf="@+id/btn_attend" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
