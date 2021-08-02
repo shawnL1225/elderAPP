@@ -71,7 +71,6 @@ class RegisterVolunteerFragment : Fragment() {
                 .load(R.drawable.nonsex)
                 .circleCrop()
                 .into(imgHeadshot)
-
         radioGroup.setOnCheckedChangeListener{ radioGroup: RadioGroup, i: Int ->
             Log.d("headshot","change${headshot.startsWith("default")}")
             if(headshot.startsWith("default")){
@@ -83,13 +82,9 @@ class RegisterVolunteerFragment : Fragment() {
                 }
 
                 headshot = arrayOf("default_m","default_f","default_n")[idx]
-                val res = arrayOf(R.drawable.male_nobg,R.drawable.female_nobg,R.drawable.nonsex)[idx]
-
-                Log.d("headshot",headshot)
-
-
             }
         }
+
 
         register.setOnClickListener {
             name = etName.text.toString().trim { it <= ' ' }
@@ -173,7 +168,7 @@ class RegisterVolunteerFragment : Fragment() {
         val stringRequest: StringRequest = object : StringRequest(Method.POST, Global.url + "imageUpload.php", Response.Listener { response: String ->
 
             var url ="${Global.url}headshot/${response}.jpg"
-            Toast.makeText(context, "上傳成功", Toast.LENGTH_SHORT).show()
+            Global.putSnackBar(etName, "上傳成功")
             Glide.with(this)
                     .load(url)
                     .circleCrop()

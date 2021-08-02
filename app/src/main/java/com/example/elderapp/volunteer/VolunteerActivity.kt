@@ -45,7 +45,7 @@ class VolunteerActivity : AppCompatActivity() {
         Log.d("life", "onResume")
         Global.profile(this, uid!!) { user: RawUser ->
             Global.headUp(this,profileImage!!,user.headshot)
-            txtName!!.text = user.name
+            txtName!!.text = user.name+" (志工)"
             txtPhone!!.text = user.phone
             getSharedPreferences("loginUser", MODE_PRIVATE).edit()
                     .putString("name",  user.name).apply()

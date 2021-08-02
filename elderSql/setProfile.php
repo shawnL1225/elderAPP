@@ -55,5 +55,35 @@ else if($type == "updateElder"){
 
 
 }
+else if($type == "updateVolunteer"){
+    $uid = $_POST['uid'];
+    $name = $_POST['name'];
+    $phone = $_POST['phone'];
+    $sex = $_POST['sex'];
+    $department = $_POST['department'];
+    $headshot = $_POST['headshot'];
+    $password = $_POST['password'];
+
+    $sql = "UPDATE user SET name=?, phone=?, sex=?, department=?, headshot=? WHERE id=? ";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("sssssi", $name, $phone, $sex, $department, $headshot, $uid);
+    $stmt->execute();
+
+
+    if($password != ""){
+        $sql2 = "UPDATE user SET password=? WHERE id=?";
+        $stmt2 = $conn->prepare($sql2);
+        $stmt2->bind_param("si", md5($password), $uid);
+        $stmt2->execute();
+    }
+
+    if($stmt->affected_rows + $stmt2->affected_rows> 0){
+        echo "success update volunteer";
+        
+    }else{
+        echo "failure".$stmt->error;
+    }
+}
 
 ?>

@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:text="長者資料設定"
+        android:text="志工資料設定"
         android:textColor="@color/brown_dark"
         android:textSize="36sp" />
     <Button
@@ -45,6 +45,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:gravity="center"
                 android:orientation="vertical">
 
                 <TextView
@@ -65,7 +66,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        tools:src="@tools:sample/avatars" />
+                        android:src="@drawable/nonsex" />
 
                     <com.google.android.material.floatingactionbutton.FloatingActionButton
                         android:id="@+id/btn_upload"
@@ -90,13 +91,14 @@
                     android:layout_marginTop="5dp"
                     android:hint="電話號碼"
                     android:inputType="phone" />
+
                 <EditText
                     android:id="@+id/et_password"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="5dp"
-                    android:inputType="textPassword"
-                    android:hint="密碼" />
+                    android:hint="密碼 (如要更改才需輸入)"
+                    android:inputType="textPassword" />
                 <EditText
                     android:id="@+id/et_passwordCheck"
                     android:layout_width="match_parent"

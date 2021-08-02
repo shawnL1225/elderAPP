@@ -21,7 +21,7 @@ import org.json.JSONException
 import java.util.ArrayList
 import java.util.HashMap
 
-class VtFriendActivity : AppCompatActivity() {
+class VtFriendActivity : AppCompatActivity(), FriendAdapter.ItemClickListener {
     private val url: String = Global.url + "setFriend.php"
     lateinit var adapter: FriendAdapter
     var userList: MutableList<User> = ArrayList()
@@ -59,7 +59,7 @@ class VtFriendActivity : AppCompatActivity() {
                     userList.add(User(id, name, phone).setHeadshot(headshot))
                 }
                 adapter = FriendAdapter(this, userList)
-//                adapter.setClickListener(this)
+                adapter.setClickListener(this)
                 recyclerView.adapter = adapter
             } catch (e: JSONException) {
                 e.printStackTrace()
@@ -74,5 +74,9 @@ class VtFriendActivity : AppCompatActivity() {
         }
         val requestQueue = Volley.newRequestQueue(this)
         requestQueue.add(stringRequest)
+    }
+
+    override fun onItemClick(position: Int) {
+        Global.putSnackBarR(recyclerView, "志工無刪除長者好友權限哦")
     }
 }
