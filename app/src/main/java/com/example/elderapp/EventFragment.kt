@@ -3,6 +3,7 @@ package com.example.elderapp
 
 import android.app.AlertDialog
 import android.content.Intent
+import android.graphics.Typeface
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
@@ -50,12 +51,18 @@ class EventFragment : Fragment(),EventAdapter.ItemClickListener{
         recyclerView.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
         requestEvent()
         val toggleGroup = view.findViewById<MaterialButtonToggleGroup?>(R.id.eventButtonToggleGroup)
+        val btnAll = view.findViewById<Button>(R.id.btn_all)
+        val btnMine = view.findViewById<Button>(R.id.btn_mine)
         toggleGroup.addOnButtonCheckedListener { group, checkedId, isChecked ->
             if(isChecked){
                 if (checkedId == R.id.btn_all){
+                    btnMine.typeface = Typeface.DEFAULT;
+                    btnAll.typeface = Typeface.DEFAULT_BOLD;
                     selectMine = false
                     requestEvent()
                 }else if (checkedId == R.id.btn_mine){
+                    btnMine.typeface = Typeface.DEFAULT_BOLD;
+                    btnAll.typeface = Typeface.DEFAULT;
                     selectMine = true
                     requestEvent()
                 }

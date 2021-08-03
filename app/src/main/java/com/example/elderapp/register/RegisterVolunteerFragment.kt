@@ -37,6 +37,7 @@ class RegisterVolunteerFragment : Fragment() {
     lateinit var etPassword: EditText
     lateinit var etPasswordC: EditText
     lateinit var etDepartment: EditText
+    lateinit var radioGroup: RadioGroup
     lateinit var name: String
     lateinit var phone: String
     lateinit var pass: String
@@ -45,6 +46,7 @@ class RegisterVolunteerFragment : Fragment() {
     var headshot: String = "default_n"
     private var sex: String? = null
     private val url: String = Global.url+"register.php"
+    lateinit var btnCancel: FloatingActionButton
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val root = inflater.inflate(R.layout.fragment_register_volunteer, container, false)
@@ -56,7 +58,7 @@ class RegisterVolunteerFragment : Fragment() {
         imgHeadshot = root.findViewById(R.id.img_headshot)
         val register = root.findViewById<Button?>(R.id.btn_register)
         val toLogin = root.findViewById<TextView?>(R.id.tv_toLogin)
-        val radioGroup = root.findViewById<RadioGroup>(R.id.RadioGroup_sex)
+        radioGroup = root.findViewById<RadioGroup>(R.id.RadioGroup_sex)
         val upload = root.findViewById<FloatingActionButton?>(R.id.btn_upload)
 
         upload.setOnClickListener {
@@ -67,21 +69,14 @@ class RegisterVolunteerFragment : Fragment() {
             };
         }
 
-        Glide.with(this)
-                .load(R.drawable.nonsex)
-                .circleCrop()
-                .into(imgHeadshot)
+        btnCancel = root.findViewById<FloatingActionButton>(R.id.btn_cancel)
+        btnCancel.setOnClickListener {
+            changeDefaultHead()
+            btnCancel.visibility = View.INVISIBLE
+        }
         radioGroup.setOnCheckedChangeListener{ radioGroup: RadioGroup, i: Int ->
-            Log.d("headshot","change${headshot.startsWith("default")}")
-            if(headshot.startsWith("default")){
-                val idx = when(radioGroup.checkedRadioButtonId){
-                    R.id.RadioButton_M -> 0
-                    R.id.holder -> 1
-                    R.id.RadioButton_N -> 2
-                    else -> 2
-                }
-
-                headshot = arrayOf("default_m","default_f","default_n")[idx]
+            if(headshot!!.startsWith("default")){
+                changeDefaultHead()
             }
         }
 
@@ -141,6 +136,22 @@ class RegisterVolunteerFragment : Fragment() {
         requestQueue.add(stringRequest)
     }
 
+    private fun changeDefaultHead() {
+        val idx = when(radioGroup!!.checkedRadioButtonId){
+            R.id.RadioButton_M -> 0
+            R.id.RadioButton_F -> 1
+            R.id.RadioButton_N -> 2
+            else -> 2
+        }
+
+        headshot = arrayOf("default_m","default_f","default_n")[idx]
+        val res = arrayOf(R.drawable.male_nobg,R.drawable.female_nobg,R.drawable.nonsex)[idx]
+        Glide.with(this)
+                .load(res)
+                .circleCrop()
+                .into(imgHeadshot!!)
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             var result:CropImage.ActivityResult? = CropImage.getActivityResult(data);
@@ -174,6 +185,7 @@ class RegisterVolunteerFragment : Fragment() {
                     .circleCrop()
                     .into(imgHeadshot)
             headshot = response
+            btnCancel.visibility = View.VISIBLE
 
         }, Response.ErrorListener { error: VolleyError -> Toast.makeText(context, error.toString().trim { it <= ' ' }, Toast.LENGTH_SHORT).show() }) {
             @Throws(AuthFailureError::class)

@@ -45,6 +45,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="所有活動"
+                android:textSize="20sp"
+                android:textStyle="bold"
                 tools:layout_editor_absoluteX="102dp"
                 tools:layout_editor_absoluteY="28dp" />
 
@@ -55,6 +57,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="我的活動"
+                android:textSize="20sp"
                 tools:layout_editor_absoluteX="214dp"
                 tools:layout_editor_absoluteY="28dp" />
 

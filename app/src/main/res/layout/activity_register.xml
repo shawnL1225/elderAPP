@@ -57,6 +57,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="長者"
+                android:textSize="20dp"
+                android:textStyle="bold"
                 tools:layout_editor_absoluteX="102dp"
                 tools:layout_editor_absoluteY="28dp" />
 
@@ -67,6 +69,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="志工"
+                android:textSize="20dp"
                 tools:layout_editor_absoluteX="214dp"
                 tools:layout_editor_absoluteY="28dp" />
 

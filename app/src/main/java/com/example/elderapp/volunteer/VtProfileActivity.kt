@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Base64
 import android.util.Log
+import android.view.View
 import android.widget.*
 import com.android.volley.AuthFailureError
 import com.android.volley.Response
@@ -43,6 +44,7 @@ class VtProfileActivity : AppCompatActivity() {
     private var radioGroup: RadioGroup? = null
     private var headshot: String? = "default_n"
     private var imgHeadshot: ImageView? = null
+    lateinit var btnCancel: FloatingActionButton
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_vt_profile)
@@ -59,16 +61,14 @@ class VtProfileActivity : AppCompatActivity() {
         val btnBack = findViewById<Button>(R.id.btn_back)
         val btnUpdate = findViewById<Button>(R.id.btn_update)
         val upload = findViewById<FloatingActionButton?>(R.id.btn_upload)
+        btnCancel = findViewById<FloatingActionButton>(R.id.btn_cancel)
+        btnCancel.setOnClickListener {
+            changeDefaultHead()
+            btnCancel.visibility = View.INVISIBLE
+        }
         radioGroup!!.setOnCheckedChangeListener{ radioGroup: RadioGroup, i: Int ->
             if(headshot!!.startsWith("default")){
-                val idx = when(radioGroup.checkedRadioButtonId){
-                    R.id.RadioButton_M -> 0
-                    R.id.holder -> 1
-                    R.id.RadioButton_N -> 2
-                    else -> 2
-                }
-
-                headshot = arrayOf("default_m","default_f","default_n")[idx]
+                changeDefaultHead()
             }
         }
         btnBack.setOnClickListener {
@@ -82,12 +82,9 @@ class VtProfileActivity : AppCompatActivity() {
             department = etDepartment!!.text.toString().trim ()
 
             when(radioGroup!!.checkedRadioButtonId){
-                R.id.RadioButton_M ->
-                    sex = "M"
-                R.id.RadioButton_F ->
-                    sex = "F"
-                R.id.RadioButton_N ->
-                    sex = "N"
+                R.id.RadioButton_M -> sex = "M"
+                R.id.RadioButton_F -> sex = "F"
+                R.id.RadioButton_N -> sex = "N"
             }
 
             if (pass != passC) {
@@ -110,6 +107,22 @@ class VtProfileActivity : AppCompatActivity() {
         }
         requestGetData()
 
+    }
+
+    private fun changeDefaultHead() {
+        val idx = when(radioGroup!!.checkedRadioButtonId){
+            R.id.RadioButton_M -> 0
+            R.id.RadioButton_F -> 1
+            R.id.RadioButton_N -> 2
+            else -> 2
+        }
+
+        headshot = arrayOf("default_m","default_f","default_n")[idx]
+        val res = arrayOf(R.drawable.male_nobg,R.drawable.female_nobg,R.drawable.nonsex)[idx]
+        Glide.with(this)
+                .load(res)
+                .circleCrop()
+                .into(imgHeadshot!!)
     }
 
     private fun updateProfile() {
@@ -140,7 +153,6 @@ class VtProfileActivity : AppCompatActivity() {
         val requestQueue = Volley.newRequestQueue(this)
         requestQueue.add(stringRequest)
     }
-
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -176,7 +188,7 @@ class VtProfileActivity : AppCompatActivity() {
             Global.putSnackBar(etName!!, "上傳成功")
 
             headshot = response
-
+            btnCancel.visibility = View.VISIBLE
 
         }, Response.ErrorListener { error: VolleyError -> Toast.makeText(this, error.toString().trim { it <= ' ' }, Toast.LENGTH_SHORT).show() }) {
             @Throws(AuthFailureError::class)
@@ -204,8 +216,9 @@ class VtProfileActivity : AppCompatActivity() {
                 "M" -> radioGroup!!.check(R.id.RadioButton_M)
                 "F" -> radioGroup!!.check(R.id.RadioButton_F)
                 "N" -> radioGroup!!.check(R.id.RadioButton_N)
-
             }
+            if(!user.headshot.startsWith("default"))
+                btnCancel.visibility = View.VISIBLE
 
         }
     }

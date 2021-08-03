@@ -58,6 +58,18 @@
                     android:layout_width="160dp"
                     android:layout_height="160dp">
 
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/btn_cancel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        app:fabSize="mini"
+                        android:visibility="invisible"
+                        android:backgroundTint="@color/gray_light"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_cancel" />
+
                     <ImageView
                         android:id="@+id/img_headshot"
                         android:layout_width="150dp"

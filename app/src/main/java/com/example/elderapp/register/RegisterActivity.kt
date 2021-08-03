@@ -1,5 +1,6 @@
 package com.example.elderapp.register
 
+import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -30,14 +31,14 @@ class RegisterActivity : AppCompatActivity() {
                     val transaction = manager.beginTransaction()
                     transaction.replace(R.id.fragment_register, elderFragment)
                     transaction.commit()
-                    btnElder.textSize = 20.0F
-                    btnVolunteer.textSize = 14.0F
+                    btnVolunteer.typeface = Typeface.DEFAULT;
+                    btnElder.typeface = Typeface.DEFAULT_BOLD;
                 } else if (checkedId == R.id.volunteerPage) {
                     val transaction = manager.beginTransaction()
                     transaction.replace(R.id.fragment_register, volunteerFragment)
                     transaction.commit()
-                    btnVolunteer.textSize = 20.0F
-                    btnElder.textSize = 14.0F
+                    btnVolunteer.typeface = Typeface.DEFAULT_BOLD;
+                    btnElder.typeface = Typeface.DEFAULT;
                 }
             }
 
