@@ -2,7 +2,6 @@ package com.example.elderapp.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,7 +34,7 @@ class EventAdapter(private val context: Context, private val data: MutableList<E
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         private var tvTitle = itemView.findViewById<TextView>(R.id.tv_title)
         private var tvLocation = itemView.findViewById<TextView>(R.id.tv_location)
-        private var tvDate = itemView.findViewById<TextView>(R.id.tv_date)
+        private var tvDate = itemView.findViewById<TextView>(R.id.tv_time)
         private var tvHolder = itemView.findViewById<TextView>(R.id.tv_holder)
         private var tvCount = itemView.findViewById<TextView>(R.id.tv_count)
         private var tvCheck = itemView.findViewById<TextView>(R.id.tv_check)

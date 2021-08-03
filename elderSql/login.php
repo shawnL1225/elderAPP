@@ -3,7 +3,6 @@
 if(isset($_POST['phone']) && isset($_POST['password'])){
 
     require_once "config.php";
-    require_once "validate.php";
     $phone = $_POST['phone'];
     $password = $_POST['password'];
     
@@ -21,9 +20,6 @@ if(isset($_POST['phone']) && isset($_POST['password'])){
         $row = $result->fetch_assoc();
         echo "-".$row["id"];
         echo "-".$row["identity"];
-        
-
-        
     }
     else
         echo "WrongPass";

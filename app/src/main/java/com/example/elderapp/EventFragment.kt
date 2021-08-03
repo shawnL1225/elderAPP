@@ -185,7 +185,7 @@ class EventFragment : Fragment(),EventAdapter.ItemClickListener{
         val view = LayoutInflater.from(context).inflate(R.layout.dialog_event, null)
         var tvTitle = view.findViewById<TextView>(R.id.tv_title)
         var tvLocation = view.findViewById<TextView>(R.id.tv_location)
-        var tvDate = view.findViewById<TextView>(R.id.tv_date)
+        var tvDate = view.findViewById<TextView>(R.id.tv_time)
         var tvHolder = view.findViewById<TextView>(R.id.tv_holder)
         var tvCount = view.findViewById<TextView>(R.id.tv_count)
         var tvCheck = view.findViewById<TextView>(R.id.tv_check)

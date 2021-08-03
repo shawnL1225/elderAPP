@@ -14,14 +14,12 @@
         
         if(file_exists($file_dir))  echo $file_code;
     }
-    else if(isset($_GET['eid'])){
-        $base64_string = $_GET['img'];
-        $eid = $_GET['eid'];
-        $file_dir = "./event_img/".$eid.".jpg";
-        base64_to_jpg($base64_string, $file_dir);
-
-        echo "hii";
-    }
+    // else if(isset($_GET['eid'])){
+    //     $base64_string = $_GET['img'];
+    //     $eid = $_GET['eid'];
+    //     $file_dir = "./event_img/".$eid.".jpg";
+    //     base64_to_jpg($base64_string, $file_dir);
+    // }
 
     
     

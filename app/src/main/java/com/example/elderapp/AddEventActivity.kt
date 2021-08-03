@@ -44,7 +44,7 @@ class AddEventActivity : AppCompatActivity() {
         val btnUpload = findViewById<FloatingActionButton>(R.id.btn_upload)
         val btnTime = findViewById<Button>(R.id.btn_date)
         val btnFinish = findViewById<Button>(R.id.btn_finish)
-        tvDate = findViewById<TextView>(R.id.tv_date)
+        tvDate = findViewById<TextView>(R.id.tv_time)
         val etTitle = findViewById<EditText>(R.id.et_title)
         val etLocation = findViewById<EditText>(R.id.et_location)
         val etContent = findViewById<EditText>(R.id.et_content)

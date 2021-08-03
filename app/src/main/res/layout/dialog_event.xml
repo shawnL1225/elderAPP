@@ -55,7 +55,7 @@
             android:text="中正大學"
             android:textColor="@color/black"
             android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="@+id/tv_date"
+            app:layout_constraintStart_toStartOf="@+id/tv_time"
             app:layout_constraintTop_toTopOf="@+id/textView10" />
 
         <com.makeramen.roundedimageview.RoundedImageView
@@ -80,7 +80,7 @@
             app:layout_constraintTop_toBottomOf="@+id/swithc_hide" />
 
         <TextView
-            android:id="@+id/tv_date"
+            android:id="@+id/tv_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="7/15  9:30"

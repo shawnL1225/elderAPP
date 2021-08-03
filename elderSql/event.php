@@ -1,7 +1,4 @@
 <?php
-
-
-
 require_once 'config.php';
 $type = $_POST["type"];
 if($type == "getEvent"){
