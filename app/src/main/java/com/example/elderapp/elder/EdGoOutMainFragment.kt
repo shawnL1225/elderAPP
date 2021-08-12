@@ -1,11 +1,30 @@
 package com.example.elderapp.elder
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.android.volley.Response
+import com.android.volley.VolleyError
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
+import com.example.elderapp.Global
 import com.example.elderapp.R
+import com.example.elderapp.adapter.Case
+import com.example.elderapp.adapter.ElderCaseAdapter
+import com.example.elderapp.elder.addCase.EdAddCaseActivity
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.gson.Gson
+import org.json.JSONException
+import java.util.HashMap
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -18,41 +37,108 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class fragment_go_out_main : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    lateinit var root:View;
+    var uid:Int = -1;
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+        root = inflater.inflate(R.layout.fragment_go_out_main, container, false)
+        uid = requireContext().getSharedPreferences("loginUser", AppCompatActivity.MODE_PRIVATE).getString("uid", "0")?.toInt()
+                ?: -1
+        //loadCases()
+        root.findViewById<FloatingActionButton>(R.id.btn_addCase).setOnClickListener {
+            startActivity(Intent(requireContext(),EdAddCaseActivity::class.java))
+        }
+        return root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        loadCases()
+    }
+
+
+
+    fun loadCases(){
+        getList(requireContext()){
+            val list_case = root!!.findViewById<RecyclerView>(R.id.list_case)
+            list_case.layoutManager = LinearLayoutManager(requireContext())
+            list_case.adapter = ElderCaseAdapter(requireContext(), it.toMutableList(),{id:Int -> cancelCase(requireContext(),id)},{id:Int -> cancelReceiver(requireContext(),id)})
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_go_out_main, container, false)
+    fun getList(context: Context, callback: (Array<Case>) -> Unit) {
+
+        val stringRequest: StringRequest = object : StringRequest(Method.POST, Global.url + "/case/list.php", Response.Listener { response: String ->
+            try {
+                val gson = Gson()
+                callback(gson.fromJson(response, Array<Case>::class.java))
+            } catch (e: JSONException) {
+                e.printStackTrace()
+            }
+
+        }, Response.ErrorListener { error: VolleyError -> Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show() }) {
+            override fun getParams(): MutableMap<String?, String?> {
+                val data: MutableMap<String?, String?> = HashMap()
+                data["uid"] = uid.toString();
+                return data
+            }
+        }
+        val requestQueue = Volley.newRequestQueue(context)
+        requestQueue.add(stringRequest)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment fragment_go_out_main.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-                fragment_go_out_main().apply {
-                    arguments = Bundle().apply {
-                        putString(ARG_PARAM1, param1)
-                        putString(ARG_PARAM2, param2)
-                    }
+    fun cancelCase(context: Context, id:Int) {
+
+        val stringRequest: StringRequest = object : StringRequest(Method.POST, Global.url + "/case/cancel.php", Response.Listener { response: String ->
+            Log.d("connect", "Response: $response")
+            try {
+                if(response == "ok"){
+                    Toast.makeText(context,"已取消行程",Toast.LENGTH_SHORT).show()
+                    loadCases()
+                }else{
+                    Toast.makeText(context,"發生錯誤",Toast.LENGTH_SHORT).show()
+                    loadCases()
                 }
+            } catch (e: JSONException) {
+                e.printStackTrace()
+            }
+
+        }, Response.ErrorListener { error: VolleyError -> Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show() }) {
+            override fun getParams(): MutableMap<String?, String?> {
+                val data: MutableMap<String?, String?> = HashMap()
+                data["id"] = id.toString();
+                return data
+            }
+        }
+        val requestQueue = Volley.newRequestQueue(context)
+        requestQueue.add(stringRequest)
+    }
+
+    fun cancelReceiver(context: Context, id:Int) {
+
+        val stringRequest: StringRequest = object : StringRequest(Method.POST, Global.url + "/case/cancelReceiver.php", Response.Listener { response: String ->
+            Log.d("connect", "Response: $response")
+            try {
+                if(response == "ok"){
+                    Toast.makeText(context,"已婉拒",Toast.LENGTH_SHORT).show()
+                    loadCases()
+                }else{
+                    Toast.makeText(context,"發生錯誤",Toast.LENGTH_SHORT).show()
+                    loadCases()
+                }
+            } catch (e: JSONException) {
+                e.printStackTrace()
+            }
+
+        }, Response.ErrorListener { error: VolleyError -> Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show() }) {
+            override fun getParams(): MutableMap<String?, String?> {
+                val data: MutableMap<String?, String?> = HashMap()
+                data["id"] = id.toString();
+                return data
+            }
+        }
+        val requestQueue = Volley.newRequestQueue(context)
+        requestQueue.add(stringRequest)
     }
 }

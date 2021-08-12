@@ -101,7 +101,6 @@ class EditPlaceActivity : AppCompatActivity(), ItemClickListener {
         }, Response.ErrorListener { error: VolleyError? -> Toast.makeText(this, error.toString(), Toast.LENGTH_SHORT).show() }) {
             override fun getParams(): MutableMap<String?, String?> {
                 val data: MutableMap<String?, String?> = HashMap()
-
                 data["select"] = ""
                 data["uid"] = uid
                 return data

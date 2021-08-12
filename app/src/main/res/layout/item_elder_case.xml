@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:background="@drawable/style_radius_block"
+    android:padding="25dp">
+
+    <TextView
+        android:id="@+id/txt_date"
+        android:layout_width="0dp"
+        android:layout_height="46dp"
+        android:text="2021/7/15 16:00"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.517"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txt_place"
+        android:layout_width="wrap_content"
+        android:layout_height="46dp"
+        android:layout_marginStart="12dp"
+        android:text="公園"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="@+id/img_place"
+        app:layout_constraintStart_toEndOf="@+id/img_place"
+        app:layout_constraintTop_toTopOf="@+id/img_place"
+        app:layout_constraintVertical_bias="0.555" />
+
+    <TextView
+        android:id="@+id/txt_status"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:text="已邀請"
+        android:textColor="@color/toolBar"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="@+id/txt_place"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/txt_place"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/img_place"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="@+id/txt_date"
+        app:layout_constraintTop_toBottomOf="@+id/txt_date"
+        app:srcCompat="@drawable/ic_place_park"
+        app:tint="@color/brown_dark" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list_candidate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.448"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_place" />
+
+    <Button
+        android:id="@+id/btn_cancel"
+        android:layout_width="103dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/style_radius_block"
+        android:backgroundTint="@color/dangerous_red"
+        android:text="取消"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_public" />
+
+    <TextView
+        android:id="@+id/txt_public"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="允許邀請之外的志工"
+        android:textColor="@color/green_dark"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/list_candidate"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="@+id/list_candidate"
+        app:layout_constraintTop_toBottomOf="@+id/list_candidate" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

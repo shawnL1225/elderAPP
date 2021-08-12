@@ -7,9 +7,8 @@
 
     <fragment
         android:id="@+id/goOutFragment"
-        android:name="com.example.elderapp.elder.GoOutFragment"
-        android:label="fragment_go_out"
-        tools:layout="@layout/fragment_go_out" />
+        android:name="com.example.elderapp.elder.fragment_go_out_main"
+        android:label="fragment_go_out" />
     <fragment
         android:id="@+id/todoFragment"
         android:name="com.example.elderapp.elder.TodoFragment"
