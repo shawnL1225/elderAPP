@@ -3,7 +3,7 @@ require_once 'config.php';
 $type = $_POST["type"];
 if($type == "getEvent"){
 
-    $sql = "SELECT * FROM event";
+    $sql = "SELECT * FROM event WHERE status=-1 OR status=1";
     $stmt = $conn->prepare($sql);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -131,7 +131,8 @@ else if($type == "deleteEvent"){
     }else{
         echo "failure ".$stmt->error;
     }
-}else if($type == "hideState"){
+}
+else if($type == "hideState"){
     $uid = $_POST["uid"];
     $eid = $_POST["eid"];
 
