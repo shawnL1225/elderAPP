@@ -65,7 +65,7 @@ class EdAddCaseActivity : AppCompatActivity() {
                 data["date"] = viewModel.date.value
                 data["place"] = viewModel.place.value.toString()
                 data["invite"] = viewModel.invite.value
-                data["public"] = viewModel.public.value
+                if(viewModel.public.value!=null) data["public"] = viewModel.public.value
                 return data
             }
         }
