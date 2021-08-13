@@ -1,6 +1,6 @@
 package com.example.elderapp.adapter
 
-class User(id: Int, name: String, phone: String){
+open class User(id: Int, name: String, phone: String){
     var id: Int = id
     var name: String = name
     var phone: String = phone

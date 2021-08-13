@@ -35,8 +35,8 @@ class PlaceAdapter(private val data: MutableList<Place>) : RecyclerView.Adapter<
 
 
         fun setData(data: Place) {
-            title.text = data.placeTitle
-            desc.text = data.placeDesc
+            title.text = data.title
+            desc.text = data.description
             when(data.iconID){
                 1 -> icon.setImageResource(R.drawable.ic_place_home)
                 2 -> icon.setImageResource(R.drawable.ic_place_park)
@@ -55,7 +55,7 @@ class PlaceAdapter(private val data: MutableList<Place>) : RecyclerView.Adapter<
 
     // convenience method for getting data at click position
     fun getTitle(id: Int): String {
-        return data[id].placeTitle
+        return data[id].title
     }
 
     fun getId(id: Int): Int {

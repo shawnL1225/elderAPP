@@ -16,7 +16,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ElderAPP">
-        <activity android:name=".volunteer.VtProfileActivity"></activity>
+        <activity
+            android:name=".elder.addCase.EdAddCaseActivity"
+            android:exported="true" />
+        <activity
+            android:name=".elder.AddCaseActivity"
+            android:exported="true" />
+        <activity android:name=".volunteer.VtProfileActivity" />
         <activity android:name=".volunteer.VtFriendActivity" />
         <activity android:name=".volunteer.VolunteerSettingActivity" />
         <activity android:name=".elder.EdFriendActivity" />

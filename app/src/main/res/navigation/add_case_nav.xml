@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/add_case_nav"
+    app:startDestination="@id/addCaseStep1Fragment">
+
+    <fragment
+        android:id="@+id/addCaseStep1Fragment"
+        android:name="com.example.elderapp.elder.addCase.AddCaseStep1Fragment"
+        android:label="add_case_step1_fragment"
+        tools:layout="@layout/add_case_step1_fragment" >
+        <action
+            android:id="@+id/action_addCaseStep1Fragment_to_addCaseStep2Fragment"
+            app:destination="@id/addCaseStep2Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addCaseStep2Fragment"
+        android:name="com.example.elderapp.elder.addCase.AddCaseStep2Fragment"
+        android:label="add_case_step2_fragment"
+        tools:layout="@layout/add_case_step2_fragment" >
+        <action
+            android:id="@+id/action_addCaseStep2Fragment_to_addCaseStep3Fragment"
+            app:destination="@id/addCaseStep3Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addCaseStep3Fragment"
+        android:name="com.example.elderapp.elder.addCase.AddCaseStep3Fragment"
+        android:label="add_case_step3_fragment"
+        tools:layout="@layout/add_case_step3_fragment" >
+        <action
+            android:id="@+id/action_addCaseStep3Fragment_to_addCaseStep4Fragment"
+            app:destination="@id/addCaseStep4Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addCaseStep4Fragment"
+        android:name="com.example.elderapp.elder.addCase.AddCaseStep4Fragment"
+        android:label="add_case_step4_fragment"
+        tools:layout="@layout/add_case_step4_fragment" />
+</navigation>

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/style_layout_background"
-    android:padding="25dp"
+    android:paddingTop="25dp"
     tools:context=".volunteer.CaseFragment">
 
     <LinearLayout
@@ -14,9 +14,11 @@
         android:orientation="vertical">
 
         <com.google.android.material.button.MaterialButtonToggleGroup
-            android:id="@+id/eventButtonToggleGroup"
+            android:id="@+id/toggleGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
             app:checkedButton="@+id/btn_all"
             app:selectionRequired="true"
             app:singleSelection="true">
@@ -28,9 +30,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="所有活動"
+                android:text="所有工作"
                 tools:layout_editor_absoluteX="102dp"
-                tools:layout_editor_absoluteY="28dp" />
+                tools:layout_editor_absoluteY="28dp"
+                android:textSize="20sp"/>
 
             <Button
                 android:id="@+id/btn_mine"
@@ -38,14 +41,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="我的活動"
+                android:text="我的工作"
                 tools:layout_editor_absoluteX="214dp"
-                tools:layout_editor_absoluteY="28dp" />
+                tools:layout_editor_absoluteY="28dp"
+                android:textSize="20sp"/>
 
         </com.google.android.material.button.MaterialButtonToggleGroup>
 
         <fragment
-            android:id="@+id/fragment2"
+            android:id="@+id/fragment"
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
