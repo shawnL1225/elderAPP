@@ -36,7 +36,7 @@
             <!-- navbar links -->
             <div class="collapse navbar-collapse justify-content-end align-center" id="main-nav">
                 <ul class="navbar-nav">
-                    <li class="nav-item ms-2">
+                    <li class="nav-item">
                         <a class="nav-link" href="index.php">活動管理</a>
                     </li>
                     <li class="nav-item">
@@ -55,6 +55,49 @@
             服務時數
         </h2>
         <p class="text-center text-secondary">審核志工的回報資料</p>
+    </div>
+    <!-- service -->
+    <div class="container-fluid px-4 py-4">
+        <table class="table table-warning table-striped align-middle shadow">
+            <thead class="table-secondary">
+                <tr class="text-center fs-5">
+                    <th>#</th>
+                    <th>名字</th>
+                    <th>電話</th>
+                    <th>電子郵件</th>
+                    <th>日期</th>
+                    <th>時間</th>
+                    <th>時數</th>
+                    <th>內容</th>
+                </tr>
+                
+            </thead>
+            <tbody>
+                <?php
+                     $sql = "SELECT * FROM hour_record INNER JOIN user ON hour_record.uid=user.id ORDER BY hour_record.id DESC";
+                     $stmt = $conn->prepare($sql);
+                     $stmt->execute();
+                     $result = $stmt->get_result();
+                    
+                     $cnt = 1;
+                     while($row = $result->fetch_assoc()){
+                        
+                        echo   "<tr class='text-center fs-5'>
+                                    <th>{$cnt}</th>
+                                    <td>{$row['name']}</td>
+                                    <td>{$row['phone']}</td>
+                                    <td>{$row['email']}</td>
+                                    <td>{$row['date']}</td>
+                                    <td>{$row['time']}</td>
+                                    <td>{$row['hour']}</td>
+                                    <td>{$row['content']}</td>
+                                </tr>";
+                        $cnt++;
+                     }
+                     
+                ?>
+            </tbody>
+        </table>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 </body>

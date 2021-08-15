@@ -13,5 +13,6 @@ class RawUser {
     var contactPhone: String = ""
     var contactEmail: String = ""
     var department: String = ""
+    var email: String = ""
     var headshot: String = ""
 }

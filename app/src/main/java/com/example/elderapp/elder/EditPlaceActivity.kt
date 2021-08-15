@@ -61,7 +61,7 @@ class EditPlaceActivity : AppCompatActivity(), ItemClickListener {
 
     private fun SQL_deletePlace(placeId: Int) {
         val stringRequest: StringRequest = object : StringRequest(Method.POST, url, Response.Listener { response: String? ->
-            Log.d("connect", "delete Response: $response")
+            Log.d("request", "delete Response: $response")
             if (response!!.startsWith("success")) {
                 Global.putSnackBar(recyclerView, "成功刪除地點")
                 SQL_getPlaces()
@@ -80,7 +80,7 @@ class EditPlaceActivity : AppCompatActivity(), ItemClickListener {
 
     private fun SQL_getPlaces() {
         val stringRequest: StringRequest = object : StringRequest(Method.POST, url, Response.Listener { response: String? ->
-            Log.d("connect", "select Response: $response")
+            Log.d("request", "select Response: $response")
             placeList.clear()
             try {
                 val places = JSONArray(response)
@@ -146,7 +146,7 @@ class EditPlaceActivity : AppCompatActivity(), ItemClickListener {
 
     private fun SQL_storePlace() {
         val stringRequest: StringRequest = object : StringRequest(Method.POST, url, Response.Listener { response: String ->
-            Log.d("connect", "store Response: $response")
+            Log.d("request", "store Response: $response")
             if (response.startsWith("success")) {
                 SQL_getPlaces()
                 Global.putSnackBar(recyclerView, "已設置地點")

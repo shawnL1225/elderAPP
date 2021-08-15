@@ -90,7 +90,7 @@ class AddEventActivity : AppCompatActivity() {
 
     private fun requestAddEvent() {
         val stringRequest: StringRequest = object : StringRequest(Method.POST, Global.url+"event.php", Response.Listener { response: String ->
-            Log.d("connect", "Response: $response")
+            Log.d("request", "Response: $response")
             if (response.startsWith("success")) {
                 Toast.makeText(this, "成功新增活動", Toast.LENGTH_SHORT).show()
                 finish()
@@ -126,7 +126,9 @@ class AddEventActivity : AppCompatActivity() {
                 .build()
         timePicker.show(supportFragmentManager, "timePicker");
         timePicker.addOnPositiveButtonClickListener {
-            date += timePicker.hour.toString()+":"+timePicker.minute.toString()
+            date += timePicker.hour.toString()+":"
+            if( timePicker.minute < 10) date += '0'
+            date += timePicker.minute.toString()
             tvDate.text = date
         }
     }

@@ -12,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.constraintlayout.solver.GoalRow
 import androidx.fragment.app.Fragment
 import com.android.volley.AuthFailureError
 import com.android.volley.Response
@@ -37,11 +38,13 @@ class RegisterVolunteerFragment : Fragment() {
     lateinit var etPassword: EditText
     lateinit var etPasswordC: EditText
     lateinit var etDepartment: EditText
+    lateinit var etEmail: EditText
     lateinit var radioGroup: RadioGroup
     lateinit var name: String
     lateinit var phone: String
     lateinit var pass: String
     lateinit var passC: String
+    lateinit var email: String
     lateinit var department: String
     var headshot: String = "default_n"
     private var sex: String? = null
@@ -55,6 +58,7 @@ class RegisterVolunteerFragment : Fragment() {
         etPassword = root.findViewById(R.id.et_password)
         etPasswordC = root.findViewById(R.id.et_passwordCheck)
         etDepartment = root.findViewById(R.id.et_department)
+        etEmail = root.findViewById(R.id.et_email)
         imgHeadshot = root.findViewById(R.id.img_headshot)
         val register = root.findViewById<Button?>(R.id.btn_register)
         val toLogin = root.findViewById<TextView?>(R.id.tv_toLogin)
@@ -86,18 +90,19 @@ class RegisterVolunteerFragment : Fragment() {
             phone = etPhone.text.toString().trim { it <= ' ' }
             pass = etPassword.text.toString().trim { it <= ' ' }
             passC = etPasswordC.text.toString().trim { it <= ' ' }
+            email = etEmail.text.toString().trim()
             department = etDepartment.text.toString().trim { it <= ' ' }
 
             sex = when(radioGroup.checkedRadioButtonId){
                 R.id.RadioButton_M ->  "M"
-                R.id.holder -> "F"
+                R.id.RadioButton_F -> "F"
                 R.id.RadioButton_N -> "N"
                 else -> "_"
             }
 
             if (pass != passC) {
                 Global.putSnackBarR(etName, "密碼不相符")
-            } else if (name == "" || phone == "") {
+            } else if (name == "" || phone == "" || email == "" || department == "") {
                 Global.putSnackBarR(etName, "請輸入完整資訊")
             } else {
                 SQL()
@@ -109,14 +114,20 @@ class RegisterVolunteerFragment : Fragment() {
 
     private fun SQL() {
         val stringRequest: StringRequest = object : StringRequest(Method.POST, url, Response.Listener { response: String ->
-            Log.d("connect", "Response: $response")
-            if (response.startsWith("success")) {
-                val it = Intent(context, LoginActivity::class.java)
-                it.putExtra("signUp", true)
-                startActivity(it)
-                activity?.finish()
-            } else if (response.startsWith("failure")) {
-                Toast.makeText(context, "註冊失敗", Toast.LENGTH_SHORT).show()
+            Log.d("request", "Response: $response")
+            when {
+                response == "isExist" -> {
+                    Global.putSnackBarR(etName, "已存在此電話使用者")
+                }
+                response.startsWith("success") -> {
+                    val it = Intent(context, LoginActivity::class.java)
+                    it.putExtra("signUp", true)
+                    startActivity(it)
+                    activity?.finish()
+                }
+                response.startsWith("failure") -> {
+                    Toast.makeText(context, "註冊失敗", Toast.LENGTH_SHORT).show()
+                }
             }
         }, Response.ErrorListener { error: VolleyError -> Toast.makeText(context, error.toString().trim { it <= ' ' }, Toast.LENGTH_SHORT).show() }) {
             @Throws(AuthFailureError::class)
@@ -128,6 +139,7 @@ class RegisterVolunteerFragment : Fragment() {
                 data["identity"] = "1"
                 data["department"] = department
                 data["sex"] = sex
+                data["email"] = email
                 data["headshot"] = headshot
                 return data
             }

@@ -40,7 +40,7 @@ class Global : Application() {
             Log.d("profile", "Executed")
 
             val stringRequest: StringRequest = object : StringRequest(Method.POST, url + "setProfile.php", Response.Listener { response: String ->
-                Log.d("connect", "Response: $response")
+                Log.d("request", "Response: $response")
                 try {
                     Log.d("Profile", response)
                     val gson = Gson()

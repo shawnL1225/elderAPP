@@ -34,7 +34,7 @@
             <!-- navbar links -->
             <div class="collapse navbar-collapse justify-content-end align-center" id="main-nav">
                 <ul class="navbar-nav">
-                    <li class="nav-item ms-2">
+                    <li class="nav-item">
                         <a class="btn btn-secondary">活動管理</a>
                     </li>
                     <li class="nav-item">
@@ -58,7 +58,7 @@
     <div class="container-fluid px-4 py-4">
         <table class="table align-middle shadow">
             <thead class="table-secondary">
-                <tr class="text-center">
+                <tr class="text-center fs-5">
                     <th>#</th>
                     <th>圖片</th>
                     <th>標題</th>
@@ -96,9 +96,9 @@
                             $state = "<td><span class='btn btn-warning ".$tdStateAttr.">已拒絕</span></td>";
 
 
-                        echo   "<tr class='text-center'>
+                        echo   "<tr class='text-center fs-5'>
                                     <th>{$cnt}</th>
-                                    <td><img src='../event_img/{$row['id']}.jpg' alt='photo' class='w-50 h-50'></td>
+                                    <td style='width:150px'><img src='../event_img/{$row['id']}.jpg' alt='photo' style='width:150px'></td>
                                     <td>{$row['title']}</td>
                                     <td>{$row['location']}</td>
                                     <td>{$row['content']}</td>

@@ -29,6 +29,7 @@ class VolunteerSettingActivity : AppCompatActivity() {
             getSharedPreferences("loginUser", MODE_PRIVATE)
                     .edit().putString("uid", "").apply()
             startActivity(Intent(this, LoginActivity::class.java))
+
         }
     }
 }

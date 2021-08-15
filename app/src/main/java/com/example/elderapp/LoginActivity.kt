@@ -57,7 +57,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun requestCheckUser() {
         val stringRequest: StringRequest = object : StringRequest(Method.POST, url, Response.Listener { response: String ->
-            Log.d("connect", "Response: $response")
+            Log.d("request", "Response: $response")
             when {
                 response.startsWith("success") -> {
                     // formation would be "success-userID-userIdentity"

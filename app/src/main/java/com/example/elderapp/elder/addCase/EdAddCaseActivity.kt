@@ -51,7 +51,7 @@ class EdAddCaseActivity : AppCompatActivity() {
 
     fun createCase() {
         val stringRequest: StringRequest = object : StringRequest(Method.POST, Global.url + "case/create.php", Response.Listener { response: String? ->
-            Log.d("connect", "select Response: $response")
+            Log.d("request", "select Response: $response")
             try {
                 Toast.makeText(this,if(response=="ok") "新增成功" else "錯誤",Toast.LENGTH_SHORT).show()
                 finish()

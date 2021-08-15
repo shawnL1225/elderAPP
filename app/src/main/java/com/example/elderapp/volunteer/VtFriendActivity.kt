@@ -46,7 +46,7 @@ class VtFriendActivity : AppCompatActivity(), FriendAdapter.ItemClickListener {
 
     private fun requestGetFriends() {
         val stringRequest: StringRequest = object : StringRequest(Method.POST, url, Response.Listener { response: String? ->
-            Log.d("connect", "select Response: $response")
+            Log.d("request", "select Response: $response")
             userList.clear()
             try {
                 val users = JSONArray(response)

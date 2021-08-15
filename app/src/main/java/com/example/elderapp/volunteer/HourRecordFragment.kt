@@ -85,7 +85,7 @@ class HourRecordFragment : Fragment() {
 
     private fun uploadHour() {
         val stringRequest: StringRequest = object : StringRequest(Method.POST, Global.url+"hourRecord.php", Response.Listener { response: String ->
-            Log.d("connect", "uploadHour: $response")
+            Log.d("request", "uploadHour: $response")
             if(response.startsWith("success")) {
                 Global.putSnackBar(tvDate, "成功新增資料")
 
@@ -120,7 +120,9 @@ class HourRecordFragment : Fragment() {
                 .build()
         timePicker.show(parentFragmentManager, "timePicker");
         timePicker.addOnPositiveButtonClickListener {
-            time = timePicker.hour.toString()+":"+timePicker.minute.toString()
+            time += timePicker.hour.toString()+":"
+            if( timePicker.minute < 10) time += '0'
+            time += timePicker.minute.toString()
             openEndTimePicker()
         }
 
@@ -135,7 +137,10 @@ class HourRecordFragment : Fragment() {
                 .build()
         timePicker.show(parentFragmentManager, "timePicker");
         timePicker.addOnPositiveButtonClickListener {
-            time += " ~ "+timePicker.hour.toString()+":"+timePicker.minute.toString()
+
+            time += " ~ "+timePicker.hour.toString()+":"
+            if( timePicker.minute < 10) time += '0'
+            time += timePicker.minute.toString()
             tvTime.text = time
         }
     }

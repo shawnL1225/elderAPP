@@ -76,7 +76,7 @@ class EventFragment : Fragment(),EventAdapter.ItemClickListener{
     }
     private fun requestEvent(){
         val stringRequest: StringRequest = object : StringRequest(Method.POST, url, Response.Listener { response: String ->
-            Log.d("connect", "Response: $response")
+            Log.d("request", "Response: $response")
             eventList.clear()
             try {
                 val events = JSONArray(response)
@@ -124,7 +124,7 @@ class EventFragment : Fragment(),EventAdapter.ItemClickListener{
     }
     private fun attend(eid: Int){
         val stringRequest: StringRequest = object : StringRequest(Method.POST, url, Response.Listener { response: String ->
-            Log.d("connect", "Response: $response")
+            Log.d("request", "Response: $response")
             if(response.startsWith("success")){
                 requestEvent()
             }
@@ -145,7 +145,7 @@ class EventFragment : Fragment(),EventAdapter.ItemClickListener{
     }
     private fun disAttend(eid: Int){
         val stringRequest: StringRequest = object : StringRequest(Method.POST, url, Response.Listener { response: String ->
-            Log.d("connect", "Response: $response")
+            Log.d("request", "Response: $response")
             if(response.startsWith("success")){
                 requestEvent()
             }
@@ -165,7 +165,7 @@ class EventFragment : Fragment(),EventAdapter.ItemClickListener{
     }
     private fun getNameList(eid: Int, view:TextView){
         val stringRequest: StringRequest = object : StringRequest(Method.POST, url, Response.Listener { response: String ->
-            Log.d("connect", "Response: $response")
+            Log.d("request", "Response: $response")
             view.text = response
         }, Response.ErrorListener { error: VolleyError -> Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show() }) {
             @Throws(AuthFailureError::class)
@@ -300,7 +300,7 @@ class EventFragment : Fragment(),EventAdapter.ItemClickListener{
 
     private fun deleteEvent(eid: Int) {
         val stringRequest: StringRequest = object : StringRequest(Method.POST, url, Response.Listener { response: String ->
-            Log.d("connect", "Response: $response")
+            Log.d("request", "Response: $response")
             if(response.startsWith("success")){
                 requestEvent()
             }

@@ -15,8 +15,22 @@ if(isset($_POST['name']) && isset($_POST['phone'])){
     $sex = $_POST['sex'];
     $address = $_POST['address'];
     $headshot = $_POST['headshot'];
+    $email = $_POST['email'];
 
-    if($identity == "0"){   //長者
+    //check is phone not use
+    $sql = "SELECT * FROM user WHERE phone=?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $phone);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if($result->num_rows>0){
+        echo "isExist";
+        return;
+    }
+
+
+
+    if($identity == "0"){   //elder
         $sql = "insert into user 
             (name, phone, password, identity, sex, address, remarks_illness, remarks_eating, remarks_other, contactPhone, contactEmail, headshot) 
             values (?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -35,13 +49,13 @@ if(isset($_POST['name']) && isset($_POST['phone'])){
         }
     }
 
-    else if($identity == "1"){ //志工
+    else if($identity == "1"){ //volunteer
         $sql = "insert into user 
-            (name, phone, password, identity, sex, department, headshot) 
-            values (?,?,?,?,?,?,?)";
+            (name, phone, password, identity, sex, department, email, headshot) 
+            values (?,?,?,?,?,?,?,?)";
 
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("sssisss", $name, $phone, md5($password), $identity, $sex, $department, $headshot);
+        $stmt->bind_param("sssissss", $name, $phone, md5($password), $identity, $sex, $department, $email, $headshot);
         $stmt->execute();
 
         if($stmt->affected_rows > 0){

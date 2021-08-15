@@ -1,10 +1,14 @@
 package com.example.elderapp.elder
 
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
+import com.android.volley.AuthFailureError
 import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.StringRequest
@@ -61,6 +65,8 @@ class EdProfileActivity : AppCompatActivity() {
         radioGroup = findViewById(R.id.RadioGroup_sex)
         val btnUpdate = findViewById<Button>(R.id.btn_update)
         val btnBack = findViewById<Button>(R.id.btn_back)
+        val btnRepass = findViewById<Button>(R.id.btn_repass)
+        val btnDeleteUser = findViewById<Button>(R.id.btn_delete_user)
         requestGetData()
         btnUpdate.setOnClickListener {
             name = etName!!.text.toString().trim()
@@ -93,13 +99,59 @@ class EdProfileActivity : AppCompatActivity() {
                 requestUpdateData()
             }
         }
+        btnDeleteUser.setOnClickListener {
+            val builder = android.app.AlertDialog.Builder(this)
+            builder.setTitle("確定要刪除此帳戶")
+                    .setPositiveButton("確定") { _, _ -> deleteUser() }
+                    .setNegativeButton("取消") { dialogInterface, _ -> dialogInterface.dismiss() }
+                    .show()
+
+        }
+        btnRepass.setOnClickListener {
+            val dialogPass = LayoutInflater.from(this).inflate(R.layout.dialog_new_password, null)
+            etPassword = dialogPass.findViewById(R.id.et_password)
+            etPasswordC = dialogPass.findViewById(R.id.et_password_c)
+            val builder = AlertDialog.Builder(this)
+            builder.setView(dialogPass).setTitle("修改密碼")
+                    .setPositiveButton("確認") { dialogInterface: DialogInterface, i: Int ->
+                        pass = etPassword!!.text.toString().trim()
+                        passC = etPasswordC!!.text.toString().trim()
+                        if(pass != passC) Global.putSnackBarR(etPassword!!, "密碼不相同")
+                        else updatePassword()
+                    }
+                    .setNegativeButton("取消") { _, _-> }
+                    .show()
+        }
         btnBack.setOnClickListener { finish() }
 
     }
+    private fun deleteUser() {
+        val stringRequest: StringRequest = object : StringRequest(Method.POST, Global.url+"setProfile.php", Response.Listener { response: String ->
+            Log.d("request", "Response: $response")
+            if (response.startsWith("success")) {
+                Toast.makeText(this, "成功刪除使用者", Toast.LENGTH_SHORT).show()
+                getSharedPreferences("loginUser", MODE_PRIVATE)
+                        .edit().putString("uid", "").apply()
+                startActivity(Intent(this, LoginActivity::class.java))
 
+            } else if (response.startsWith("failure")) {
+                Toast.makeText(this, "刪除失敗", Toast.LENGTH_SHORT).show()
+            }
+        }, Response.ErrorListener { error: VolleyError -> Toast.makeText(this, error.toString().trim { it <= ' ' }, Toast.LENGTH_SHORT).show() }) {
+            @Throws(AuthFailureError::class)
+            override fun getParams(): MutableMap<String?, String?> {
+                val data: MutableMap<String?, String?> = HashMap()
+                data["type"] = "deleteUser"
+                data["uid"] = uid
+                return data
+            }
+        }
+        val requestQueue = Volley.newRequestQueue(this)
+        requestQueue.add(stringRequest)
+    }
     private fun requestUpdateData() {
         val stringRequest: StringRequest = object : StringRequest(Method.POST, url, Response.Listener { response: String ->
-            Log.d("connect", "Response: $response")
+            Log.d("request", "Response: $response")
             if (response.startsWith("success")) {
                 Global.putSnackBar(etName!!,"更新成功!")
                 requestGetData()
@@ -130,10 +182,31 @@ class EdProfileActivity : AppCompatActivity() {
         val requestQueue = Volley.newRequestQueue(this)
         requestQueue.add(stringRequest)
     }
+    private fun updatePassword() {
+        val stringRequest: StringRequest = object : StringRequest(Method.POST, Global.url+"setProfile.php", Response.Listener { response: String ->
+            Log.d("request", "Response: $response")
+            if (response.startsWith("success")) {
+                Global.putSnackBar(etName!!, "更新密碼成功")
+            } else if (response.startsWith("failure")) {
+                Toast.makeText(this, "更新失敗", Toast.LENGTH_SHORT).show()
+            }
+        }, Response.ErrorListener { error: VolleyError -> Toast.makeText(this, error.toString().trim { it <= ' ' }, Toast.LENGTH_SHORT).show() }) {
+            @Throws(AuthFailureError::class)
+            override fun getParams(): MutableMap<String?, String?> {
+                val data: MutableMap<String?, String?> = HashMap()
+                data["type"] = "updatePassword"
+                data["uid"] = uid
+                data["password"] = pass
 
+                return data
+            }
+        }
+        val requestQueue = Volley.newRequestQueue(this)
+        requestQueue.add(stringRequest)
+    }
     private fun requestGetData(){
         val stringRequest: StringRequest = object : StringRequest(Method.POST, url, Response.Listener { response: String ->
-            Log.d("connect", "Response: $response")
+            Log.d("request", "Response: $response")
             try {
                 val userObj = JSONObject(response)
                 name = userObj.getString("name")

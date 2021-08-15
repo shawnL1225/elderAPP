@@ -60,7 +60,7 @@ class EdFriendActivity : AppCompatActivity(), FriendAdapter.ItemClickListener {
 
     private fun requestGetFriends() {
         val stringRequest: StringRequest = object : StringRequest(Method.POST, url, Response.Listener { response: String? ->
-            Log.d("connect", "select Response: $response")
+            Log.d("request", "select Response: $response")
             userList.clear()
             try {
                 val users = JSONArray(response)
@@ -95,7 +95,7 @@ class EdFriendActivity : AppCompatActivity(), FriendAdapter.ItemClickListener {
 
     private fun requestDeleteFriend(friendId: Int) {
         val stringRequest: StringRequest = object : StringRequest(Method.POST, url, Response.Listener { response: String? ->
-            Log.d("connect", "delete Response: $response")
+            Log.d("request", "delete Response: $response")
             if (response!!.startsWith("success")) {
                 Global.putSnackBar(recyclerView, "成功刪除志工朋友")
                requestGetFriends()
@@ -135,7 +135,7 @@ class EdFriendActivity : AppCompatActivity(), FriendAdapter.ItemClickListener {
 
     private fun requestStoreFriend() {
         val stringRequest: StringRequest = object : StringRequest(Method.POST, url, Response.Listener { response: String ->
-            Log.d("connect", "store Response: $response")
+            Log.d("request", "store Response: $response")
             when {
                 response.startsWith("success") -> {
                     requestGetFriends()

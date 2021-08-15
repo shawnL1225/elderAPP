@@ -64,13 +64,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="5dp"
-                android:hint="姓名"/>
+                android:hint="姓名 (必填)"/>
             <EditText
                 android:id="@+id/et_phone"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="5dp"
-                android:hint="電話號碼"
+                android:hint="電話號碼 (必填)"
                 android:inputType="phone" />
             <EditText
                 android:id="@+id/et_password"
@@ -87,14 +87,20 @@
                 android:inputType="textPassword"
                 android:hint="確認密碼" />
 
-
+            <EditText
+                android:id="@+id/et_email"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
+                android:inputType="textEmailAddress"
+                android:hint="電子郵件 (必填)" />
             <EditText
                 android:id="@+id/et_department"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="5dp"
-                android:inputType="textPassword"
-                android:hint="所屬單位" />
+                android:inputType="text"
+                android:hint="所屬單位 (必填)" />
             <RadioGroup
                 android:id="@+id/RadioGroup_sex"
                 android:layout_width="match_parent"

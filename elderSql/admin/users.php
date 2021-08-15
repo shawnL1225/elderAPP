@@ -27,7 +27,7 @@
                     尊嚴長者
                 </span>
             </a>
-            
+
             <!-- toggle button for mobile nav -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#user-nav" aria-controls="user-nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -36,7 +36,7 @@
             <!-- navbar links -->
             <div class="collapse navbar-collapse justify-content-end align-center" id="user-nav">
                 <ul class="navbar-nav">
-                    <li class="nav-item ms-2">
+                    <li class="nav-item">
                         <a class="nav-link" href="index.php">活動管理</a>
                     </li>
                     <li class="nav-item">
@@ -56,6 +56,113 @@
             使用者名單
         </h2>
         <p class="text-center text-secondary">查看所有使用者資料</p>
+    </div>
+
+    <!-- tab -->
+    <ul class="nav nav-pills justify-content-center mt-4"  id="myTab" role="tablist">
+        <li class="nav-item"  role="presentation">
+            <button class="nav-link border active" style="width: 45vw;" id="elder-tab" data-bs-toggle="tab" data-bs-target="#elder" type="button" role="tab" aria-controls="elder" aria-selected="true">長者</button>
+        </li>
+        <li class="nav-item"  role="presentation">
+            <button class="nav-link border"  style="width: 45vw " id="volunteer-tab" data-bs-toggle="tab" data-bs-target="#volunteer" type="button" role="tab" aria-controls="volunteer" aria-selected="false">志工</button>
+        </li>
+    </ul>
+
+
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="elder" role="tabpanel" aria-labelledby="elder-tab">
+            <!-- user0 -->
+            <div class="container-fluid px-4">
+                <table class="table table-warning table-striped align-middle shadow">
+                    <thead class="table-secondary">
+                        <tr class="text-center fs-5">
+                            <th>#</th>
+                            <th>姓名</th>
+                            <th>電話</th>
+                            <th>姓別</th>
+                            <th>地址</th>
+                            <th>生理疾病</th>
+                            <th>飲食習慣</th>
+                            <th>其他</th>
+                            <th>聯絡人電話</th>
+                            <th>聯絡人郵件</th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        <?php
+                        $sql = "SELECT * FROM user WHERE identity=0";
+                        $stmt = $conn->prepare($sql);
+                        $stmt->execute();
+                        $result = $stmt->get_result();
+
+                        $cnt = 1;
+                        while ($row = $result->fetch_assoc()) {
+
+                            echo   "<tr class='text-center fs-5'>
+                                    <th>{$cnt}</th>
+                                    <td style='width:100px'>{$row['name']}</td>
+                                    <td>{$row['phone']}</td>
+                                    <td style='width:60px'>{$row['sex']}</td>
+                                    <td>{$row['address']}</td>
+                                    <td>{$row['remarks_illness']}</td>
+                                    <td>{$row['remarks_eating']}</td>
+                                    <td>{$row['remarks_other']}</td>
+                                    <td>{$row['contactPhone']}</td>
+                                    <td>{$row['contactEmail']}</td>
+                                </tr>";
+                            $cnt++;
+                        }
+
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+       
+        <div class="tab-pane fade" id="volunteer" role="tabpanel" aria-labelledby="volunteer-tab">
+            <!-- user1 -->
+            <div class="container-fluid px-4" id='volunteer'>
+                <table class="table table-warning table-striped align-middle shadow">
+                    <thead class="table-secondary">
+                        <tr class="text-center fs-5">
+                            <th>#</th>
+                            <th>頭像</th>
+                            <th>姓名</th>
+                            <th>電話</th>
+                            <th>姓別</th>
+                            <th>電子郵件</th>
+                            <th>服務單位</th>
+
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        <?php
+                        $sql = "SELECT * FROM user WHERE identity=1";
+                        $stmt = $conn->prepare($sql);
+                        $stmt->execute();
+                        $result = $stmt->get_result();
+
+                        $cnt = 1;
+                        while ($row = $result->fetch_assoc()) {
+                            echo   "<tr class='text-center fs-5'>
+                                    <th>{$cnt}</th>
+                                    <td style='width:150px'><img src='../headshot/{$row['headshot']}.jpg' alt='headshot' style='width:150px'></td>
+                                    <td>{$row['name']}</td>
+                                    <td>{$row['phone']}</td>
+                                    <td>{$row['sex']}</td>
+                                    <td>{$row['email']}</td>
+                                    <td>{$row['department']}</td>
+                                </tr>";
+                            $cnt++;
+                        }
+
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 </body>

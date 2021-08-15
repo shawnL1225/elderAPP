@@ -17,8 +17,6 @@ if($type == "getData"){
 else if($type == "updateElder"){
 
     $name = $_POST['name'];
-    $password = $_POST['password'];
-    $phone = $_POST['phone'];
     $remarks_ill = $_POST['remarks_ill'];
     $remarks_eating = $_POST['remarks_eating'];
     $remarks_other = $_POST['remarks_other'];
@@ -38,14 +36,7 @@ else if($type == "updateElder"){
 
 
     
-    if($password != ""){
-        $sql2 = "UPDATE user SET password=? WHERE id=?";
-        $stmt2 = $conn->prepare($sql2);
-        $stmt2->bind_param("si", md5($password), $uid);
-        $stmt2->execute();
-
-    }
-    if($stmt->affected_rows + $stmt2->affected_rows> 0){
+    if($stmt->affected_rows> 0){
         echo "success";
         
     }else{
@@ -62,24 +53,52 @@ else if($type == "updateVolunteer"){
     $sex = $_POST['sex'];
     $department = $_POST['department'];
     $headshot = $_POST['headshot'];
-    $password = $_POST['password'];
+    $email = $_POST['email'];
 
-    $sql = "UPDATE user SET name=?, phone=?, sex=?, department=?, headshot=? WHERE id=? ";
+    $sql = "UPDATE user SET name=?, phone=?, sex=?, department=?, email=?, headshot=? WHERE id=? ";
 
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sssssi", $name, $phone, $sex, $department, $headshot, $uid);
+    $stmt->bind_param("ssssssi", $name, $phone, $sex, $department, $email, $headshot, $uid);
     $stmt->execute();
 
 
-    if($password != ""){
-        $sql2 = "UPDATE user SET password=? WHERE id=?";
-        $stmt2 = $conn->prepare($sql2);
-        $stmt2->bind_param("si", md5($password), $uid);
-        $stmt2->execute();
-    }
 
-    if($stmt->affected_rows + $stmt2->affected_rows> 0){
+
+    if($stmt->affected_rows> 0){
         echo "success update volunteer";
+        
+    }else{
+        echo "failure".$stmt->error;
+    }
+}
+else if($type == "updatePassword"){
+    $password = $_POST['password'];
+    $uid = $_POST['uid'];
+
+    $sql = "UPDATE user SET password=? WHERE id=? ";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("si", md5($password), $uid);
+    $stmt->execute();
+
+    if($stmt->affected_rows> 0){
+        echo "success update password";
+        
+    }else{
+        echo "failure".$stmt->error;
+    }
+}
+else if($type == "deleteUser"){
+    $uid = $_POST['uid'];
+
+    $sql = "DELETE FROM user WHERE id=? ";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $uid);
+    $stmt->execute();
+
+    if($stmt->affected_rows> 0){
+        echo "success delete user";
         
     }else{
         echo "failure".$stmt->error;

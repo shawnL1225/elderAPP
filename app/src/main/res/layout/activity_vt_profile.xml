@@ -95,31 +95,37 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="5dp"
-                    android:hint="姓名"/>
+                    android:hint="姓名 (必填)"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/et_phone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="5"
+                        android:hint="電話號碼  (必填)"
+                        android:inputType="phone" />
+
+                    <Button
+                        android:id="@+id/btn_repass"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="修改密碼" />
+                </LinearLayout>
+
                 <EditText
-                    android:id="@+id/et_phone"
+                    android:id="@+id/et_email"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="5dp"
-                    android:hint="電話號碼"
-                    android:inputType="phone" />
-
-                <EditText
-                    android:id="@+id/et_password"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="5dp"
-                    android:hint="密碼 (如要更改才需輸入)"
-                    android:inputType="textPassword" />
-                <EditText
-                    android:id="@+id/et_passwordCheck"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="5dp"
-                    android:inputType="textPassword"
-                    android:hint="確認密碼" />
-
-
+                    android:inputType="textEmailAddress"
+                    android:hint="電子郵件" />
                 <EditText
                     android:id="@+id/et_department"
                     android:layout_width="match_parent"
@@ -164,6 +170,15 @@
                     android:layout_height="match_parent"
                     android:layout_marginTop="20dp"
                     android:text="更新" />
+
+                <Button
+                    android:id="@+id/btn_delete_user"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="40dp"
+                    android:layout_marginTop="20dp"
+                    android:backgroundTint="@color/dangerous_red"
+                    android:text="刪除帳號" />
 
             </LinearLayout>
         </ScrollView>

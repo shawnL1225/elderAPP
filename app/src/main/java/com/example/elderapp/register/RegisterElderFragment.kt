@@ -114,14 +114,20 @@ class RegisterElderFragment : Fragment() {
 
     fun SQL() {
         val stringRequest: StringRequest = object : StringRequest(Method.POST, url, Response.Listener { response: String ->
-            Log.d("connect", "Response: $response")
-            if (response.startsWith("success")) {
-                val it = Intent(context, LoginActivity::class.java)
-                it.putExtra("signUp", true)
-                startActivity(it)
-                activity?.finish()
-            } else if (response.startsWith("failure")) {
-                Toast.makeText(context, "註冊失敗", Toast.LENGTH_SHORT).show()
+            Log.d("request", "Response: $response")
+            when {
+                response == "isExist" -> {
+                    Global.putSnackBarR(etName!!, "已存在此電話使用者")
+                }
+                response.startsWith("success") -> {
+                    val it = Intent(context, LoginActivity::class.java)
+                    it.putExtra("signUp", true)
+                    startActivity(it)
+                    activity?.finish()
+                }
+                response.startsWith("failure") -> {
+                    Toast.makeText(context, "註冊失敗", Toast.LENGTH_SHORT).show()
+                }
             }
         }, Response.ErrorListener { error: VolleyError -> Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show() }) {
             @Throws(AuthFailureError::class)
