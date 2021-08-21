@@ -111,7 +111,7 @@ class HourRecordFragment : Fragment() {
     }
 
     private fun openStartTimePicker() {
-        val clockFormat = if (DateFormat.is24HourFormat(requireContext())) TimeFormat.CLOCK_24H else TimeFormat.CLOCK_12H
+        val clockFormat = TimeFormat.CLOCK_24H
         val timePicker = MaterialTimePicker.Builder()
                 .setTimeFormat(clockFormat)
                 .setHour(12)
@@ -120,7 +120,7 @@ class HourRecordFragment : Fragment() {
                 .build()
         timePicker.show(parentFragmentManager, "timePicker");
         timePicker.addOnPositiveButtonClickListener {
-            time += timePicker.hour.toString()+":"
+            time = timePicker.hour.toString()+":"
             if( timePicker.minute < 10) time += '0'
             time += timePicker.minute.toString()
             openEndTimePicker()
@@ -128,7 +128,7 @@ class HourRecordFragment : Fragment() {
 
     }
     private fun openEndTimePicker() {
-        val clockFormat = if (DateFormat.is24HourFormat(requireContext())) TimeFormat.CLOCK_24H else TimeFormat.CLOCK_12H
+        val clockFormat = TimeFormat.CLOCK_24H
         val timePicker = MaterialTimePicker.Builder()
                 .setTimeFormat(clockFormat)
                 .setHour(12)

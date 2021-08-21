@@ -117,7 +117,7 @@ class AddEventActivity : AppCompatActivity() {
         requestQueue.add(stringRequest)
     }
     private fun openTimePicker() {
-        val clockFormat = if (is24HourFormat(this)) TimeFormat.CLOCK_24H else TimeFormat.CLOCK_12H
+        val clockFormat = TimeFormat.CLOCK_24H
         val timePicker = MaterialTimePicker.Builder()
                 .setTimeFormat(clockFormat)
                 .setHour(12)

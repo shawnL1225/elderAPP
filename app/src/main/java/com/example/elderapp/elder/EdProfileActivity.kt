@@ -71,8 +71,6 @@ class EdProfileActivity : AppCompatActivity() {
         btnUpdate.setOnClickListener {
             name = etName!!.text.toString().trim()
             phone = etPhone!!.text.toString().trim()
-            pass = etPassword!!.text.toString().trim()
-            passC = etPasswordC!!.text.toString().trim ()
             remarksIll = etRemarksIll!!.text.toString().trim()
             remarksEating = etRemarksEating!!.text.toString().trim()
             remarksOther = etRemarksOther!!.text.toString().trim()

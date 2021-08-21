@@ -97,8 +97,6 @@ class VtProfileActivity : AppCompatActivity() {
         btnUpdate.setOnClickListener {
             name = etName!!.text.toString().trim()
             phone = etPhone!!.text.toString().trim()
-            pass = etPassword!!.text.toString().trim()
-            passC = etPasswordC!!.text.toString().trim ()
             email = etEmail!!.text.toString().trim()
             department = etDepartment!!.text.toString().trim ()
 
