@@ -7,7 +7,7 @@
     tools:context="elder.fragment_go_out_main">
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/tv_empty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="還未新增出門請求\n按右下角新增"

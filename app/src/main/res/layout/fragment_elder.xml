@@ -13,7 +13,6 @@
         android:layout_height="120dp"
         android:layout_margin="10dp"
         android:background="#F44A4A"
-        android:rotationX="0"
         android:scaleType="centerCrop"
         app:srcCompat="@drawable/banner"
         tools:srcCompat="@drawable/banner" />

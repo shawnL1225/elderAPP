@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -38,6 +39,7 @@ private const val ARG_PARAM2 = "param2"
  */
 class fragment_go_out_main : Fragment() {
     lateinit var root:View;
+    lateinit var tvEmpty:TextView
     var uid:Int = -1;
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -45,10 +47,10 @@ class fragment_go_out_main : Fragment() {
         root = inflater.inflate(R.layout.fragment_go_out_main, container, false)
         uid = requireContext().getSharedPreferences("loginUser", AppCompatActivity.MODE_PRIVATE).getString("uid", "0")?.toInt()
                 ?: -1
-        //loadCases()
         root.findViewById<FloatingActionButton>(R.id.btn_addCase).setOnClickListener {
             startActivity(Intent(requireContext(),EdAddCaseActivity::class.java))
         }
+        tvEmpty = root.findViewById(R.id.tv_empty)
         return root
     }
 
@@ -64,6 +66,11 @@ class fragment_go_out_main : Fragment() {
             val list_case = root!!.findViewById<RecyclerView>(R.id.list_case)
             list_case.layoutManager = LinearLayoutManager(requireContext())
             list_case.adapter = ElderCaseAdapter(requireContext(), it.toMutableList(),{id:Int -> cancelCase(requireContext(),id)},{id:Int -> cancelReceiver(requireContext(),id)})
+            if(it.isNotEmpty()){
+                tvEmpty.visibility = View.GONE
+            }else{
+                tvEmpty.visibility = View.VISIBLE
+            }
         }
     }
 
