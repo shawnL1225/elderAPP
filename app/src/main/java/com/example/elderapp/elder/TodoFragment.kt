@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -28,6 +29,7 @@ class TodoFragment : Fragment(), TodoAdapter.ItemClickListener {
     private var itemNum:Int? = null
     lateinit var etContent:EditText
     lateinit var content:String
+    lateinit var tvEmpty:TextView
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -37,6 +39,7 @@ class TodoFragment : Fragment(), TodoAdapter.ItemClickListener {
         recyclerView = root.findViewById<RecyclerView>(R.id.recycler_todo)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
+        tvEmpty = root.findViewById(R.id.tv_empty)
         getTodoList()
         val btnAdd = root.findViewById<ExtendedFloatingActionButton>(R.id.btn_add)
         btnAdd.setOnClickListener {
@@ -46,15 +49,15 @@ class TodoFragment : Fragment(), TodoAdapter.ItemClickListener {
     }
 
     private fun getTodoList() {
-
-
         val gson = Gson()
         val json = requireActivity().getSharedPreferences("todoList", AppCompatActivity.MODE_PRIVATE)
                 .getString("items", "")
-        if (json!!.isEmpty()) {
-
+        todoList = gson.fromJson(json, MutableList::class.java) as MutableList<String>;
+        if (todoList.isEmpty()) {
+            tvEmpty.visibility = View.VISIBLE
         } else {
-            todoList = gson.fromJson(json, MutableList::class.java) as MutableList<String>;
+            tvEmpty.visibility = View.GONE
+
         }
 
         adapter = TodoAdapter(todoList)
