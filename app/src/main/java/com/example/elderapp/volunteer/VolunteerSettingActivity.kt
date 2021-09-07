@@ -7,9 +7,6 @@ import android.widget.Button
 import android.widget.LinearLayout
 import com.example.elderapp.LoginActivity
 import com.example.elderapp.R
-import com.example.elderapp.elder.EdFriendActivity
-import com.example.elderapp.elder.EdProfileActivity
-import com.example.elderapp.elder.EditPlaceActivity
 
 class VolunteerSettingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,7 +20,7 @@ class VolunteerSettingActivity : AppCompatActivity() {
         val btnLogout = findViewById<LinearLayout>(R.id.btn_logout)
         val btnDiscuss = findViewById<LinearLayout>(R.id.btn_disscus)
 
-        btnDiscuss.setOnClickListener { startActivity(Intent(this, DiscussActivity::class.java)) }
+        btnDiscuss.setOnClickListener { startActivity(Intent(this, DiscussTitleActivity::class.java)) }
         btnBack.setOnClickListener { finish() }
         btnFriend.setOnClickListener { startActivity(Intent(this, VtFriendActivity::class.java)) }
         btnProfile.setOnClickListener { startActivity(Intent(this, VtProfileActivity::class.java)) }
