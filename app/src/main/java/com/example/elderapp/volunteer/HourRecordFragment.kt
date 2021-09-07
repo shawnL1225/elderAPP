@@ -34,6 +34,11 @@ class HourRecordFragment : Fragment() {
     private var hour:String = ""
     private var content:String = ""
     private var uid:String? = ""
+    lateinit var checkBox1:CheckBox
+    lateinit var checkBox2:CheckBox
+    lateinit var checkBox3:CheckBox
+    lateinit var checkBox4:CheckBox
+
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -48,6 +53,10 @@ class HourRecordFragment : Fragment() {
         tvTime = root.findViewById(R.id.tv_time)
         etHour = root.findViewById(R.id.et_hour)
         etContent = root.findViewById(R.id.et_content)
+        checkBox1 = root.findViewById(R.id.checkBox1)
+        checkBox2 = root.findViewById(R.id.checkBox2)
+        checkBox3 = root.findViewById(R.id.checkBox3)
+        checkBox4 = root.findViewById(R.id.checkBox4)
 
         btnDate.setOnClickListener {
             openDatePicker()
@@ -57,7 +66,11 @@ class HourRecordFragment : Fragment() {
         }
         btnFinish.setOnClickListener {
             hour = etHour.text.toString().trim()
-            content = etContent.text.toString().trim()
+            if(checkBox1.isChecked) content = '*'+checkBox1.text.toString()
+            if(checkBox2.isChecked) content += '*'+checkBox2.text.toString()
+            if(checkBox3.isChecked) content += '*'+checkBox3.text.toString()
+            if(checkBox4.isChecked) content += '*'+checkBox4.text.toString()
+            content += "  "+etContent.text.toString().trim()
             if(hour == "" || time == "" || date == "" || content == ""){
                 Global.putSnackBarR(tvDate, "請輸入完整資訊")
                 return@setOnClickListener
@@ -78,6 +91,7 @@ class HourRecordFragment : Fragment() {
 
 
         }
+
         return root
 
 
@@ -161,4 +175,5 @@ class HourRecordFragment : Fragment() {
             tvDate.text = date
         }
     }
+
 }

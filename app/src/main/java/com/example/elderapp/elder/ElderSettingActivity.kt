@@ -14,7 +14,7 @@ class ElderSettingActivity : AppCompatActivity() {
         setContentView(R.layout.activity_elder_setting)
 
         val btnBack = findViewById<Button>(R.id.btn_back)
-        val btnPlace = findViewById<LinearLayout>(R.id.btn_place)
+        val btnPlace = findViewById<LinearLayout>(R.id.btn_disscus)
         val btnProfile = findViewById<LinearLayout>(R.id.btn_profile)
         val btnFriend = findViewById<LinearLayout>(R.id.btn_friend)
         val btnLogout = findViewById<LinearLayout>(R.id.btn_logout)

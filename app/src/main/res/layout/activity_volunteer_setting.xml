@@ -77,7 +77,7 @@
                 android:padding="10dp">
 
                 <LinearLayout
-                    android:id="@+id/btn_place"
+                    android:id="@+id/btn_disscus"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/style_radius_block"
@@ -89,14 +89,14 @@
                         android:id="@+id/imageView5"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        app:srcCompat="@drawable/ic_elder_setting_place"
+                        app:srcCompat="@drawable/ic_volunteer_setting_chat"
                         app:tint="@color/blue_dark" />
 
                     <TextView
                         android:id="@+id/textView11"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="常去地點"
+                        android:text="討論區"
                         android:textColor="@color/blue_dark"
                         android:textSize="30sp" />
                 </LinearLayout>

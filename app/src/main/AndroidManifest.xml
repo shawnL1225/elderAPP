@@ -16,6 +16,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ElderAPP">
+        <activity android:name=".volunteer.DiscussActivity"></activity>
         <activity
             android:name=".elder.addCase.EdAddCaseActivity"
             android:exported="true" />

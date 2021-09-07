@@ -21,7 +21,9 @@ class VolunteerSettingActivity : AppCompatActivity() {
         val btnProfile = findViewById<LinearLayout>(R.id.btn_profile)
         val btnFriend = findViewById<LinearLayout>(R.id.btn_friend)
         val btnLogout = findViewById<LinearLayout>(R.id.btn_logout)
+        val btnDiscuss = findViewById<LinearLayout>(R.id.btn_disscus)
 
+        btnDiscuss.setOnClickListener { startActivity(Intent(this, DiscussActivity::class.java)) }
         btnBack.setOnClickListener { finish() }
         btnFriend.setOnClickListener { startActivity(Intent(this, VtFriendActivity::class.java)) }
         btnProfile.setOnClickListener { startActivity(Intent(this, VtProfileActivity::class.java)) }

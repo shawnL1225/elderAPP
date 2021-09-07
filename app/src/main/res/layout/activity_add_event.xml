@@ -24,8 +24,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         app:icon="@drawable/ic_elder_setting_arrow"
-        android:textSize="15dp"
-        android:text="回設定" />
+        android:textSize="20sp"
+        android:text="回活動" />
 
 
     <LinearLayout

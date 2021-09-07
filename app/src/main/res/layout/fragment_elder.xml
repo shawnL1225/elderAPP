@@ -105,7 +105,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="外出"
-                        android:textColor="@color/blue_dark"
+                        android:textColor="@color/green_dark"
                         android:textSize="36sp" />
                 </LinearLayout>
             </LinearLayout>
@@ -139,7 +139,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="緊急電話"
-                        android:textColor="@color/blue_dark"
+                        android:textColor="@color/pink_dark"
                         android:textSize="30sp" />
                 </LinearLayout>
             </LinearLayout>
@@ -173,7 +173,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="記事本"
-                        android:textColor="@color/blue_dark"
+                        android:textColor="@color/yellow_dark"
                         android:textSize="36sp" />
                 </LinearLayout>
             </LinearLayout>
