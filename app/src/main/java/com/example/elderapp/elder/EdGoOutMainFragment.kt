@@ -3,6 +3,7 @@ package com.example.elderapp.elder
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Debug
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -19,6 +20,7 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.elderapp.Global
 import com.example.elderapp.R
+import com.example.elderapp.RawUser
 import com.example.elderapp.adapter.Case
 import com.example.elderapp.adapter.ElderCaseAdapter
 import com.example.elderapp.elder.addCase.EdAddCaseActivity
@@ -79,6 +81,7 @@ class fragment_go_out_main : Fragment() {
         val stringRequest: StringRequest = object : StringRequest(Method.POST, Global.url + "/case/list.php", Response.Listener { response: String ->
             try {
                 val gson = Gson()
+                Log.d("RESSSS",response);
                 callback(gson.fromJson(response, Array<Case>::class.java))
             } catch (e: JSONException) {
                 e.printStackTrace()
@@ -148,4 +151,5 @@ class fragment_go_out_main : Fragment() {
         val requestQueue = Volley.newRequestQueue(context)
         requestQueue.add(stringRequest)
     }
+
 }

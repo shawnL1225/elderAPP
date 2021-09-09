@@ -19,6 +19,7 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.elderapp.Global
 import com.example.elderapp.R
+import com.example.elderapp.RawUser
 import com.example.elderapp.adapter.Case
 import com.example.elderapp.adapter.VolunteerCaseAdapter
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -50,15 +51,17 @@ class VolunteerMyCaseFragment : Fragment() {
 
         val case_list = root.findViewById<RecyclerView>(R.id.case_list)
 
-        getList(context){ res ->
-            Log.d("res", Gson().toJson(res))
+        getSex(context) { sex ->
 
-            val uid = context.getSharedPreferences("loginUser", AppCompatActivity.MODE_PRIVATE).getString("uid", "0")
+            Log.d("sex",sex)
+            getList(context) { res ->
 
-            case_list.layoutManager = LinearLayoutManager(context)
-            case_list.adapter =  VolunteerCaseAdapter(context,res.filter { it.receiver?.id ?:0 == uid?.toInt() ?: -1 }.toMutableList()).
-            setClickListener(){
-                showCase(it)
+                val uid = context.getSharedPreferences("loginUser", AppCompatActivity.MODE_PRIVATE).getString("uid", "0")
+
+                case_list.layoutManager = LinearLayoutManager(context)
+                case_list.adapter = VolunteerCaseAdapter(context, res.filter { it.receiver?.id ?: 0 == uid?.toInt() ?: -1 && (it.sex_limit == "A" || it.sex_limit == sex) }.toMutableList()).setClickListener() {
+                    showCase(it)
+                }
             }
         }
     }
@@ -136,5 +139,12 @@ class VolunteerMyCaseFragment : Fragment() {
 
         bottomSheetDialog.setContentView(view)
         bottomSheetDialog.show()
+    }
+
+
+    fun getSex(context: Context, callback: (String) -> Unit) {
+        Global.profile(context, uid.toString()) { user: RawUser ->
+            callback(user.sex)
+        }
     }
 }

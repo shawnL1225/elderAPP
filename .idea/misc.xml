@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Projects/elderAPP/app/src/main/res/layout/activity_vt_profile.xml" value="0.32518115942028986" />
+        <entry key="..\:/Projects/elderAPP/app/src/main/res/layout/add_case_step3_fragment.xml" value="0.32518115942028986" />
+        <entry key="..\:/Projects/elderAPP/app/src/main/res/layout/add_case_step4_fragment.xml" value="0.32518115942028986" />
         <entry key="..\:/Users/User/Documents/Android_projects/elderAPP/app/src/main/res/layout/activity_discuss.xml" value="0.15896739130434784" />
         <entry key="..\:/Users/User/Documents/Android_projects/elderAPP/app/src/main/res/layout/activity_discuss_comment.xml" value="0.264" />
         <entry key="..\:/Users/User/Documents/Android_projects/elderAPP/app/src/main/res/layout/activity_discuss_title.xml" value="0.12335359675785208" />
@@ -13,5 +16,5 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
 </project>

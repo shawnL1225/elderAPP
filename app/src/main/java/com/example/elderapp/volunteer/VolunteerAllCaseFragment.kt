@@ -2,6 +2,7 @@ package com.example.elderapp.volunteer
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +19,7 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.elderapp.Global
 import com.example.elderapp.R
+import com.example.elderapp.RawUser
 import com.example.elderapp.adapter.Case
 import com.example.elderapp.adapter.VolunteerCaseAdapter
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -38,8 +40,8 @@ private const val ARG_PARAM2 = "param2"
  */
 class VolunteerAllCaseFragment : Fragment() {
 
-    var uid:Int = -1
-    var root:View? = null;
+    var uid: Int = -1
+    var root: View? = null;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,33 +53,31 @@ class VolunteerAllCaseFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         root = inflater.inflate(R.layout.fragment_volunteer_all_case, container, false)
-        load_cases(requireContext(),root!!)
+        load_cases(requireContext(), root!!)
         return root
     }
 
-    fun load_cases( context: Context,root: View){
+    fun load_cases(context: Context, root: View) {
 
         val all_list = root.findViewById<RecyclerView>(R.id.all_list)
         val invited_list = root.findViewById<RecyclerView>(R.id.case_list)
 
-        getList(context){ res ->
+        getSex(context) { sex ->
+            Log.d("sex",sex)
+            getList(context) { res ->
+                all_list.layoutManager = LinearLayoutManager(context)
+                all_list.adapter =
+                        VolunteerCaseAdapter(context, res.filter { it.public != null && (it.sex_limit == "A" || it.sex_limit == sex) && SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(it.public).before(Calendar.getInstance().time) && it.receiver == null && it.invited.find { i -> i.id == uid } == null }.toMutableList()).setClickListener() {
+                            showCase(it)
+                        }
 
-
-            all_list.layoutManager = LinearLayoutManager(context)
-            all_list.adapter =
-                    VolunteerCaseAdapter(context,res.filter{it.public!=null && SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(it.public).before(Calendar.getInstance().time) && it.receiver == null && it.invited.find{ i->  i.id == uid} ==null}.toMutableList()).
-                    setClickListener(){
-                        showCase(it)
-                    }
-
-            invited_list.layoutManager = LinearLayoutManager(context)
-            invited_list.adapter =
-                    VolunteerCaseAdapter(context,res.filter {it.receiver == null && it.invited.find{ i->  i.id == uid} !==null }.toMutableList()).
-                            setClickListener(){
-                                showCase(it)
-                            }
-
-            invited_list.adapter
+                invited_list.layoutManager = LinearLayoutManager(context)
+                invited_list.adapter =
+                        VolunteerCaseAdapter(context, res.filter { it.receiver == null && it.invited.find { i -> i.id == uid } !== null }.toMutableList()).setClickListener() {
+                            showCase(it)
+                        }
+                invited_list.adapter
+            }
         }
     }
 
@@ -101,11 +101,11 @@ class VolunteerAllCaseFragment : Fragment() {
         requestQueue.add(stringRequest)
     }
 
-    fun showCase(case:Case){
-        val bottomSheetDialog = BottomSheetDialog(requireContext(),R.style.BottomSheetDialog)
+    fun showCase(case: Case) {
+        val bottomSheetDialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialog)
         val view = LayoutInflater.from(context).inflate(R.layout.dialog_case, null)
         view.findViewById<TextView>(R.id.txt_submitter).text = case.submitter.name
-        Global.headUp(requireContext(),view.findViewById<ImageView>(R.id.img_headshot),case.submitter.headshot)
+        Global.headUp(requireContext(), view.findViewById<ImageView>(R.id.img_headshot), case.submitter.headshot)
 
         val parser = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
         val formatter = SimpleDateFormat("MM-dd HH:mm")
@@ -114,22 +114,22 @@ class VolunteerAllCaseFragment : Fragment() {
         view.findViewById<TextView>(R.id.txt_date).text = date
         view.findViewById<TextView>(R.id.txt_place).text = case.place.title
 
-        val txt_received=  view.findViewById<TextView>(R.id.txt_received)
-        val btn_receive=  view.findViewById<TextView>(R.id.btn_receive)
+        val txt_received = view.findViewById<TextView>(R.id.txt_received)
+        val btn_receive = view.findViewById<TextView>(R.id.btn_receive)
 
-        if(case.receiver == null){
+        if (case.receiver == null) {
             txt_received.visibility = View.GONE
             btn_receive.visibility = View.VISIBLE
             btn_receive.setOnClickListener {
                 val stringRequest: StringRequest = object : StringRequest(Method.POST, Global.url + "/case/receive.php", Response.Listener { response: String ->
                     bottomSheetDialog.hide()
-                    if(response=="ok"){
-                       Toast.makeText(requireContext(),"已將工作加入\"我的工作\"",Toast.LENGTH_SHORT).show()
-                       load_cases(requireContext(),root!!)
-                   }else{
-                       Toast.makeText(requireContext(),"發生錯誤，請稍後再試",Toast.LENGTH_SHORT).show()
-                       load_cases(requireContext(),root!!)
-                   }
+                    if (response == "ok") {
+                        Toast.makeText(requireContext(), "已將工作加入\"我的工作\"", Toast.LENGTH_SHORT).show()
+                        load_cases(requireContext(), root!!)
+                    } else {
+                        Toast.makeText(requireContext(), "發生錯誤，請稍後再試", Toast.LENGTH_SHORT).show()
+                        load_cases(requireContext(), root!!)
+                    }
                 }, Response.ErrorListener { error: VolleyError -> Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show() }) {
                     override fun getParams(): MutableMap<String?, String?> {
                         val data: MutableMap<String?, String?> = HashMap()
@@ -141,10 +141,10 @@ class VolunteerAllCaseFragment : Fragment() {
                 val requestQueue = Volley.newRequestQueue(context)
                 requestQueue.add(stringRequest)
             }
-        }else if(case.receiver!!.id == uid){
+        } else if (case.receiver!!.id == uid) {
             txt_received.visibility = View.VISIBLE
             btn_receive.visibility = View.GONE
-        }else{
+        } else {
             txt_received.visibility = View.GONE
             btn_receive.visibility = View.GONE
         }
@@ -153,4 +153,9 @@ class VolunteerAllCaseFragment : Fragment() {
         bottomSheetDialog.show()
     }
 
+    fun getSex(context: Context, callback: (String) -> Unit) {
+        Global.profile(context, uid.toString()) { user: RawUser ->
+            callback(user.sex)
+        }
+    }
 }
