@@ -23,13 +23,6 @@ import java.util.HashMap
 class EdAddCaseActivity : AppCompatActivity() {
     lateinit var navController: NavController
 
-    class WillAddCase {
-        var place: Int = 0
-        var date: String = ""
-        var invite: MutableList<Int> = mutableListOf()
-        var public: Boolean = true
-    }
-
     private val viewModel: AddCaseViewModel by viewModels()
      var uid: Int = 0;
 
@@ -65,6 +58,7 @@ class EdAddCaseActivity : AppCompatActivity() {
                 data["date"] = viewModel.date.value
                 data["place"] = viewModel.place.value.toString()
                 data["invite"] = viewModel.invite.value
+                data["sex_limit"] = viewModel.limit.value
                 if(viewModel.public.value!=null) data["public"] = viewModel.public.value
                 return data
             }

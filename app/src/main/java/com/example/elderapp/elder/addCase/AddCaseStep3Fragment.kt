@@ -1,14 +1,11 @@
 package com.example.elderapp.elder.addCase
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.CheckBox
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,7 +18,6 @@ import com.example.elderapp.Global
 import com.example.elderapp.R
 import com.example.elderapp.adapter.*
 import com.google.gson.Gson
-import org.json.JSONArray
 import org.json.JSONException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -41,6 +37,8 @@ class AddCaseStep3Fragment : Fragment() {
 
         val list_friend = root.findViewById<RecyclerView>(R.id.list_friend)
         val check_public = root.findViewById<CheckBox>(R.id.check_public)
+        val sex_limit = root.findViewById<LinearLayout>(R.id.sex_limit)
+        val RadioGroup_sex = root.findViewById<RadioGroup>(R.id.RadioGroup_sex)
 
         getFriends(){
             list_friend.layoutManager = LinearLayoutManager(requireContext())
@@ -49,17 +47,36 @@ class AddCaseStep3Fragment : Fragment() {
             list_friend.adapter = adapter
         }
 
+
+
+        check_public.setOnClickListener {
+            if(check_public.isChecked){
+                sex_limit.visibility = View.VISIBLE;
+            }else{
+                sex_limit.visibility = View.GONE;
+            }
+        }
+
         root.findViewById<Button>(R.id.btn_finish).setOnClickListener {
             viewModel.setInvite(adapter.getData().filter{ it.selected }.map{it.id}.joinToString(","))
 
             val formatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
 
             if(check_public.isChecked){
+                val limit:String = when(RadioGroup_sex!!.checkedRadioButtonId){
+                    R.id.RadioButton_M ->   "M"
+                    R.id.RadioButton_F ->   "F"
+                    R.id.RadioButton_A ->   "A"
+                    else -> "A"
+                }
+                viewModel.setLimit(limit);
+
                 if(viewModel.invite.value==""){
                     viewModel.setPublic(formatter.format(Calendar.getInstance().time))
                     (activity as EdAddCaseActivity?)!!.createCase()
                 }else (activity as EdAddCaseActivity?)!!.navController.navigate(R.id.action_addCaseStep3Fragment_to_addCaseStep4Fragment)
             }else{
+                viewModel.setLimit("A")
                 if(viewModel.invite.value=="") {
                     viewModel.setPublic(formatter.format(Calendar.getInstance().time))
                 }

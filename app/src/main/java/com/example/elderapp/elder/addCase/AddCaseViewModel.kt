@@ -10,6 +10,7 @@ class AddCaseViewModel : ViewModel() {
     var date = MutableLiveData<String>()
     var invite = MutableLiveData<String>()
     var public = MutableLiveData<String?>()
+    var limit = MutableLiveData<String?>()
 
     fun setPlace(place: Int) {
         this.place.value = place
@@ -25,5 +26,10 @@ class AddCaseViewModel : ViewModel() {
 
     fun setPublic(public:String?) {
         this.public.value = public
+    }
+
+
+    fun setLimit(limit:String) {
+        this.limit.value = limit
     }
 }
