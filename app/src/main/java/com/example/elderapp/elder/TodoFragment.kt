@@ -74,6 +74,10 @@ class TodoFragment : Fragment(), TodoAdapter.ItemClickListener {
         builder.setTitle("新增待辦事項").setView(dialog)
                 .setPositiveButton("確認") { dialogInterface: DialogInterface, i: Int ->
                     content = etContent.text.toString().trim()
+                    if(content == "") {
+                        Global.putSnackBarR(tvEmpty, "需填寫記事內容")
+                        return@setPositiveButton
+                    }
                     todoList.add(content)
                     val gson = Gson()
                     val json = gson.toJson(todoList)

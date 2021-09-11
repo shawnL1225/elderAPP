@@ -16,7 +16,7 @@ if($type == "selectTitle"){
     echo json_encode($title,JSON_UNESCAPED_UNICODE);
 }
 
-if($type == "selectComment"){
+elseif($type == "selectComment"){
     $tid = $_POST['tid'];
     $sql = "SELECT * FROM discuss_comment WHERE tid=?";
     $stmt = $conn->prepare($sql);
@@ -32,4 +32,75 @@ if($type == "selectComment"){
     echo json_encode($comments,JSON_UNESCAPED_UNICODE);
 }
 
+else if($type == "storeTitle"){
+    $uid = $_POST["uid"];
+    $title = $_POST["title"];
+    $sql = "INSERT INTO discuss_title (title, uid) VALUES (?,?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('si', $title, $uid);
+    $stmt->execute();
+    if($stmt->affected_rows > 0){
+        echo "success";
+    }else{
+        echo "failure ".$stmt->error;
+    }
+}
+else if($type == "storeComment"){
+    $tid = $_POST["tid"];
+    $uid = $_POST["uid"];
+    $comment = $_POST["comment"];
+    $sql = "INSERT INTO discuss_comment (tid, comment, uid) VALUES (?,?,?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('isi', $tid, $comment, $uid);
+    $stmt->execute();
+    if($stmt->affected_rows > 0){
+        echo "success";
+    }else{
+        echo "failure ".$stmt->error;
+    }
+}
+else if($type == "deletePost"){
+    $tid = $_POST["tid"];
+    $sql = "DELETE FROM discuss_title WHERE id=?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $tid);
+    $stmt->execute();
+
+    if($stmt->affected_rows > 0){
+        echo "success delete";
+        
+    }else{
+        echo "failure".$stmt->error;
+    }
+
+}
+else if($type == "deleteComment"){
+    $id = $_POST["id"];
+    $sql = "DELETE FROM discuss_comment WHERE id=?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+
+    if($stmt->affected_rows > 0){
+        echo "success delete";
+        
+    }else{
+        echo "failure".$stmt->error;
+    }
+}
+else if($type == "editComment"){
+    $id = $_POST["id"];
+    $comment = $_POST["comment"];
+    $sql = "UPDATE discuss_comment SET comment=? WHERE id=?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("si",$comment, $id);
+    $stmt->execute();
+
+    if($stmt->affected_rows > 0){
+        echo "success edit";
+        
+    }else{
+        echo "failure".$stmt->error;
+    }
+}
 ?>

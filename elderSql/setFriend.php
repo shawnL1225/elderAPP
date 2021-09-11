@@ -52,7 +52,7 @@
             echo "failure".$stmt->error;
         }
     }
-    if($type == "insert"){
+    else if($type == "insert"){
         
         $elderID = $_POST['elderID'];
         $phone = $_POST['phone'];
