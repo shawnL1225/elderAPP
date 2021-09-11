@@ -131,13 +131,13 @@
                 android:textSize="24dp"
                 android:text="\n"
                 android:inputType="textMultiLine" />
-
+            <!--40dp each row-->
             <GridLayout
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:background="@color/white"
                 android:columnCount="3"
-                android:rowCount="2">
+                android:rowCount="3">
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -148,7 +148,6 @@
                     android:padding="5dp">
 
                     <LinearLayout
-                        android:id="@+id/btn_event"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/style_radius_block"
@@ -173,11 +172,10 @@
                     android:padding="5dp">
 
                     <LinearLayout
-                        android:id="@+id/btn_goOut"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/style_radius_block"
-                        android:backgroundTint="@color/background"
+                        android:backgroundTint="@color/blue_light"
                         android:gravity="center"
                         android:orientation="vertical">
 
@@ -198,7 +196,6 @@
                     android:padding="5dp">
 
                     <LinearLayout
-                        android:id="@+id/btn_call"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/style_radius_block"
@@ -210,7 +207,7 @@
                             android:id="@+id/checkBox3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="搭車" />
+                            android:text="搭乘交通" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -223,7 +220,6 @@
                     android:padding="5dp">
 
                     <LinearLayout
-                        android:id="@+id/btn_todo"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/style_radius_block"
@@ -235,9 +231,58 @@
                             android:id="@+id/checkBox4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="參與活動" />
+                            android:text="休閒娛樂" />
                     </LinearLayout>
                 </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/style_radius_block"
+                        android:backgroundTint="@color/background"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <CheckBox
+                            android:id="@+id/checkBox5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="採買購物" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/style_radius_block"
+                        android:backgroundTint="@color/blue_light"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <CheckBox
+                            android:id="@+id/checkBox6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="拜訪親友" />
+                    </LinearLayout>
+                </LinearLayout>
+
 
             </GridLayout>
 
