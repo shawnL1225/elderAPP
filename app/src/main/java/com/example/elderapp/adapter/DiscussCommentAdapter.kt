@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.RecyclerView
 
 import android.graphics.drawable.Drawable
 import android.graphics.PorterDuff
-
-
+import com.example.elderapp.R
+import org.w3c.dom.Text
 
 
 class DiscussCommentAdapter(private val context: Context, private val data:MutableList<DiscussComment>, private val uid:Int): RecyclerView.Adapter<DiscussCommentAdapter.ViewHolder>() {
@@ -22,7 +22,7 @@ class DiscussCommentAdapter(private val context: Context, private val data:Mutab
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(com.example.elderapp.R.layout.item_discuss_comment, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_discuss_comment, parent, false)
         return ViewHolder(view)
     }
 
@@ -37,15 +37,14 @@ class DiscussCommentAdapter(private val context: Context, private val data:Mutab
         if(data[position].uid == uid){
             holder.btnEdit.visibility = View.VISIBLE
             holder.btnDelete.visibility = View.VISIBLE
-            val drawable: Drawable = context.resources.getDrawable(com.example.elderapp.R.drawable.nonsex).mutate()
+            val drawable: Drawable = context.resources.getDrawable(R.drawable.nonsex).mutate()
             drawable.setColorFilter(
-                context.resources.getColor(com.example.elderapp.R.color.brown),
+                context.resources.getColor(R.color.brown),
                 PorterDuff.Mode.SRC_ATOP
             )
             holder.imgHead.setImageDrawable(drawable)
-
-
         }
+        holder.tvUid.text = "ID#"+data[position].uid
 
     }
 
@@ -54,10 +53,11 @@ class DiscussCommentAdapter(private val context: Context, private val data:Mutab
     }
 
     class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
-        val comment = itemView.findViewById<TextView>(com.example.elderapp.R.id.textView)!!
-        val btnEdit = itemView.findViewById<ImageView>(com.example.elderapp.R.id.btn_edit)!!
-        val btnDelete = itemView.findViewById<ImageView>(com.example.elderapp.R.id.btn_delete)!!
-        val imgHead = itemView.findViewById<ImageView>(com.example.elderapp.R.id.img_head)!!
+        val comment = itemView.findViewById<TextView>(R.id.textView)!!
+        val btnEdit = itemView.findViewById<ImageView>(R.id.btn_edit)!!
+        val btnDelete = itemView.findViewById<ImageView>(R.id.btn_delete)!!
+        val imgHead = itemView.findViewById<ImageView>(R.id.img_head)!!
+        val tvUid = itemView.findViewById<TextView>(R.id.tv_uid)
     }
 
     fun getComment(pos:Int):DiscussComment{

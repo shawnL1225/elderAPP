@@ -72,6 +72,17 @@ else if($type == "deletePost"){
     }else{
         echo "failure".$stmt->error;
     }
+    $sql = "DELETE FROM discuss_comment WHERE tid=?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $tid);
+    $stmt->execute();
+
+    if($stmt->affected_rows > 0){
+        echo "success delete";
+        
+    }else{
+        echo "failure".$stmt->error;
+    }
 
 }
 else if($type == "deleteComment"){

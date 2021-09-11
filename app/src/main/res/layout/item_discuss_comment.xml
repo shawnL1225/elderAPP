@@ -23,10 +23,9 @@
         android:layout_marginEnd="10dp"
         android:text="TextView"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/img_head"
         app:layout_constraintEnd_toStartOf="@+id/btn_edit"
         app:layout_constraintStart_toEndOf="@+id/img_head"
-        app:layout_constraintTop_toTopOf="@+id/img_head" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_uid" />
 
     <ImageView
         android:id="@+id/btn_edit"
@@ -48,4 +47,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_place_delete" />
+
+    <TextView
+        android:id="@+id/tv_uid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ID #28"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
