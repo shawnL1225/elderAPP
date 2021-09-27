@@ -51,19 +51,16 @@ class VolunteerMyCaseFragment : Fragment() {
 
         val case_list = root.findViewById<RecyclerView>(R.id.case_list)
 
-        getSex(context) { sex ->
-
-            Log.d("sex",sex)
             getList(context) { res ->
 
                 val uid = context.getSharedPreferences("loginUser", AppCompatActivity.MODE_PRIVATE).getString("uid", "0")
 
                 case_list.layoutManager = LinearLayoutManager(context)
-                case_list.adapter = VolunteerCaseAdapter(context, res.filter { it.receiver?.id ?: 0 == uid?.toInt() ?: -1 && (it.sex_limit == "A" || it.sex_limit == sex) }.toMutableList()).setClickListener() {
+                case_list.adapter = VolunteerCaseAdapter(context, res.filter { it.receiver?.id ?: 0 == uid?.toInt() ?: -1 }.toMutableList()).setClickListener() {
                     showCase(it)
                 }
             }
-        }
+
     }
 
     fun getList(context: Context, callback: (Array<Case>) -> Unit) {
