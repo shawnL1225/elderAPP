@@ -51,7 +51,7 @@ class TodoFragment : Fragment(), TodoAdapter.ItemClickListener {
     private fun getTodoList() {
         val gson = Gson()
         val json = requireActivity().getSharedPreferences("todoList", AppCompatActivity.MODE_PRIVATE)
-                .getString("items", "")
+                .getString("items", "[]")
         todoList = gson.fromJson(json, MutableList::class.java) as MutableList<String>;
         if (todoList.isEmpty()) {
             tvEmpty.visibility = View.VISIBLE

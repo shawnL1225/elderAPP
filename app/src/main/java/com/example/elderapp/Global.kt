@@ -21,8 +21,8 @@ import java.util.HashMap
 
 class Global : Application() {
     companion object {
-        var url: String? = "https://www2.cs.ccu.edu.tw/~lwx109u/elderApp/"
-        //    public static String url = "http://140.123.105.178/~tcus/elderApp/";
+//        var url: String? = "https://www2.cs.ccu.edu.tw/~lwx109u/elderApp/"
+        var url: String? = "http://140.123.105.18:3000/elderApp/"
 
         fun putSnackBar(view: View, s: String) {
             val snackBar = Snackbar.make(view, s, Snackbar.LENGTH_SHORT)
