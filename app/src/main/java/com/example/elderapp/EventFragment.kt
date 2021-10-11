@@ -212,7 +212,7 @@ class EventFragment : Fragment(),EventAdapter.ItemClickListener{
         }
 
 
-        var imgUrl ="${Global.url}event_img/${event.id}.jpg"
+        var imgUrl ="${Global.urlData}/event_img/${event.id}.jpg"
         Glide.with(requireContext())
                 .load(imgUrl)
                 .centerCrop()

@@ -192,7 +192,7 @@ class RegisterVolunteerFragment : Fragment() {
     private fun uploadHeadShot(base64string : String) {
         val stringRequest: StringRequest = object : StringRequest(Method.POST, Global.url + "imageUpload.php", Response.Listener { response: String ->
 
-            var url ="${Global.url}headshot/${response}.jpg"
+            var url ="${Global.urlData}headshot/${response}.jpg"
             Global.putSnackBar(etName, "上傳成功")
             Glide.with(this)
                     .load(url)

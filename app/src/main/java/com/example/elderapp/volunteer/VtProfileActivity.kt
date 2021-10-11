@@ -252,7 +252,7 @@ class VtProfileActivity : AppCompatActivity() {
     private fun uploadHeadShot(base64string : String) {
         val stringRequest: StringRequest = object : StringRequest(Method.POST, Global.url + "imageUpload.php", Response.Listener { response: String ->
 
-            var url ="${Global.url}headshot/${response}.jpg"
+            var url ="${Global.urlData}headshot/${response}.jpg"
             Glide.with(this)
                     .load(url)
                     .circleCrop()

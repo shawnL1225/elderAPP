@@ -22,7 +22,8 @@ import java.util.HashMap
 class Global : Application() {
     companion object {
 //        var url: String? = "https://www2.cs.ccu.edu.tw/~lwx109u/elderApp/"
-        var url: String? = "http://140.123.105.18:3000/elderApp/"
+        var url: String? = "http://140.123.105.18:3000/elderSql/"
+        var urlData: String? = "http://140.123.105.18:3000/imgData/"
 
         fun putSnackBar(view: View, s: String) {
             val snackBar = Snackbar.make(view, s, Snackbar.LENGTH_SHORT)
@@ -69,7 +70,7 @@ class Global : Application() {
                     else -> 3
                 }
                 if(idx==3){
-                    var url ="${Global.url}headshot/${headshot}.jpg"
+                    var url ="${Global.urlData}headshot/${headshot}.jpg"
                     Glide.with(context)
                             .load(url)
                             .circleCrop()

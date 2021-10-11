@@ -51,7 +51,7 @@ class EventAdapter(private val context: Context, private val data: MutableList<E
             if(data.attendee.contains(uid)){
                 tvCheck.visibility = View.VISIBLE
             }
-            var imgUrl ="${Global.url}event_img/${data.id}.jpg"
+            var imgUrl ="${Global.urlData}event_img/${data.id}.jpg"
             Glide.with(context)
                     .load(imgUrl)
                     .centerCrop()
