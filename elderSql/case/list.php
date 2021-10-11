@@ -1,7 +1,4 @@
 <?php
-error_reporting(E_ALL);
-
-ini_set('display_errors', 1);
 require_once __DIR__ . '/../config.php';
 
 $new_time = date("Y-m-d H:i:s", strtotime('-1 hours'));
@@ -13,8 +10,7 @@ $sql = "SELECT go_out_case.id, go_out_case.date, go_out_case.receiver, go_out_ca
             INNER JOIN user
             ON go_out_case.submitter=user.id
             INNER JOIN place
-            ON go_out_case.place_id=place.id
-            WHERE go_out_case.date > '$new_time'";
+            ON go_out_case.place_id=place.id";
 
 if (isset($_POST["uid"])) {
         $submitter = $_POST["uid"];
