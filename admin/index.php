@@ -98,7 +98,7 @@
 
                         echo   "<tr class='text-center fs-5'>
                                     <th>{$cnt}</th>
-                                    <td style='width:150px'><img src='../event_img/{$row['id']}.jpg' alt='photo' style='width:150px'></td>
+                                    <td style='width:150px'><img src='../imgData/event_img/{$row['id']}.jpg' alt='photo' style='width:150px'></td>
                                     <td>{$row['title']}</td>
                                     <td>{$row['location']}</td>
                                     <td>{$row['content']}</td>
