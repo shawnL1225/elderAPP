@@ -11,6 +11,7 @@
     <application
         android:name=".Global"
         android:allowBackup="true"
+        android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -22,9 +23,6 @@
         <activity android:name=".volunteer.DiscussTitleActivity" />
         <activity
             android:name=".elder.addCase.EdAddCaseActivity"
-            android:exported="true" />
-        <activity
-            android:name=".elder.AddCaseActivity"
             android:exported="true" />
         <activity android:name=".volunteer.VtProfileActivity" />
         <activity android:name=".volunteer.VtFriendActivity" />
