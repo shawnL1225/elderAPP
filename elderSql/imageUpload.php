@@ -9,7 +9,7 @@
     if(isset($_POST['headshot'])){
         $base64_string = $_POST['headshot'];
         $file_code = uniqid();
-        $file_dir = "./headshot/".$file_code.".jpg";
+        $file_dir = "../headshot/".$file_code.".jpg";
         base64_to_jpg($base64_string, $file_dir);
         
         if(file_exists($file_dir))  echo $file_code;

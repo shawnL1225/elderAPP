@@ -106,7 +106,7 @@ else if($type == "addEvent"){
         $eid = $conn->insert_id;
         echo "success add event {$eid} ";
 
-        $file_dir = "./event_img/".$eid.".jpg";
+        $file_dir = "../event_img/".$eid.".jpg";
         base64_to_jpg($img, $file_dir);
         // header("Location: imageUpload.php?eid=".$eid."&img=".$img);
 
