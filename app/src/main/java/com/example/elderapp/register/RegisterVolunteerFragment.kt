@@ -104,6 +104,8 @@ class RegisterVolunteerFragment : Fragment() {
                 Global.putSnackBarR(etName, "密碼不相符")
             } else if (name == "" || phone == "" || email == "" || department == "") {
                 Global.putSnackBarR(etName, "請輸入完整資訊")
+            } else if(phone!!.length != 10 || !phone.startsWith("09")){
+                Global.putSnackBarR(etName!!, "請輸入合法電話號碼")
             } else {
                 SQL()
             }

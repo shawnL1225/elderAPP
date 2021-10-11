@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:text="志工好友設定"
+        android:text="長者好友列表"
         android:textColor="@color/brown_dark"
         android:textSize="36sp" />
     <Button
@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         app:icon="@drawable/ic_elder_setting_arrow"
-        android:textSize="15dp"
+        android:textSize="20dp"
         android:text="回設定" />
 
 

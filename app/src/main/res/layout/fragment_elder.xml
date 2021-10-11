@@ -140,7 +140,7 @@
                         android:layout_height="wrap_content"
                         android:text="緊急電話"
                         android:textColor="@color/pink_dark"
-                        android:textSize="30sp" />
+                        android:textSize="36sp" />
                 </LinearLayout>
             </LinearLayout>
 

@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         app:icon="@drawable/ic_elder_setting_arrow"
-        android:textSize="15dp"
+        android:textSize="20dp"
         android:text="回設定" />
 
 
@@ -109,7 +109,8 @@
                         android:layout_marginTop="5dp"
                         android:layout_weight="5"
                         android:hint="電話號碼  (必填)"
-                        android:inputType="phone" />
+                        android:inputType="phone"
+                        android:maxLength="10" />
 
                     <Button
                         android:id="@+id/btn_repass"

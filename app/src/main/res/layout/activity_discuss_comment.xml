@@ -17,15 +17,16 @@
         android:text="文章標題"
         android:textColor="@color/brown_dark"
         android:textSize="36sp" />
+
     <Button
         android:id="@+id/btn_back"
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        app:icon="@drawable/ic_elder_setting_arrow"
-        android:textSize="15dp"
-        android:text="回討論區" />
+        android:text="回討論區"
+        android:textSize="20dp"
+        app:icon="@drawable/ic_elder_setting_arrow" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

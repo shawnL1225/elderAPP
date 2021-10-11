@@ -98,7 +98,7 @@
                         android:layout_height="wrap_content"
                         android:text="常去地點"
                         android:textColor="@color/blue_dark"
-                        android:textSize="30sp" />
+                        android:textSize="36sp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -132,7 +132,7 @@
                         android:layout_height="wrap_content"
                         android:text="基本資料"
                         android:textColor="@color/green_dark"
-                        android:textSize="30sp" />
+                        android:textSize="36sp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -200,7 +200,7 @@
                         android:layout_height="wrap_content"
                         android:text="志工好友"
                         android:textColor="@color/yellow_dark"
-                        android:textSize="30sp" />
+                        android:textSize="36sp" />
                 </LinearLayout>
             </LinearLayout>
 

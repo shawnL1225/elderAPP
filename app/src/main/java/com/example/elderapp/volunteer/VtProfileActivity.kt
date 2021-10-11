@@ -106,11 +106,11 @@ class VtProfileActivity : AppCompatActivity() {
                 R.id.RadioButton_N -> sex = "N"
             }
 
-            if (pass != passC) {
-                Global.putSnackBarR(etName!!, "密碼不相符")
-            } else if (name == "" || phone == "" || department == "") {
+             if (name == "" || phone == "" || department == "") {
                 Global.putSnackBarR(etName!!, "請輸入完整資訊")
-            } else {
+            } else if(phone!!.length != 10 || !phone!!.startsWith("09")){
+                 Global.putSnackBarR(etName!!, "請輸入合法電話號碼")
+             }else {
                 updateProfile()
             }
         }
@@ -178,8 +178,9 @@ class VtProfileActivity : AppCompatActivity() {
         val stringRequest: StringRequest = object : StringRequest(Method.POST, Global.url+"setProfile.php", Response.Listener { response: String ->
             Log.d("request", "Response: $response")
             if (response.startsWith("success")) {
-                startActivity(Intent(this, VolunteerActivity::class.java))
-                finish()
+                Global.putSnackBar(etName!!,"更新成功!")
+                requestGetData()
+
             } else if (response.startsWith("failure")) {
                 Toast.makeText(this, "更新失敗", Toast.LENGTH_SHORT).show()
             }

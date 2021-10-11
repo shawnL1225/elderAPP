@@ -3,6 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/User/Documents/Android_projects/elderAPP/app/src/main/res/layout/activity_add_event.xml" value="0.17806484295845998" />
+        <entry key="..\:/Users/User/Documents/Android_projects/elderAPP/app/src/main/res/layout/activity_discuss_comment.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/User/Documents/Android_projects/elderAPP/app/src/main/res/layout/activity_discuss_title.xml" value="0.17806484295845998" />
+        <entry key="..\:/Users/User/Documents/Android_projects/elderAPP/app/src/main/res/layout/activity_ed_profile.xml" value="0.33" />
+        <entry key="..\:/Users/User/Documents/Android_projects/elderAPP/app/src/main/res/layout/activity_elder_setting.xml" value="0.17806484295845998" />
+        <entry key="..\:/Users/User/Documents/Android_projects/elderAPP/app/src/main/res/layout/activity_volunteer.xml" value="0.17806484295845998" />
+        <entry key="..\:/Users/User/Documents/Android_projects/elderAPP/app/src/main/res/layout/activity_volunteer_setting.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/User/Documents/Android_projects/elderAPP/app/src/main/res/layout/activity_vt_friend.xml" value="0.17806484295845998" />
+        <entry key="..\:/Users/User/Documents/Android_projects/elderAPP/app/src/main/res/layout/activity_vt_profile.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/User/Documents/Android_projects/elderAPP/app/src/main/res/layout/dialog_add_friend.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/User/Documents/Android_projects/elderAPP/app/src/main/res/layout/fragment_elder.xml" value="0.17806484295845998" />
         <entry key="..\:/Users/User/Documents/Android_projects/elderAPP/app/src/main/res/layout/fragment_hour_record.xml" value="0.33" />
         <entry key="..\:/Users/User/Documents/Android_projects/elderAPP/app/src/main/res/layout/item_discuss_comment.xml" value="0.5" />
       </map>

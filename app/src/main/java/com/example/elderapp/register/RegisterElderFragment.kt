@@ -104,6 +104,8 @@ class RegisterElderFragment : Fragment() {
                 Global.putSnackBarR(etName!!, "密碼不相符")
             } else if (name == "" || phone == "" || contactPhone == "") {
                 Global.putSnackBarR(etName!!, "請輸入完整資訊")
+            } else if(phone!!.length != 10 || contactPhone!!.length!=10 || !phone!!.startsWith("09") || !contactPhone!!.startsWith("09") ){
+                Global.putSnackBarR(etName!!, "請輸入合法電話號碼")
             } else {
                 SQL()
             }

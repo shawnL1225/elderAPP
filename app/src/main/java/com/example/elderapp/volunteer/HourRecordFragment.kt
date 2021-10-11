@@ -38,6 +38,8 @@ class HourRecordFragment : Fragment() {
     lateinit var checkBox2:CheckBox
     lateinit var checkBox3:CheckBox
     lateinit var checkBox4:CheckBox
+    lateinit var checkBox5:CheckBox
+    lateinit var checkBox6:CheckBox
 
 
 
@@ -57,6 +59,8 @@ class HourRecordFragment : Fragment() {
         checkBox2 = root.findViewById(R.id.checkBox2)
         checkBox3 = root.findViewById(R.id.checkBox3)
         checkBox4 = root.findViewById(R.id.checkBox4)
+        checkBox5 = root.findViewById(R.id.checkBox5)
+        checkBox6 = root.findViewById(R.id.checkBox6)
 
         btnDate.setOnClickListener {
             openDatePicker()
@@ -70,7 +74,9 @@ class HourRecordFragment : Fragment() {
             if(checkBox2.isChecked) content += '*'+checkBox2.text.toString()
             if(checkBox3.isChecked) content += '*'+checkBox3.text.toString()
             if(checkBox4.isChecked) content += '*'+checkBox4.text.toString()
-            content += "  "+etContent.text.toString().trim()
+            if(checkBox5.isChecked) content += '*'+checkBox5.text.toString()
+            if(checkBox6.isChecked) content += '*'+checkBox6.text.toString()
+            content += "\n"+etContent.text.toString().trim()
             if(hour == "" || time == "" || date == "" || content == ""){
                 Global.putSnackBarR(tvDate, "請輸入完整資訊")
                 return@setOnClickListener

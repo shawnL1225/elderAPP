@@ -1,5 +1,6 @@
 package com.example.elderapp
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
@@ -8,8 +9,10 @@ import android.provider.MediaStore
 import android.text.format.DateFormat.is24HourFormat
 import android.util.Base64
 import android.util.Log
+import android.util.TypedValue
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.StringRequest
@@ -83,7 +86,21 @@ class AddEventActivity : AppCompatActivity() {
             }
             val name = getSharedPreferences("loginUser", MODE_PRIVATE).getString("name", "")!!
             holder += name
-            requestAddEvent()
+
+            val builder = AlertDialog.Builder(this)
+            val layout  = LinearLayout(this)
+            val textView  = TextView(this)
+            textView.text = "標題: $title\n地址: $location\n內容: $content\n$holder"
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f)
+            layout.addView(textView)
+            layout.setPadding(80,15,80,15)
+            builder.setView(layout).setTitle("請確認資料是否正確 上傳活動後無法更改")
+                .setPositiveButton("確定") { _, _ ->
+                    requestAddEvent()
+                }
+                .setNegativeButton("取消") { _, _-> }
+                .show()
+
         }
 
     }
@@ -92,7 +109,7 @@ class AddEventActivity : AppCompatActivity() {
         val stringRequest: StringRequest = object : StringRequest(Method.POST, Global.url+"event.php", Response.Listener { response: String ->
             Log.d("request", "Response: $response")
             if (response.startsWith("success")) {
-                Toast.makeText(this, "成功新增活動", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "成功新增活動，活動正在審核", Toast.LENGTH_SHORT).show()
                 finish()
             } else if (response.startsWith("failure")) {
                 Toast.makeText(this, "新增失敗", Toast.LENGTH_SHORT).show()

@@ -89,10 +89,10 @@ class EdProfileActivity : AppCompatActivity() {
                 }
             }
 
-            if (pass != passC) {
-                Global.putSnackBarR(etName!!, "密碼不相符")
-            } else if (name == "" || phone == "" || contactPhone == "") {
+            if (name == "" || phone == "" || contactPhone == "") {
                 Global.putSnackBarR(etName!!, "請輸入完整資訊")
+            }else if(phone!!.length != 10 ||!phone!!.startsWith("09")){
+                Global.putSnackBarR(etName!!, "請輸入合法電話號碼")
             } else {
                 requestUpdateData()
             }
@@ -186,7 +186,7 @@ class EdProfileActivity : AppCompatActivity() {
             if (response.startsWith("success")) {
                 Global.putSnackBar(etName!!, "更新密碼成功")
             } else if (response.startsWith("failure")) {
-                Toast.makeText(this, "更新失敗", Toast.LENGTH_SHORT).show()
+                Global.putSnackBarR(etName!!, "密碼並無更動")
             }
         }, Response.ErrorListener { error: VolleyError -> Toast.makeText(this, error.toString().trim { it <= ' ' }, Toast.LENGTH_SHORT).show() }) {
             @Throws(AuthFailureError::class)

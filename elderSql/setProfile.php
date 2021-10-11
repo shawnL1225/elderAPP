@@ -17,6 +17,7 @@ if($type == "getData"){
 else if($type == "updateElder"){
 
     $name = $_POST['name'];
+    $phone = $_POST['phone'];
     $remarks_ill = $_POST['remarks_ill'];
     $remarks_eating = $_POST['remarks_eating'];
     $remarks_other = $_POST['remarks_other'];
