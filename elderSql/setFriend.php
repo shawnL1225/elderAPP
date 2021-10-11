@@ -58,7 +58,7 @@
         $phone = $_POST['phone'];
 
         //find user with this phone number
-        $sql = "SELECT id FROM user WHERE phone = ?";
+        $sql = "SELECT id FROM user WHERE phone = ? AND identity = 1";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("s", $phone);
         $stmt->execute();
