@@ -45,8 +45,13 @@ class VolunteerAllCaseFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        uid = requireContext().getSharedPreferences("loginUser", AppCompatActivity.MODE_PRIVATE).getString("uid", "0")?.toInt()
+        try {
+            uid = requireContext().getSharedPreferences("loginUser", AppCompatActivity.MODE_PRIVATE).getString("uid", "0")?.toInt()
                 ?: -1
+        }catch(e: Throwable){
+            uid = -1
+        }
+
 
     }
 
@@ -124,10 +129,10 @@ class VolunteerAllCaseFragment : Fragment() {
                 val stringRequest: StringRequest = object : StringRequest(Method.POST, Global.url + "/case/receive.php", Response.Listener { response: String ->
                     bottomSheetDialog.hide()
                     if (response == "ok") {
-                        Toast.makeText(requireContext(), "已將工作加入\"我的工作\"", Toast.LENGTH_SHORT).show()
+                        Global.putSnackBar(requireView(), "已將工作加入\"我的工作\"")
                         load_cases(requireContext(), root!!)
                     } else {
-                        Toast.makeText(requireContext(), "發生錯誤，請稍後再試", Toast.LENGTH_SHORT).show()
+                        Global.putSnackBarR(requireView(), "發生錯誤，請稍後再試")
                         load_cases(requireContext(), root!!)
                     }
                 }, Response.ErrorListener { error: VolleyError -> Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show() }) {

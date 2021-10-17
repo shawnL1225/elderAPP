@@ -8,4 +8,6 @@
     <string name="title_activity_add_event">AddEventActivity</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="announcement">歡迎使用 尊嚴長者APP</string>
 </resources>

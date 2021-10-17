@@ -94,7 +94,7 @@ class AddEventActivity : AppCompatActivity() {
             textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f)
             layout.addView(textView)
             layout.setPadding(80,15,80,15)
-            builder.setView(layout).setTitle("請確認資料是否正確 上傳活動後無法更改")
+            builder.setView(layout).setTitle("請確認資料是否正確\n上傳活動後無法更改")
                 .setPositiveButton("確定") { _, _ ->
                     requestAddEvent()
                 }
@@ -158,7 +158,12 @@ class AddEventActivity : AppCompatActivity() {
         datePicker.addOnPositiveButtonClickListener {
             // Create calendar object and set the date to be that returned from selection
             val calendar = Calendar.getInstance()
+
             calendar.time = Date(it)
+            if(calendar.before(Calendar.getInstance())){
+                Global.putSnackBarR(tvDate!!,"請選擇未來日期")
+                return@addOnPositiveButtonClickListener
+            }
             date = "${calendar.get(Calendar.YEAR)}-" +
                     "${calendar.get(Calendar.MONTH) + 1}-${calendar.get(Calendar.DAY_OF_MONTH)} "
 

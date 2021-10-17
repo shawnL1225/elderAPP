@@ -30,7 +30,7 @@
             android:background="@drawable/style_layout_background"
             android:backgroundTint="@color/brown"
             android:gravity="center"
-            android:text="這裡可以放公告"
+            android:text="@string/announcement"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="18dp" />
