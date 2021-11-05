@@ -52,7 +52,7 @@
         android:layout_marginTop="16dp"
         android:text="有 6 人參與"
         android:textColor="@color/blue_dark"
-        android:textSize="25dp"
+        android:textSize="20dp"
         app:layout_constraintStart_toStartOf="@+id/tv_title"
         app:layout_constraintTop_toBottomOf="@+id/tv_title" />
 
