@@ -41,8 +41,9 @@ class AddCaseStep3Fragment : Fragment() {
         val RadioGroup_sex = root.findViewById<RadioGroup>(R.id.RadioGroup_sex)
 
         getFriends(){
+
             list_friend.layoutManager = LinearLayoutManager(requireContext())
-            adapter = FriendForCaseAdapter(requireContext(),it.map{item -> FriendForCaseAdapter.SelectableUser(item)}.toMutableList()){
+            adapter = FriendForCaseAdapter(requireContext(),it.map{item -> FriendForCaseAdapter.SelectableUser(item).head(item.headshot)}.toMutableList()){
             }
             list_friend.adapter = adapter
         }

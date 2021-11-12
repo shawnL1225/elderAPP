@@ -27,9 +27,6 @@ class AddCaseStep4Fragment : Fragment() {
         root.findViewById<Button>(R.id.btn_3h).setOnClickListener {
             setPublic(180)
         }
-        root.findViewById<Button>(R.id.btn_infi).setOnClickListener {
-            setPublic(999999)
-        }
         return root
     }
 

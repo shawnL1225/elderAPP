@@ -40,12 +40,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="地點:   "
+            android:text="需求:   "
             android:textColor="@color/brown_dark"
             android:textSize="24dp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/textView9"
             app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="資訊:   "
+            android:textColor="@color/brown_dark"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/textView10"
+            app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
         <TextView
             android:id="@+id/txt_place"
@@ -56,6 +68,16 @@
             android:textSize="24sp"
             app:layout_constraintStart_toEndOf="@+id/textView10"
             app:layout_constraintTop_toTopOf="@+id/textView10" />
+
+        <TextView
+            android:id="@+id/txt_place_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="中正大學"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            app:layout_constraintStart_toEndOf="@+id/textView10"
+            app:layout_constraintTop_toTopOf="@+id/textView16" />
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/img_headshot"
@@ -92,12 +114,12 @@
             android:id="@+id/btn_receive"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="8dp"
             android:text="接受"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_place" />
+            app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

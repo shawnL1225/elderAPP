@@ -3,6 +3,7 @@ package com.example.elderapp.adapter
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.elderapp.R
+import com.google.gson.Gson
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -78,6 +80,7 @@ class ElderCaseAdapter(private val context: Context, private val data: MutableLi
             if(data.receiver!==null && list.find { it.id == data.receiver!!.id } == null){
                 list.add(data.receiver!!)
             }
+            Log.d("Test",Gson().toJson(list))
             list_candidate.layoutManager = LinearLayoutManager(context)
             list_candidate.adapter = ElderCaseMemberAdapter(context,list , data,onCancelReceiver)
 

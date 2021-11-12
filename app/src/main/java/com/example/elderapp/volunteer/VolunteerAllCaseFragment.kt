@@ -118,6 +118,7 @@ class VolunteerAllCaseFragment : Fragment() {
 
         view.findViewById<TextView>(R.id.txt_date).text = date
         view.findViewById<TextView>(R.id.txt_place).text = case.place.title
+        view.findViewById<TextView>(R.id.txt_place_desc).text = case.place.description
 
         val txt_received = view.findViewById<TextView>(R.id.txt_received)
         val btn_receive = view.findViewById<TextView>(R.id.btn_receive)

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.elderapp.Global
@@ -41,7 +42,6 @@ class FriendAdapter(private val context: Context, private val data: MutableList<
             tvName.text = data.name
             tvPhone.text = data.phone
             Global.headUp(context, imgHeadShot, data.headshot)
-
             imgDelete.setOnClickListener {
                 if (mClickListener != null) mClickListener!!.onItemClick(adapterPosition)
             }
