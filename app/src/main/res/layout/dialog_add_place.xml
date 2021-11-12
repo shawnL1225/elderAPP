@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:ems="10"
-            android:hint="地點名稱"
+            android:hint="需求"
             android:inputType="textPersonName" />
     </com.google.android.material.textfield.TextInputLayout>
 

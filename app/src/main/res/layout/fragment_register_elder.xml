@@ -33,7 +33,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="5dp"
-                android:hint="電話號碼  (必填)"
+                android:hint="手機號碼  (必填)"
                 android:inputType="phone"
                 android:textColorLink="@color/brown_dark" />
 
