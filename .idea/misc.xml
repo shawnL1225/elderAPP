@@ -7,6 +7,7 @@
         <entry key="..\:/Projects/elderAPP/app/src/main/res/layout/add_case_step2_fragment.xml" value="0.21041666666666667" />
         <entry key="..\:/Projects/elderAPP/app/src/main/res/layout/add_case_step3_fragment.xml" value="0.21041666666666667" />
         <entry key="..\:/Projects/elderAPP/app/src/main/res/layout/add_case_step4_fragment.xml" value="0.21041666666666667" />
+        <entry key="..\:/Projects/elderAPP/app/src/main/res/layout/dialog_case.xml" value="0.4" />
         <entry key="..\:/Projects/elderAPP/app/src/main/res/layout/dialog_event.xml" value="0.2658514492753623" />
         <entry key="..\:/Projects/elderAPP/app/src/main/res/layout/dialog_volunteer.xml" value="0.2658514492753623" />
         <entry key="..\:/Projects/elderAPP/app/src/main/res/layout/item_elder_case_member.xml" value="0.5" />
@@ -39,5 +40,5 @@
     </option>
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="11" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />
 </project>
