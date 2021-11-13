@@ -37,6 +37,7 @@ class ElderActivity : AppCompatActivity() {
         txtName = findViewById<TextView>(R.id.txt_name)
         txtPhone = findViewById<TextView>(R.id.txt_phone)
         btnBack = findViewById(R.id.btn_back)
+
         navController = Navigation.findNavController(this, R.id.fragment_elder)
         uid = getSharedPreferences("loginUser", MODE_PRIVATE).getString("uid", "")
         btnBack!!.setOnClickListener {

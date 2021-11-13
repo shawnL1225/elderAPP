@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -53,6 +54,8 @@ class fragment_go_out_main : Fragment() {
             startActivity(Intent(requireContext(), EdAddCaseActivity::class.java))
         }
         tvEmpty = root.findViewById(R.id.tv_empty)
+        val btnBack = requireActivity().findViewById<Button>(R.id.btn_back)
+        btnBack?.visibility = View.VISIBLE
         return root
     }
 

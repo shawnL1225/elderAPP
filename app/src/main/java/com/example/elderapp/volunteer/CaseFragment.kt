@@ -23,12 +23,17 @@ class CaseFragment : Fragment() {
         val root = inflater.inflate(R.layout.fragment_case, container, false)
         val navController = Navigation.findNavController(root.findViewById(R.id.fragment))
         val toggleGroup = root.findViewById<MaterialButtonToggleGroup>(R.id.toggleGroup)
-
+        val btnAll = root.findViewById<Button>(R.id.btn_all)
+        val btnMine = root.findViewById<Button>(R.id.btn_mine)
         toggleGroup.addOnButtonCheckedListener { group, checkedId, isChecked ->
             if(isChecked){
                 if (checkedId == R.id.btn_all){
+                    btnMine.typeface = Typeface.DEFAULT;
+                    btnAll.typeface = Typeface.DEFAULT_BOLD;
                     navController.navigate(R.id.action_volunteerMyCaseFragment_to_volunteerAllCaseFragment)
                 }else if (checkedId == R.id.btn_mine){
+                    btnMine.typeface = Typeface.DEFAULT_BOLD;
+                    btnAll.typeface = Typeface.DEFAULT;
                     navController.navigate(R.id.action_volunteerAllCaseFragment_to_volunteerMyCaseFragment)
                 }
             }

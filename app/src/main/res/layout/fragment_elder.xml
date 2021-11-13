@@ -51,7 +51,7 @@
                 android:padding="10dp">
 
                 <LinearLayout
-                    android:id="@+id/btn_back2"
+                    android:id="@+id/btn_event"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/style_radius_block"

@@ -72,6 +72,8 @@ class EventFragment : Fragment(),EventAdapter.ItemClickListener{
         btnAddEvent.setOnClickListener {
             startActivity(Intent(requireContext(), AddEventActivity::class.java))
         }
+        val btnBack = activity?.findViewById<Button>(R.id.btn_back)
+        btnBack?.visibility = View.VISIBLE
         return view
     }
     private fun requestEvent(){

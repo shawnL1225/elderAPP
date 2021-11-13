@@ -31,9 +31,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="所有工作"
+                android:textSize="20sp"
+                android:textStyle="bold"
                 tools:layout_editor_absoluteX="102dp"
-                tools:layout_editor_absoluteY="28dp"
-                android:textSize="20sp"/>
+                tools:layout_editor_absoluteY="28dp" />
 
             <Button
                 android:id="@+id/btn_mine"
