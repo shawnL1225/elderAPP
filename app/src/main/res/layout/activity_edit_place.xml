@@ -17,15 +17,16 @@
         android:text="常去地點設定"
         android:textColor="@color/brown_dark"
         android:textSize="36sp" />
+
     <Button
         android:id="@+id/btn_back"
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        app:icon="@drawable/ic_elder_setting_arrow"
+        android:text="回上一頁"
         android:textSize="15dp"
-        android:text="回設定" />
+        app:icon="@drawable/ic_elder_setting_arrow" />
 
 
     <androidx.constraintlayout.widget.ConstraintLayout

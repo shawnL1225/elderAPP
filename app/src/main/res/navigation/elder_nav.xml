@@ -21,10 +21,10 @@
         tools:layout="@layout/fragment_elder" >
         <action
             android:id="@+id/action_elderFragment_to_goOutFragment"
-            app:destination="@id/goOutFragment" />
+            app:destination="@id/goOutFragment"/>
         <action
             android:id="@+id/action_elderFragment_to_todoFragment"
-            app:destination="@id/todoFragment" />
+            app:destination="@id/todoFragment"/>
         <action
             android:id="@+id/action_elderFragment_to_eventFragment"
             app:destination="@id/eventFragment" />

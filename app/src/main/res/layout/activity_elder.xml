@@ -75,6 +75,16 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <Button
+        android:id="@+id/btn_back"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="回到主畫面"
+        android:textSize="20dp"
+        android:visibility="gone"
+        app:icon="@drawable/ic_elder_setting_arrow" />
+
     <fragment
         android:id="@+id/fragment_elder"
         android:name="androidx.navigation.fragment.NavHostFragment"
