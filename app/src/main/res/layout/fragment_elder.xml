@@ -10,12 +10,11 @@
     <ImageView
         android:id="@+id/imageView4"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="124dp"
         android:layout_margin="10dp"
         android:background="#F44A4A"
         android:scaleType="centerCrop"
-        app:srcCompat="@drawable/banner"
-        tools:srcCompat="@drawable/banner" />
+        app:srcCompat="@drawable/banner_version2" />
 
     <LinearLayout
         android:layout_width="match_parent"
